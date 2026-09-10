@@ -1,22 +1,42 @@
 {
-  "$schema": "https://flow.jig.md/schemas/capability-contract-1.schema.json",
-  "flowCapabilityContract": 1,
+  "$schema": "https://flow.jig.md/schemas/invocation-contract-1.schema.json",
   "id": "https://example.org/contracts/session-store",
   "version": "1.0.0",
-  "methods": {
-    "read": {
-      "input": {
-        "$ref": "#/$defs/ReadInput"
+  "input": {
+    "$ref": "#/$defs/ReadInput"
+  },
+  "result": {
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "const": "done"
+          },
+          "output": {
+            "$ref": "#/$defs/Session"
+          }
+        },
+        "required": ["outcome", "output"],
+        "additionalProperties": false
       },
-      "output": {
-        "$ref": "#/$defs/Session"
-      },
-      "errors": {
-        "not-found": {
-          "$ref": "#/$defs/NotFound"
-        }
+      {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "const": "not-found"
+          },
+          "output": {
+            "$ref": "#/$defs/NotFound"
+          }
+        },
+        "required": ["outcome", "output"],
+        "additionalProperties": false
       }
-    }
+    ]
+  },
+  "outcomes": {
+    "not-found": "The requested session does not exist."
   },
   "$defs": {
     "ReadInput": {
