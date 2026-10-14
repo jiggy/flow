@@ -1,213 +1,27 @@
-# Contributing
+# Contributing to FLOW
 
-Jig contributions require the rights holder's acceptance of the
-[Jig contributor agreement](CONTRIBUTOR-AGREEMENT.md) before incorporation.
-It permits future commercial licensing and relicensing; contributors retain
-copyright. A pull request, DCO sign-off, or permission to use Jig does not
-substitute for that agreement. Until its recipient details and acceptance
-process are completed, external Jig contributions must not be merged.
+Contributions use the destination license in [LICENSES.md](LICENSES.md).
+Sign off each commit with the Developer Certificate of Origin 1.1 below.
+Specification contributions also accept the Community Specification License 1.0 and its patent terms.
+Jig's contributor agreement governs Jig separately.
 
-For separately licensed open-source material, each commit must carry the
-Developer Certificate of Origin 1.1 sign-off reproduced below:
+## Development
 
-```text
-Signed-off-by: Name <email@example.com>
-```
-
-Use `git commit --signoff`. The destination's license in
-[LICENSES.md](LICENSES.md) applies. FLOW Draft Specification contributions
-also accept the Community Specification License 1.0, including its patent
-terms and exclusion procedure. Jig's contributor agreement does not govern
-FLOW or the Sley integration skill. Mixed contributions must satisfy each
-applicable path's terms. Include third-party provenance and required notices.
-
-## Development shell
-
-### macOS
-
-Use **Bun 1.4.2**, Node 22 or newer, Just 1.43.1, and jq. The Mac candidate's
-build checks the exact Bun version; the Linux Nix shell below pins a different
-qualified runtime and is not the Mac setup path.
-
-With an older Bun installation, install the pinned version using Bun's
-[official installer](https://bun.sh/docs/installation):
+Install Bun 1.3.3, Node 22 or newer, Just 1.43.1, and Python 3.11 or newer.
+The pinned Nix shell supplies the development runtimes.
 
 ```sh
-curl -fsSL https://bun.sh/install | bash -s "bun-v1.4.2"
-export PATH="$HOME/.bun/bin:$PATH"
-bun --version # must print 1.4.2
-export JIG_AUTHORING_NODE_PATH="$(node -p 'process.execPath')"
-bun i
-just jig::build
-./packages/jig/bin/jig --version
+bun install --ignore-scripts
+bun install --cwd conformance/run-0 --frozen-lockfile --ignore-scripts
+python3 -m pip install build==1.3.0 twine==6.2.0 mypy==1.18.2
+just build
+just test
+just test-tooling
+just test-release
+scripts/build-site.sh flow .tmp/flow-site
 ```
 
-This builds and runs Jig directly from the checkout; no npm installation of
-Jig is needed. To use that build in another project, add the checkout's launcher
-directory to `PATH` before changing directories:
-
-```sh
-export PATH="$PWD/packages/jig/bin:$PATH"
-cd /path/to/your/project
-jig --help
-```
-
-Run installation and build commands from the repository root. Bun 1.1.6 cannot discover the
-nested Flow workspace pattern and reports `semantic-router-flow` as missing,
-even though it exists in `examples/software-factory/flows/router`. Upgrade
-Bun; do not remove that workspace or install it from the registry.
-
-### Linux with Nix
-
-With Nix and direnv installed and direnv hooked into your shell, enter the
-repository and approve its environment:
-
-```sh
-direnv allow
-```
-
-Alternatively, run `nix-shell` from the repository root. The first entry fetches
-the pinned Nixpkgs toolchain: Bun 1.3.3, Node 24 with npm, Python with package
-build dependencies, Bubblewrap 0.12, Just 1.43.1, and common development tools.
-`FLOW_NODE`, `FLOW_NPM`, `JIG_NPM`, and `PYTHON` point to those tools; Python is also on `PATH` for
-conformance tests. The Bun pin follows Jig's exact build requirement, not the
-latest Nix channel.
-
-Direnv also loads the optional, gitignored `.env.local` file. Both direnv and
-`nix-shell` put `packages/jig/bin` first on `PATH`, so `jig` uses your checkout's
-built executable.
-Put your operator-selected Agent environment variables in `.env.local`; never
-commit it. After changing `.envrc`, run `direnv allow` again. Plain `nix-shell`
-does not load that local environment file.
-
-From the repository root, `bun i` installs the root tooling and all TypeScript
-packages under `packages/`, example applications, and their Flows as Bun workspaces.
-Examples use the local SDK through `workspace:*`. The root `bun.lock` is generated
-by Bun and ignored; regenerate it as needed, never maintain it by hand.
-Site tooling and conformance fixtures keep their separate dependency installations.
-Build the SDK with `just flow::build` before reviewing examples; `just build`
-builds both SDK and Jig. Review captures the workspace, so no SDK publication
-or per-Flow dependency setup is needed.
-
-Shell entry warns in bold red when Jig is missing or incompletely built, or
-when its successful-build version differs from `packages/jig/package.json`.
-It prints the command to run, but never installs or builds automatically:
-
-```sh
-bun i
-just jig::build
-```
-
-The shell compares `jig --version` (embedded at build time) with the source
-manifest. This is a version check, not source-change detection: rebuild after
-source edits even when the package version has not changed.
-
-The shell supplies Bubblewrap locally and sets `JIG_BWRAP_PATH` to its exact
-Nix-store executable. No system-wide Bubblewrap installation is needed.
-Running Jig still requires the [supported host configuration](docs/jig/guide/index.md#supported-host).
-On NixOS, enable the unmodified runtime's loader support in your host configuration:
-
-```nix
-programs.nix-ld.enable = true;
-```
-
-Apply that through your normal NixOS configuration workflow. Outside this
-shell, `JIG_BWRAP_PATH` can name another operator-installed Bubblewrap ≥0.12;
-Jig does not search ambient `PATH` and never falls back from an invalid explicit
-selection. Systemd user delegation and namespaces must also be available. The
-shell does not configure these host facilities, and independent NixOS host conformance
-has not yet been established. Rebuild Jig after pulling launcher changes; an
-older `packages/jig/bin/jig` is generated output, not the updated source. Keep Agent
-credentials and model choices in your operator environment or ignored
-`.env.local`, never in the tracked shell configuration.
-
-## Parallel worktrees
-
-Keep the primary checkout in `jig/main` and task checkouts beside it. From the
-workspace directory, create a branch and checkout with:
-
-```sh
-main/scripts/new-worktree.sh work/issue-input issue-input
-cd issue-input
-direnv allow
-bun i
-```
-
-The optional second argument is a single directory name; it defaults to the
-branch name when that name contains no `/`. New branches start at the primary
-checkout's committed `HEAD`; an existing branch keeps its own contents. Invoke
-the primary checkout's script even when working in another directory. Each
-writing agent owns a different branch and worktree; the coordinator integrates
-completed commits into `main`.
-
-The workspace owns shared local state. Existing ignored links such as
-`main/.env.local -> ../.env.local`, `main/.codex -> ../.codex`, and
-`main/.agent-sandbox.env -> ../.agent-sandbox.env` are reproduced in new
-checkouts. Shared targets must already exist as real workspace entries. To
-share another local entry, ignore it and link it from the primary checkout to
-`../<same-name>` first. Environment files are never copied.
-
-Links in the opposite direction—workspace `.agents`, `.envrc`, and `shell.nix`
-pointing into `main`—stay unchanged. Every checkout uses its own tracked copies
-of those files. Dependencies, build output, `.direnv`, `.jig`, and `.tmp` also
-stay local to each checkout. Enter the assigned checkout before loading its
-development shell or running repository commands.
-
-Invalid names, existing destinations, and shared-path conflicts are rejected
-before creation. A later filesystem failure reports the retained checkout for
-inspection. Remove a finished checkout with `git worktree remove` only after
-accounting for its commits and local files, including ignored evidence; do not
-force-remove unfinished work. Worktrees separate source and staging, not host
-resources: coordinate tests that inspect shared cgroups or temporary resources.
-
-## Development tasks
-
-Repository tasks live in justfiles, not package manifests. Run `just` to list
-them, including package modules. Use Just 1.43.1 or newer outside the Nix shell.
-Install dependencies with `bun i` first; tasks never install their own tools.
-
-```sh
-just build                    # Both TypeScript packages
-just jig::build               # Jig only
-just flow::test                # SDK tests
-just jig::test                 # Jig tests
-just jig::check                # Build, package tests, and local native Mac regressions
-just test-tooling              # Shell and recipe wiring
-just preflight                 # Build, tooling, portable tests, and native Mac regressions
-just test-release              # Full unprivileged gate; needs FLOW_NODE and Python
-just jig::pack --destination /tmp/jig-artifacts
-```
-
-Each package also has a local justfile: `just build` in `packages/jig`
-builds Jig. Packing is explicit: `just jig::pack` or `just flow::pack`
-builds first and then packs. There is no automatic `prepack` hook.
-The release publisher still consumes already tested archives without rebuilding.
-
-Before pushing a review milestone, run `just preflight`. On an exact supported
-Mac it also runs every Mac-specific regression file in fresh sequential test
-processes and checks that host ownership residue is unchanged. Native tests
-need ordinary launchd and disk-image access, so an enclosing execution sandbox
-may refuse them. They require no installed Agent clients or model calls.
-Unsupported Macs refuse before building; other hosts report portable-only
-coverage. Complete Linux and Intel/Apple Silicon qualification remains in CI.
-Run this pass while other Jig work on the same host is idle so the residue
-comparison describes this test run.
-
-## Biome
-
-The root development dependency pins Biome 2.5.12 to match `biome.json`.
-The root `bun i` installs it with the package workspaces. These tasks accept
-file or directory paths:
-
-```sh
-just biome-check scripts/development-shell.test.ts
-just lint scripts/development-shell.test.ts
-just format scripts/development-shell.test.ts
-```
-
-`biome-check` checks formatting, lint, and imports without writing. `format`
-rewrites formatting only. Omit paths to check the repository, but do not run
-broad formatting over an unrelated dirty worktree.
+No Jig checkout is required. [RELEASING.md](RELEASING.md) owns publication.
 
 ## Developer Certificate of Origin 1.1
 

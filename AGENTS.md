@@ -29,12 +29,10 @@ Before making project decisions:
    choices to the principles they serve. Independent probe consumers do not make
    platform decisions and retain their public-only inputs.
 
-Jig's adoption and retained Bread text belong in [LICENSE.md](LICENSE.md), its
-prices in [PRICING.md](PRICING.md), and contribution rights in
-[CONTRIBUTING.md](CONTRIBUTING.md). [LICENSES.md](LICENSES.md) owns the
-multi-project scope. Bread is independently maintained. No neighboring Bread
-checkout is an input to Jig builds, releases, or required guidance. Preserve
-previously issued grants and separately licensed FLOW and third-party material.
+This repository owns FLOW specifications, SDKs, conformance, and independent authoring.
+Jig owns its host, flavored Flows, portable reporting profiles, displays, and applications.
+[LICENSES.md](LICENSES.md) maps the retained terms. Preserve earlier grants and third-party notices.
+Build and test without a Jig checkout.
 
 Follow the [maintainer guide](.agents/maintainer-guide.md) for repository-wide
 engineering workflow rules and use the
@@ -218,16 +216,11 @@ Default section order:
   doctrine, project coordination and recovery, optional field notes, and
   repository-native agent skills.
 - [.github/AGENTS.md](.github/AGENTS.md) — Continuous integration, release,
-  host-conformance, and public-site automation.
+  and public-site automation.
 - [conformance/AGENTS.md](conformance/AGENTS.md) — Implementation-independent
   executable evidence for versioned FLOW protocol candidates.
-- [docs/AGENTS.md](docs/AGENTS.md) — Public specifications, current product
-  guidance, and research catalogues.
-- [examples/AGENTS.md](examples/AGENTS.md) — Authored applications exercising
-  documented composition, with their own fixtures and checks.
-- [packages/AGENTS.md](packages/AGENTS.md) — Publishable SDK and Jig host
-  implementations, with their package-local tests and artifacts.
+- [docs/AGENTS.md](docs/AGENTS.md) — FLOW specifications and public guidance.
+- [packages/AGENTS.md](packages/AGENTS.md) — Publishable SDK and independent authoring implementations, with package-local tests and artifacts.
 - [scripts/AGENTS.md](scripts/AGENTS.md) — Build, verification,
   release-candidate, and site-assembly entrypoints.
-- [site/AGENTS.md](site/AGENTS.md) — FLOW and Jig public-site configuration,
-  static root files, shared tooling, and deployment topology.
+- [site/AGENTS.md](site/AGENTS.md) — FLOW public-site configuration, static root files, and deployment.

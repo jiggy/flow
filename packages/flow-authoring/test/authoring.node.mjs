@@ -5,7 +5,9 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
-import { AuthoringError, compileContract, getToolchain, stampSource } from '../dist/index.js'
+const { AuthoringError, compileContract, getToolchain, stampSource } = await import(
+  process.env.FLOW_AUTHORING_PACKAGE_ENTRY || new URL('../dist/index.js', import.meta.url).href
+)
 
 const drafter = await readFile(new URL('./fixtures/drafter.tsp', import.meta.url), 'utf8')
 const source = await stampSource(drafter, { types: true })

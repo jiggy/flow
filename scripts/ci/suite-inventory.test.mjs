@@ -50,77 +50,28 @@ test('local discovery observes additions and deletions while pinned Git inventor
   assert.throws(() => gitRepositoryTests(root, 'HEAD'), /symbolic link/)
 })
 
-test('whole-file profile ownership excludes inapplicable roles and gives compact targets exactly their witness', () => {
+test('FLOW source and protocol ownership includes both SDKs and independent authoring', () => {
   const files = [
-    'packages/jig/test/portable/plain.test.ts',
-    'packages/jig/test/linux/pure.test.ts',
-    'packages/jig/test/linux-host/authority.test.ts',
-    'packages/jig/test/macos/native.test.ts',
-    'packages/jig/test/macos-23E224/observer.test.ts',
-    'packages/jig/test/host/package-provider-observation.test.ts',
-    'packages/jig/test/live/client.test.ts',
-    'packages/jig/test/startup/native-agent-startup.test.ts',
+    'packages/flow-sdk/test/session.test.ts',
     'packages/flow-authoring/test/authoring.node.mjs',
-    'packages/display-tui/test/native.test.ts',
-    'packages/jig/test/experimental/image-preview.test.ts',
-  ]
-  assert.deepEqual(reconcileSuiteInventory(files, affectedManifest).errors, [])
-  const filesFor = (target, profile) => filesForTarget(files, target, affectedManifest, profile)
-  assert.ok(!filesFor('source-portable', 'portable').includes(files[1]))
-  assert.ok(filesFor('source-portable', 'portable-linux').includes(files[1]))
-  assert.deepEqual(filesFor('source-protocol'), ['packages/flow-authoring/test/authoring.node.mjs'])
-  assert.ok(filesFor('linux').includes(files[2]))
-  assert.ok(!filesFor('linux').includes(files[3]))
-  assert.ok(filesFor('macos-x64').includes(files[3]))
-  assert.ok(!filesFor('macos-x64').includes(files[4]))
-  assert.ok(filesFor('macos-x64', 'macos-23E224').includes(files[4]))
-  assert.ok(!filesFor('macos-x64').includes(files[6]))
-  assert.ok(filesFor('macos-x64').includes(files[7]))
-  assert.ok(filesFor('linux').includes(files[5]))
-  assert.ok(filesFor('macos-x64').includes(files[5]))
-  for (const target of ['source-portable', 'source-protocol', 'linux', 'macos-x64', 'macos-arm64'])
-    assert.ok(!filesFor(target).includes(files[10]))
-  assert.equal(
-    reconcileSuiteInventory(files, affectedManifest).ownership[files[10]],
-    'image-thread-candidate',
-  )
-})
-
-test('Reporting additions retain distinct JavaScript and Python source owners', () => {
-  const files = [
-    'packages/reporting/test/wire.test.ts',
-    'packages/reporting/test/nested/future.test.ts',
-    'packages/jiggy-reporting/tests/test_wire.py',
-    'packages/jiggy-reporting/tests/nested/test_future.py',
+    'conformance/run-0/schema.test.ts',
+    'packages/jiggy-flow/tests/test_runtime.py',
+    'conformance/run-0/python-peer/test_channels.py',
   ]
   const inventory = reconcileSuiteInventory(files, affectedManifest)
   assert.deepEqual(inventory.errors, [])
-  assert.deepEqual(inventory.ownership, {
-    [files[0]]: 'reporting',
-    [files[1]]: 'reporting',
-    [files[2]]: 'python-reporting',
-    [files[3]]: 'python-reporting',
-  })
   assert.deepEqual(
     filesForTarget(files, 'source-protocol', affectedManifest),
-    files.slice(0, 2).sort(),
+    files.slice(0, 3).sort(),
   )
-  assert.deepEqual(filesForTarget(files, 'source-python', affectedManifest), files.slice(2).sort())
-  for (const target of ['source-portable', 'linux', 'macos-x64', 'macos-arm64'])
-    assert.deepEqual(filesForTarget(files, target, affectedManifest), [])
+  assert.deepEqual(filesForTarget(files, 'source-python', affectedManifest), files.slice(3).sort())
+})
+test('unknown, duplicate, linked and ambiguous tests cannot inherit FLOW execution', () => {
+  const known = 'packages/flow-sdk/test/known.test.ts'
   assert.match(
-    reconcileSuiteInventory(
-      ['packages/unreviewed-reporting/test/wire.test.ts'],
-      affectedManifest,
-    ).errors.join('\n'),
+    reconcileSuiteInventory(['packages/new/test/new.test.ts'], affectedManifest).errors.join('\n'),
     /Unowned/,
   )
-})
-
-test('unowned, ambiguous, duplicate and symlink tests cannot inherit suite execution from neighboring paths', () => {
-  const known = 'packages/jig/test/portable/known.test.ts'
-  for (const file of ['packages/jig/test/new.test.ts', 'packages/new-package/test/new.test.ts'])
-    assert.match(reconcileSuiteInventory([file], affectedManifest).errors.join('\n'), /Unowned/)
   assert.match(
     reconcileSuiteInventory([known, known], affectedManifest).errors.join('\n'),
     /Repeated/,
@@ -132,10 +83,12 @@ test('unowned, ambiguous, duplicate and symlink tests cannot inherit suite execu
   const changed = structuredClone(affectedManifest)
   changed.testSuites.push({
     id: 'conflict',
-    roots: ['packages/jig/test/portable/'],
+    roots: ['packages/flow-sdk/'],
     profiles: ['portable-linux'],
   })
   assert.match(reconcileSuiteInventory([known], changed).errors.join('\n'), /Ambiguous/)
-  const fixture = 'examples/tested-patch/fixtures/project/test/project.test.ts'
-  assert.deepEqual(reconcileSuiteInventory([fixture], affectedManifest).tests, [])
+  assert.match(
+    reconcileSuiteInventory(['packages/jig/test/host.test.ts'], affectedManifest).errors.join('\n'),
+    /Unowned/,
+  )
 })

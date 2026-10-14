@@ -4,7 +4,7 @@ Write one model and derive its invocation contract, explicitly selected Agent
 schemas and implementation types. The resulting JSON needs no compiler in the
 host that consumes it.
 
-This private prerelease package is bundled with Jig. Its standalone API returns
+This independent prerelease package can be used by any host. Its API returns
 artifacts as data and never edits project files or admits a Run. Jig's
 [managed workflow](https://jig.md/guide/contracts) composes it with explicit
 generation, checked publication and normal review: `jig review --generate-contracts`.

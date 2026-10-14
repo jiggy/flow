@@ -42,6 +42,10 @@ returns artifacts to Jig's separately owned managed publisher.
 
 ## Verification
 
+- `node scripts/test-authoring-package.mjs <archive>` installs the exact archive outside the checkout.
+  It runs the public API and complete mapping suite against the installed entrypoint.
+  Source fixtures and the development compiler provide test inputs only.
+
 - `just authoring::test` builds the package and runs its Node mapping/lifecycle
   tests and generated-type fixtures.
 

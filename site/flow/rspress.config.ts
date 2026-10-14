@@ -94,13 +94,13 @@ export default defineConfig({
   },
   themeConfig: {
     llmsUI: { placement: 'title', viewOptions: ['markdownLink'] },
-    editLink: { docRepoBaseUrl: 'https://github.com/jiggy/jig/tree/main/docs/flow' },
+    editLink: { docRepoBaseUrl: 'https://github.com/jiggy/flow/tree/main/docs/flow' },
     enableScrollToTop: true,
     nav: [
       { text: 'Documentation', link: '/guide/overview' },
       { text: 'Specifications', link: '/guide/' },
       { text: 'For agents', link: '/guide/for-agents' },
-      { text: 'GitHub', link: 'https://github.com/jiggy/jig' },
+      { text: 'GitHub', link: 'https://github.com/jiggy/flow' },
     ],
     sidebar: { '/': sidebar },
     footer: {

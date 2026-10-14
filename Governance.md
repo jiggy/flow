@@ -6,7 +6,7 @@ not an independently governed foundation standard.
 The project steward controls the official FLOW name, repositories, releases,
 and conformance marks and has final editorial authority. Significant technical
 changes, specification proposals, and feedback are discussed in public
-repository discussions (https://github.com/jiggy/jig/discussions), with the
+repository discussions (https://github.com/jiggy/flow/discussions), with the
 reason for the final decision recorded publicly. Anyone may propose changes or
 report implementation experience.
 

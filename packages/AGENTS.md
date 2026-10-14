@@ -1,85 +1,29 @@
-# Package workspace
+# FLOW packages
 
 ## Purpose
 
-Contains the independently built FLOW SDKs, reusable Agent methods, Jig host,
-semantic display model and renderers, and optional contract authoring toolchain.
+Own the independent FLOW SDKs and contract authoring tools.
 
 ## Ownership
 
-- Package directories own source, tests, manifests, release READMEs, licenses,
-  notices, and package-local justfiles.
-- The TypeScript packages are Bun workspaces. Bun generates the ignored root
-  `bun.lock` during installation. It is disposable, not maintained by hand or
-  committed. Python retains its own packaging.
-- `docs/flow/spec/` and `docs/jig/spec/` own normative contracts.
-- Repository scripts and workflows own cross-package release automation.
+- `flow-sdk/` owns the TypeScript Run SDK.
+- `jiggy-flow/` owns the Python Run SDK.
+- `flow-authoring/` owns the optional independent TypeSpec compiler.
+- `docs/flow/spec/` owns normative semantics.
 
 ## Local Contracts
 
-- Sibling packages are independent release units. Never import sibling source or
-  generated output.
-- Run `bun install` at the repository root to install all package workspaces.
-  Keep Bun's isolated workspace layout. Clean installs regenerate the lock from
-  manifests. Do not restore per-workspace Bun locks. Example applications and
-  their Flows are workspace members. Examples pin matching SDK versions so Bun
-  can substitute the local workspaces.
-
-  Application-only method packages may use `workspace:*` for explicit source
-  composition.
-- Use the root Just modules (`just flow::build`, `just display_model::build`,
-  `just display_web::build`, `just display_tui::build`, `just jig::build`) or
-  run package recipes locally. `pack` builds explicitly. Manifests have no build
-  or packing lifecycle scripts. Just is development tooling, not an installed
-  Jig or FLOW dependency.
-- TypeScript and Python FLOW SDKs implement the same Run SDK/0 and Run/0 wire
-  semantics. Language ergonomics may differ only where the specifications allow
-  it.
-- Only manifest-declared exports are public. Test seams and exported internal
-  symbols do not create an API.
-- Generated, installed, cache, and packaging-output directories are not source
-  and must not be edited.
-- Keep manifests, lockfiles, versions, packed allowlists, licenses, notices, and
-  release READMEs aligned with the actual artifact.
-
-## Work Guidance
-
-- Start with the narrow package check, then test packed artifacts rather than
-  relying only on workspace resolution.
-- Shared wire changes require both SDKs, Jig, conformance, and specifications to
-  be reviewed together.
+Use public dependency exports. No Jig checkout or host implementation is a build input.
+Bun generates the ignored workspace lock from package manifests.
+Just owns explicit builds and packing. Manifests contain no task scripts.
+Preserve language parity, exact wire semantics, licenses, and distribution inventories.
 
 ## Verification
 
-- Cross-package gate:
-  `FLOW_NODE="$(command -v node)" PYTHON="$(command -v python3)" scripts/test-release.sh`
+Run `just build`, `just test`, and `just test-release`.
 
 ## Child DOX Index
 
-- [reporting/AGENTS.md](reporting/AGENTS.md) — Portable reporting agreement,
-  semantic validation and scoped TypeScript publishing.
-- [jiggy-reporting/AGENTS.md](jiggy-reporting/AGENTS.md) — Independently
-  packaged Python reporting publisher using the same canonical agreement.
-
-- [agent-method/AGENTS.md](agent-method/AGENTS.md) — Shared Agent procedure,
-  bounded Skill reader, and complete ordinary Flow artifact.
-- [agent-acp/AGENTS.md](agent-acp/AGENTS.md) — Ordinary finite native Agent
-  dialogue and public ACP resource framing, without credentials or launch
-  authority.
-
-- [flow-authoring/AGENTS.md](flow-authoring/AGENTS.md) — Optional TypeSpec
-  mapping toolchain, generated contracts, Agent projections and editor types.
-
-- [flow-sdk/AGENTS.md](flow-sdk/AGENTS.md) — Public TypeScript Run SDK/0
-  package.
-- [jiggy-flow/AGENTS.md](jiggy-flow/AGENTS.md) — Independently released Python
-  Run SDK/0 package.
-- [jig/AGENTS.md](jig/AGENTS.md) — Public Jig authoring package and installed
-  secure host, with required scoped implementation and qualification guidance.
-- [display-model/AGENTS.md](display-model/AGENTS.md) — Readonly semantic
-  snapshots and pure display meaning, independent of Jig and renderer state.
-- [display-web/AGENTS.md](display-web/AGENTS.md) — Browser rendering, bounded
-  observation client, viewer navigation and fixed bundled assets.
-- [display-tui/AGENTS.md](display-tui/AGENTS.md) — Independent terminal and
-  inline rendering, viewer input/navigation, lazy native support and bounded
-  frames.
+- [flow-sdk/AGENTS.md](flow-sdk/AGENTS.md) — TypeScript SDK.
+- [jiggy-flow/AGENTS.md](jiggy-flow/AGENTS.md) — Python SDK.
+- [flow-authoring/AGENTS.md](flow-authoring/AGENTS.md) — Independent authoring.
