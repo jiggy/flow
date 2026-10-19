@@ -40,7 +40,12 @@ export function comparePrerelease(left, right) {
 
 export async function publishNpm(
   directory,
-  { run = execute, reauthorize = authorize, verify = verifyCandidate } = {},
+  {
+    run = execute,
+    reauthorize = authorize,
+    verify = verifyCandidate,
+    pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
+  } = {},
 ) {
   const root = resolve(directory)
   const snapshot = JSON.parse(await readFile(join(root, 'AUTHORIZATION.json'), 'utf8'))
@@ -82,9 +87,21 @@ export async function publishNpm(
       '--provenance',
       '--ignore-scripts',
     ])
-    const actual = optionalView([`${plan.entry.name}@${plan.entry.version}`, 'dist.integrity'], run)
-    if (actual !== plan.integrity)
-      throw new Error('Published registry bytes are not yet verified; retry publication')
+    for (let attempt = 0; ; attempt++) {
+      const actual = optionalView(
+        [`${plan.entry.name}@${plan.entry.version}`, 'dist.integrity'],
+        run,
+      )
+      if (actual === plan.integrity) break
+      if (actual !== undefined) throw new Error('Published registry version has different bytes')
+      if (attempt === 60)
+        throw new Error(
+          'Published registry bytes remained unavailable after five minutes; retry publication',
+        )
+      if (attempt === 0)
+        console.log(`Waiting for registry visibility: ${plan.entry.name}@${plan.entry.version}`)
+      await pause(5_000)
+    }
   }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)

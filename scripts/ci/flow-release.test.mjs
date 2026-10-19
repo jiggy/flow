@@ -262,3 +262,100 @@ test('candidate verification reads archives beneath drive-colon paths as local f
     await rm(temporary, { recursive: true, force: true })
   }
 })
+
+test('accepted npm publication waits for registry propagation without republishing', async (t) => {
+  const f = await fixture(t)
+  const hidden = new Map()
+  const waits = []
+  await publishNpm(f.root, {
+    ...f.options,
+    pause: async (milliseconds) => {
+      waits.push(milliseconds)
+    },
+    run: (args) => {
+      const output = f.options.run(args)
+      if (args[0] === 'publish') {
+        const entry = f.entries.find((entry) => join(f.root, entry.path) === args[1])
+        hidden.set(`${entry.name}@${entry.version}`, 2)
+      } else if (args[2] === 'dist.integrity' && hidden.get(args[1]) > 0) {
+        hidden.set(args[1], hidden.get(args[1]) - 1)
+        throw Object.assign(new Error('Not yet visible'), {
+          stdout: JSON.stringify({ error: { code: 'E404' } }),
+        })
+      }
+      return output
+    },
+  })
+  assert.deepEqual(waits, [5000, 5000, 5000, 5000])
+  assert.equal(f.calls.filter((call) => call[0] === 'publish').length, 2)
+})
+
+test('unavailable registry metadata has a bounded wait and cannot publish the next package', async (t) => {
+  const f = await fixture(t)
+  const waits = []
+  await assert.rejects(
+    () =>
+      publishNpm(f.root, {
+        ...f.options,
+        pause: async (milliseconds) => {
+          waits.push(milliseconds)
+        },
+        run: (args) => {
+          f.options.run(args)
+          return ''
+        },
+      }),
+    /unavailable after five minutes/,
+  )
+  assert.equal(waits.length, 60)
+  assert.ok(waits.every((milliseconds) => milliseconds === 5000))
+  assert.equal(f.calls.filter((call) => call[0] === 'publish').length, 1)
+})
+
+test('conflicting registry bytes after publication fail without waiting or publishing the next package', async (t) => {
+  const f = await fixture(t)
+  let waited = false
+  await assert.rejects(
+    () =>
+      publishNpm(f.root, {
+        ...f.options,
+        pause: async () => {
+          waited = true
+        },
+        run: (args) => {
+          const output = f.options.run(args)
+          return args[2] === 'dist.integrity' && f.versions.has(args[1])
+            ? JSON.stringify('conflicting-integrity')
+            : output
+        },
+      }),
+    /different bytes/,
+  )
+  assert.equal(waited, false)
+  assert.equal(f.calls.filter((call) => call[0] === 'publish').length, 1)
+})
+
+test('registry access errors after publication fail without waiting or republishing', async (t) => {
+  const f = await fixture(t)
+  let waited = false
+  await assert.rejects(
+    () =>
+      publishNpm(f.root, {
+        ...f.options,
+        pause: async () => {
+          waited = true
+        },
+        run: (args) => {
+          const output = f.options.run(args)
+          if (args[2] === 'dist.integrity' && f.versions.has(args[1]))
+            throw Object.assign(new Error('Registry authorization failed'), {
+              stdout: JSON.stringify({ error: { code: 'E401' } }),
+            })
+          return output
+        },
+      }),
+    /Registry authorization failed/,
+  )
+  assert.equal(waited, false)
+  assert.equal(f.calls.filter((call) => call[0] === 'publish').length, 1)
+})
