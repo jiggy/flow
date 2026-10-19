@@ -27,6 +27,8 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: "24"
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
       - name: Authorize exact qualified producer
         id: authorized
         env:
@@ -45,3 +47,4 @@ jobs:
         run: node scripts/ci/publish-npm.mjs candidates
         env:
           GH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
