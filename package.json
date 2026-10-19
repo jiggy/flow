@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@biomejs/biome": "2.5.12"
+    "@biomejs/biome": "2.5.12",
+    "yaml": "2.9.0"
   }
 }

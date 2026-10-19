@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { lstat, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { dirname, join, resolve } from 'node:path'
+import { basename, dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { promoteDirectory } from '../promote-directory.mjs'
 
@@ -53,7 +53,8 @@ export async function buildCandidates(destination) {
       const files = (await readdir(target)).filter((path) => path.endsWith('.tgz'))
       if (files.length !== 1) throw new Error(`Incomplete ${name} candidate`)
       const manifest = JSON.parse(
-        execFileSync('tar', ['-xOzf', join(target, files[0]), 'package/package.json'], {
+        execFileSync('tar', ['-xOzf', files[0], 'package/package.json'], {
+          cwd: target,
           encoding: 'utf8',
         }),
       )
@@ -141,7 +142,8 @@ export async function verifyCandidate(directory, sourceRevision) {
       throw new Error('Candidate archive changed')
     if (entry.path.endsWith('.tgz')) {
       const manifest = JSON.parse(
-        execFileSync('tar', ['-xOzf', join(root, entry.path), 'package/package.json'], {
+        execFileSync('tar', ['-xOzf', basename(entry.path), 'package/package.json'], {
+          cwd: join(root, dirname(entry.path)),
           encoding: 'utf8',
         }),
       )

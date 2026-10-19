@@ -11,7 +11,12 @@ Publication consumes exact qualified archives from one successful main-push CI r
 Refuse failed, skipped, stale, expired, or mismatched qualification. Never rebuild during publication.
 
 Use protected environments and registry trusted publishing.
+The existing publication environments are `npm` and `pypi`.
+Pages uses `github-pages`. Keep workflow environment names aligned with registry trust configuration.
 Jig host qualification belongs to the Jig repository.
+
+Documentation checks compare PRs with their base and pushes with their previous commit.
+For first pushes and manual runs, use the checked revision's parent instead of a missing or all-zero baseline.
 
 ## Verification
 

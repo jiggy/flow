@@ -112,14 +112,14 @@ jobs:
           just-version: 1.43.1
       - name: Check documentation source and checker regressions
         env:
-          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
         run: |-
           bun test scripts/check-docs.test.ts
           bun scripts/check-docs.ts
       - run: bun install --cwd site --frozen-lockfile --ignore-scripts
       - name: Build FLOW documentation
         env:
-          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
         run: |-
           scripts/build-site.sh flow "$RUNNER_TEMP/sites/flow"
           bun scripts/check-docs.ts --sites "$RUNNER_TEMP/sites"

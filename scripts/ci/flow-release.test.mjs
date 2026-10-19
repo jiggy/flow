@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { mkdir } from 'node:fs/promises'
+import { verifyCandidate } from './flow-candidates.mjs'
 import { createHash } from 'node:crypto'
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -201,4 +204,61 @@ test('a changed producer attempt during registry reconciliation prevents mutatio
     /authorization changed/,
   )
   assert.equal(f.calls.filter((call) => call[0] === 'publish').length, 0)
+})
+
+test('candidate verification reads archives beneath drive-colon paths as local files', async () => {
+  const temporary = await mkdtemp(join(tmpdir(), 'flow-drive-path-'))
+  try {
+    const root = join(temporary, process.platform === 'win32' ? 'source' : 'D:', 'candidates')
+    const packages = []
+    for (const [directory, name] of [
+      ['flow-sdk', '@jigging/flow'],
+      ['flow-authoring', '@jigging/flow-authoring'],
+    ]) {
+      const cwd = join(root, directory)
+      await mkdir(join(cwd, 'package'), { recursive: true })
+      await writeFile(
+        join(cwd, 'package/package.json'),
+        JSON.stringify({ name, version: '0.1.0-alpha.1', publishConfig: { access: 'public' } }),
+      )
+      execFileSync('tar', ['-czf', 'candidate.tgz', 'package'], { cwd })
+      const path = `${directory}/candidate.tgz`
+      packages.push({
+        name,
+        version: '0.1.0-alpha.1',
+        path,
+        sha256: createHash('sha256')
+          .update(await readFile(join(root, path)))
+          .digest('hex'),
+      })
+    }
+    await mkdir(join(root, 'python'))
+    for (const extension of ['-py3-none-any.whl', '.tar.gz']) {
+      const path = `python/jiggy_flow-0.1.0a1${extension}`
+      const bytes = Buffer.from('distribution integrity fixture')
+      await writeFile(join(root, path), bytes)
+      packages.push({
+        name: 'jiggy-flow',
+        version: '0.1.0a1',
+        path,
+        sha256: createHash('sha256').update(bytes).digest('hex'),
+      })
+    }
+    await mkdir(join(root, 'resolution'))
+    const resolution = Buffer.from('resolution integrity fixture')
+    await writeFile(join(root, 'resolution/bun.lock'), resolution)
+    const receipt = {
+      schemaVersion: 1,
+      sourceRevision: revision,
+      packages,
+      resolutionSha256: createHash('sha256').update(resolution).digest('hex'),
+      qualification: 'pending',
+    }
+    await writeFile(join(root, 'CANDIDATE.json'), JSON.stringify(receipt))
+    assert.deepEqual(await verifyCandidate(root, revision), receipt)
+    await writeFile(join(root, packages[0].path), 'changed archive')
+    await assert.rejects(() => verifyCandidate(root, revision), /Candidate archive changed/)
+  } finally {
+    await rm(temporary, { recursive: true, force: true })
+  }
 })
