@@ -49,22 +49,21 @@ test('publication workflows use the configured protected registry environments',
   }
 })
 
-test('npm bootstrap authentication is confined to qualified publication in Actions', async () => {
+test('npm publication uses OIDC without a bootstrap token', async () => {
   const workflow = parse(await readFile(new URL('npm-publish.yml', workflows), 'utf8'))
   const job = workflow.jobs.publish
   assert.equal(job.environment, 'npm')
   assert.equal(workflow.permissions['id-token'], 'write')
   const node = job.steps.find((step) => step.uses?.startsWith('actions/setup-node@'))
-  assert.equal(node.with['registry-url'], 'https://registry.npmjs.org')
   assert.equal(node.with['package-manager-cache'], false)
-  const authenticated = job.steps.filter((step) =>
-    JSON.stringify(step).includes('secrets.NPM_TOKEN'),
+  assert.ok(!JSON.stringify(workflow).includes('NPM_TOKEN'))
+  assert.ok(!JSON.stringify(workflow).includes('NODE_AUTH_TOKEN'))
+  const publish = job.steps.find(
+    (step) => step.run === 'node scripts/ci/publish-npm.mjs candidates',
   )
-  assert.equal(authenticated.length, 1)
-  assert.equal(authenticated[0].env.NODE_AUTH_TOKEN, '${{ secrets.NPM_TOKEN }}')
-  assert.equal(authenticated[0].run, 'node scripts/ci/publish-npm.mjs candidates')
+  assert.ok(publish)
   assert.ok(
-    job.steps.findIndex((step) => step === authenticated[0]) >
+    job.steps.findIndex((step) => step === publish) >
       job.steps.findIndex((step) => step.name === 'Revalidate after queueing and download'),
   )
   const ci = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))

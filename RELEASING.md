@@ -16,13 +16,10 @@ Changed package metadata requires a new prerelease identifier.
 The first independent authoring release must precede the Jig cutover.
 Jig pins that public version and bundles its compiler through ordinary package installation.
 
-Bootstrap new npm packages through the same GitHub Actions publisher.
-Store a short-lived granular token as `NPM_TOKEN` in the `npm` environment for the first publication.
-It needs publish access to the package's scope and bypass 2FA enabled for noninteractive publishing.
-The publish step consumes exact qualified CI archives with provenance and performs no rebuild.
-
-Then configure the package's trusted publisher for `jiggy/flow`, `npm-publish.yml`, environment `npm`, allowing direct publication.
-Remove the bootstrap secret and revoke the token after setup. Later releases use OIDC.
+Bootstrap new npm packages locally with an empty `0.0.0` version under the `bootstrap` tag.
+Use an interactive npm login. The placeholder creates the package without replacing the `latest` tag.
+Then configure its trusted publisher for `jiggy/flow`, `npm-publish.yml`, environment `npm`, allowing direct publication.
+Actions publishes qualified release archives through OIDC without a registry token secret.
 
 GitHub Pages deploys this repository's FLOW site directly.
 Enable Actions Pages and preserve the `flow.jig.md` custom domain.
