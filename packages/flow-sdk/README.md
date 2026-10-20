@@ -2,12 +2,12 @@
 
 Minimal, dependency-free TypeScript projection of FLOW Run/0.
 
-This is the prerelease `0.1.0-alpha.13` package. Its authoritative documents
+This is the prerelease `0.1.0-alpha.15` package. Its authoritative documents
 are the [Run SDK/0](https://flow.jig.md/spec/run-sdk) and
 [Run/0](https://flow.jig.md/spec/run-protocol) specifications. Prereleases
 do not establish a stable compatibility promise.
 
-Install the latest published prerelease:
+From the directory containing `FLOW.ts`, install the latest published prerelease:
 
 ```console
 npm install @jigging/flow@alpha
@@ -19,21 +19,28 @@ Or declare the exact alpha in the FLOW package's `package.json`:
 {
   "private": true,
   "dependencies": {
-    "@jigging/flow": "0.1.0-alpha.13"
+    "@jigging/flow": "0.1.0-alpha.15"
   }
 }
 ```
 
-Generate only the text lock with Bun 1.3.3:
+Generate the text lock with Bun 1.3.3:
 
 ```console
 bun install --lockfile-only
 ```
 
-Keep `package.json` and `bun.lock` beside `FLOW.ts`; do not add `node_modules`
-to the FLOW package. Jig's direct-run alpha prepares that locked dependency
-during `jig review`; the admitted Run then reuses the prepared package without
-installing or fetching.
+Declare runtime imports in the Flow's own `dependencies`, even when an
+application root also depends on the SDK. Keep `package.json` and `bun.lock`
+beside `FLOW.ts`. Do not include `node_modules` in the distributed Flow.
+
+When using Jig, start with its [quickstart](https://jig.md/guide/).
+Jig prepares the Flow's locked dependencies during `jig review`.
+The admitted Run reuses the prepared packages without installing or fetching.
+Jig supports default-registry dependencies and declared source workspaces,
+not `file:` archives or tarball dependencies.
+See [dependency preparation](https://jig.md/guide/dependencies) for workspace
+declarations, root locks, and supported Bun versions.
 
 Finite work uses `handle()`:
 
@@ -70,10 +77,10 @@ await handle(async (run) => {
 This also protects console methods cached by that later module graph. It does
 not make raw stdout or inherited child stdout valid protocol output.
 
-Use `run.call({ operationId, slot, input, intent?, channels? }, options?)` for
+Use `run.call({ operationId, slot, input, intent?, channels?, attachments? }, options?)` for
 finite work through a local slot. `FlowCall` describes this request; the host
 selects its admitted implementation and determines which slots are available.
-Every normal reply is the complete `RunResult`, including declared domain
+Every normal reply is the complete `CallResult`, including declared domain
 refusals. Branch on `outcome` and use `output` explicitly:
 
 ```ts
@@ -102,6 +109,41 @@ The SDK permits at most 64 live wire requests and 65,536 request frames over
 one Run. When channels are present, it reserves capacity inside those limits
 for endpoint disposal. Saturated ordinary admission fails with
 `OperationError` code `RESOURCE_EXHAUSTED`.
+
+## Immutable artifact handoff
+
+On a host supporting finite attachments, produce and evaluate distinct immutable
+trees without choosing paths or creating a slot per attempt:
+
+```ts
+const produced = await run.call({
+  operationId: "p1", slot: "producer", input: { revision: 1 },
+  attachments: { files: { create: true } },
+});
+const files = produced.artifacts!.files!;
+const evaluated = await run.call({
+  operationId: "e1", slot: "evaluator", input: {},
+  attachments: { candidate: { read: files } },
+});
+return { outcome: "done", output: evaluated.output,
+  artifactResults: { final: files } };
+```
+
+The producer declares `attachments: {files:"read-write"}`, the evaluator
+`attachments: {candidate:"read"}`, and the coordinator declares
+`artifactResults:["final"]` in their invocation contracts. Initial readonly
+attachments also expose an optional held `artifact` for onward delegation.
+`Artifact` has readonly `reference` identity, no path and no public constructor.
+Only this Run's genuine host-supplied objects serialize as attachment rights;
+the host validates permission. Artifacts are not JSON domain data. Keep domain
+schemas limited to `{outcome, output}` and select forwarded trees explicitly.
+Exact duplicates preserve original refs and outcomes without allocating again.
+
+Ordinary root cleanup automatically retires live rights. Advanced
+`run.release({operationId:"release:1", artifact:files})` relinquishes additional
+read initiation, not already accepted sibling reads. Cancelled waits retain
+wire settlement. Old result replay never restores a released right; the host
+distinguishes replay from new reads.
 
 ## Direct channels
 
