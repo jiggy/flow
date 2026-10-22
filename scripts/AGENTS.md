@@ -2,17 +2,19 @@
 
 ## Purpose
 
-Own SDK candidate building, Python distribution checks, documentation verification, and site assembly.
+Own SDK candidate building, Python distribution checks, documentation verification, skill bundling, and site assembly.
 
 ## Local Contracts
 
 Use explicit inputs and fresh destinations. Preserve exact archive bytes, hashes, and nonzero failures.
 Build candidates from clean Git source. Never rebuild during publication.
 Site assembly publishes FLOW pages, schemas, fonts, and indexed Markdown together.
+Skill builds consume `skills/references.json` and preserve reference provenance, links, and license notices.
 
 ## Verification
 
 Run `just test-tooling`, `just test-release`, and a fresh FLOW site build.
+Run `just build-skills` with a fresh output directory.
 
 ## Child DOX Index
 

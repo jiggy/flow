@@ -64,6 +64,16 @@ jobs:
           just-version: 1.43.1
       - run: bun install --ignore-scripts
       - run: just test-tooling
+      - name: Build portable skills from canonical documentation
+        run: just build-skills "$RUNNER_TEMP/skills"
+      - name: Upload complete skills
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: flow-skills-${{ github.sha }}-r${{ github.run_id }}-a${{ github.run_attempt }}
+          path: ${{ runner.temp }}/skills
+          retention-days: 30
+          if-no-files-found: error
+          overwrite: true
   source-tests:
     name: Source and protocol checks
     runs-on: ubuntu-24.04

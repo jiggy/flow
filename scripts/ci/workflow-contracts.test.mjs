@@ -69,3 +69,22 @@ test('npm publication uses OIDC without a bootstrap token', async () => {
   const ci = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
   assert.ok(!JSON.stringify(ci).includes('NPM_TOKEN'))
 })
+
+test('CI builds and uploads complete skills without source write permissions', async () => {
+  const workflow = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
+  const job = workflow.jobs['quick-checks']
+  const permissions = job.permissions ?? workflow.permissions
+  assert.equal(permissions.contents, 'read')
+  const buildIndex = job.steps.findIndex(
+    (step) => step.run === 'just build-skills "$RUNNER_TEMP/skills"',
+  )
+  assert.ok(buildIndex >= 0, 'CI must build skill references from the checked source')
+  const uploadIndex = job.steps.findIndex(
+    (step) =>
+      step.uses?.startsWith('actions/upload-artifact@') &&
+      step.with?.path === '${{ runner.temp }}/skills',
+  )
+  assert.ok(uploadIndex > buildIndex, 'CI must deliver the completed skill folder')
+  assert.equal(job.steps[uploadIndex].with['if-no-files-found'], 'error')
+  assert.ok(job.steps[uploadIndex].with.name.includes('${{ github.sha }}'))
+})

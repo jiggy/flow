@@ -9,6 +9,10 @@ mod site "site/justfile"
 build: flow::build authoring::build
 
 [positional-arguments]
+@build-skills output:
+    node scripts/build-skills.mjs "$1"
+
+[positional-arguments]
 @test *args:
     bun test packages/flow-sdk conformance/run-0 "$@"
     just authoring::test
