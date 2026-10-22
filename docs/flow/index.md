@@ -894,7 +894,7 @@ description: "A proposed successor to SKILL.md. Put your agent know-how inside y
       <p>Jig runs your FLOW methods.</p>
       <div
         class="supported-runtime-footer"
-        aria-label="Jig supports Markdown, Python, and TypeScript through Bun"
+        aria-label="Jig supports Markdown and TypeScript through Bun"
       >
         <span
           ><img
@@ -903,8 +903,6 @@ description: "A proposed successor to SKILL.md. Put your agent know-how inside y
             width="19"
             height="19"
           />Markdown</span
-        ><span
-          ><img src="/home/assets/brands/python.svg" alt="" width="18" height="18" />Python</span
         ><span
           ><img src="/home/assets/brands/typescript.svg" alt="" width="17" height="17" />TypeScript
           <small>(Bun)</small></span
