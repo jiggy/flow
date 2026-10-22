@@ -57,6 +57,7 @@ and invocation-contract semantics.
 
 ## Work Guidance
 
+- Label examples explicitly and state the assumptions behind their design choices.
 - Lead introductions with the applications readers can build by composing
   executable methods. Keep stewardship and governance in supporting reference
   material, after the technical value is clear.
