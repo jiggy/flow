@@ -1,8 +1,8 @@
 # Brand identity
 
-This guide owns the selected names and visual system for Jig and FLOW. It is
-the reference for product marks and lockups, not a claim about trademark
-availability or legal clearance.
+This guide owns the selected names, emblems, and lockups for Jig and FLOW.
+[FLOW's design guide](../DESIGN.md) owns its website presentation and visual system.
+These guides do not establish trademark availability or legal clearance.
 
 ## Product names
 
@@ -60,7 +60,8 @@ product name provide the link's accessible name.
   embeds the licensed Quicksand face needed to preserve the chosen wordmark
   when opened outside the sites. Use the ink `logo.svg` on light surfaces and
   the paper `logo-light.svg` on dark surfaces.
-- `site/landing.css` owns shared wordmark font faces, size, color, and spacing.
+- `site/landing.css` owns shared wordmark font faces and documentation lockups.
+  `site/home.css` owns FLOW's homepage placements.
   The site configurations supply each site's mark and live product name.
 - `site/theme/fonts/quicksand-semibold.ttf` and `quicksand-bold.ttf` are the
   self-hosted wordmark fonts. Preserve `quicksand-LICENSE.txt` and the build's

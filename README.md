@@ -1,3 +1,5 @@
+[![FLOW — Put your Skills to work in software.](site/flow/public/social/flow-readme.png)](https://flow.jig.md/)
+
 # FLOW
 
 **Capability compounding through independently reusable methods.**

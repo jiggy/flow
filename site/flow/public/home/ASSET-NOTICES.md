@@ -38,3 +38,13 @@ Paths below are relative to `/home/`.
 | `assets/brands/aider.svg` | [Aider wordmark](https://github.com/Aider-AI/aider/blob/main/aider/website/assets/logo.svg). |
 
 The FLOW emblem and favicon use the repository's existing product artwork.
+
+## Social graphics
+
+`/social/flow-social.svg` and `/social/flow-readme.svg` compose the official FLOW lockup,
+the existing `assets/flow-sky.webp` texture, and outlined OpenRunde and Quicksand lettering.
+The texture is embedded as JPEG data. The emblem geometry and wordmark proportions are retained.
+Matching PNG exports provide website share previews and the repository README banner.
+
+`scripts/generate-social-assets.py` owns the composition and exports all four files.
+The font notices above also apply to lettering within these graphics.
