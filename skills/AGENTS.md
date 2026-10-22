@@ -9,7 +9,7 @@ Enable capability compounding through skills that help agents author and review 
 - `flow/SKILL.md` owns the public FLOW authoring and review workflow.
 - `references.json` selects canonical references for each skill.
 - [Canonical documentation](../docs/flow/) owns FLOW guidance, examples, and exact requirements.
-- [Design guidance](../docs/flow/guide/design.md) owns opinionated practices for modularity, composition, portability, and local reasoning.
+- [Design guidance](../docs/flow/guide/design.md) owns opinionated practices for naming, decomposition, composition, portability, and local reasoning.
 - [Repository skills](../.agents/skills/) serve local repository work.
 - [Build tooling](../scripts/AGENTS.md) owns reference synchronization and verification.
 - [CI](../.github/AGENTS.md) keeps committed skill references synchronized with their canonical sources.

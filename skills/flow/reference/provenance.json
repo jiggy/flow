@@ -15,8 +15,8 @@
     {
       "source": "docs/flow/guide/design.md",
       "destination": "guide/design.md",
-      "sourceSha256": "40dc90ecb4193b4378b7a59c499c157e6f031477ae81d05e22645ac8fee0e1ff",
-      "outputSha256": "f39720e8cd8e8b116ecf1e60bf71ef1346abe4489a35c821c879b6d02ad5fb66"
+      "sourceSha256": "e27c776545c82ca0ceb9dc124386b47a3e2bbd1f3b2c94a8edebc59aaf216c20",
+      "outputSha256": "40ce2d109bedc7bbb21ef28dc07091d9c29646c659c828bffd64e1fd1caac649"
     },
     {
       "source": "docs/flow/guide/runtimes.md",

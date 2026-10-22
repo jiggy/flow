@@ -19,6 +19,7 @@ These opinionated authoring defaults complement the normative specifications lin
 ## In this guide
 
 - [Start with the caller's promise](#start-with-the-callers-promise)
+- [Choose short, clear names](#choose-short-clear-names)
 - [Choose meaningful small pieces](#choose-meaningful-small-pieces)
 - [Make composition hide complexity](#make-composition-hide-complexity)
 - [Keep independent choices independent](#keep-independent-choices-independent)
@@ -35,7 +36,7 @@ This exercise needs no additional manifest or required file.
 
 | Question | What the caller should understand |
 | --- | --- |
-| What does it do? | One coherent capability, named with a domain verb and object |
+| What does it do? | One coherent capability, with a concise name that is clear in the application's domain |
 | What does it need? | Relevant input values, settings, dependency roles, and any live message ports |
 | What does it return? | A useful result, expected alternatives, and the meaning of completion |
 | What can it change? | External effects, state ownership, and any consequences that might survive failure |
@@ -56,7 +57,24 @@ Introduce a named invocation contract when independently maintained consumers ne
 [Invocation Contract/0](../spec/invocation-contracts.md) also supports anonymous local constraints.
 A clear interface promise does not require every component to publish a named contract.
 
+## Choose short, clear names
+
+Use the shortest name that makes the Flow's role unambiguous once the application's purpose is known.
+Use familiar domain vocabulary and prefer verb-object names for actions.
+In a support application, prefer `classify-request` to `classify`.
+The object identifies the capability without requiring the reader to inspect its implementation.
+
+Keep qualifiers that distinguish capabilities a caller could otherwise confuse.
+Remove words that only repeat the application's established context.
+Avoid abbreviations that make the role harder to recognize.
+Recheck the name's clarity when moving the Flow into a different application.
+
 ## Choose meaningful small pieces
+
+Understand the application's domain and choose the level of abstraction its components should expose.
+Within that level, split Flows as far as possible while every resulting piece remains a meaningful capability.
+Prefer splitting when both smaller Flows satisfy these rules and the split adds value for an identifiable beneficiary.
+Apply the same judgment recursively to each piece.
 
 Prefer components with high cohesion: their parts contribute to the same understandable capability.
 Keep coupling low: using one component should require little knowledge of another component's internals.
@@ -81,6 +99,13 @@ Extract a private helper when a concrete caller or replacement need gives it an 
 Avoid generic components whose many mode flags select unrelated jobs.
 Unrelated callers changing together often reveal a missing boundary.
 
+A single current caller can be a sufficient beneficiary when it receives a concrete benefit.
+In request processing, separate `classify-request` and `assign-request`: one suggests a category, while the other performs assignment.
+An `http-request` boundary depends on the chosen level of abstraction.
+Expose it when consumers need HTTP as an independently useful capability.
+Keep HTTP private within the integration when consumers only need the domain operation.
+Use domain knowledge to choose this boundary and make its benefit explicit.
+
 ## Make composition hide complexity
 
 A composed Flow should provide one useful capability through the same calling model as its children.
@@ -102,9 +127,10 @@ It calls assignment only when that policy permits assignment.
 It returns an assigned result only after the required assignment succeeds.
 An uncertain suggestion can produce a manual-review result without requesting the assignment effect.
 
-Keep a policy used only by this method inside the composite.
+Keep a policy private when extraction would add no meaningful boundary or benefit.
 Extract `apply-routing-policy` when intake and batch processing need the same independently maintained decision.
 Then both callers can compose that smaller capability without duplicating the rule.
+A single composite can also benefit from extracting policy for independent testing, replacement, or ownership.
 
 The outside caller should only need to invoke `route-request` and interpret its documented result and effects.
 It should not coordinate the classifier's prompts, the ticket vendor's request format, or the children's cleanup.
