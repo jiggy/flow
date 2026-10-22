@@ -3,14 +3,20 @@
   "repository": "https://github.com/jiggy/flow",
   "manifest": {
     "source": "skills/references.json",
-    "sha256": "e1d2376875b98c3dd6cc4d0c39ee06f5d48d22f4c71184eb8ca2ef59f51a06c5"
+    "sha256": "61ce886d46f16ac6656b57d543460cd83df52a9286a26306d329d913f6f5f700"
   },
   "files": [
     {
       "source": "docs/flow/guide/for-agents.md",
       "destination": "guide/for-agents.md",
-      "sourceSha256": "a31125001090b97009f52ecc6c72b2d83baf24ce6d06e2f1ece477ca17cbcda1",
-      "outputSha256": "fecba1a969f36c9a51e3ada4d587748997d3af4c0862cbd8c54de40b53fbc92a"
+      "sourceSha256": "272fac3082df4d6b53cf831686cb1cfc248cc9b1645c78a2a6fb0fc62afadab3",
+      "outputSha256": "892c59dc11c490031061cd5d9312f94e645f9cc06c919238af60f3ee2024a4f9"
+    },
+    {
+      "source": "docs/flow/guide/design.md",
+      "destination": "guide/design.md",
+      "sourceSha256": "40dc90ecb4193b4378b7a59c499c157e6f031477ae81d05e22645ac8fee0e1ff",
+      "outputSha256": "f39720e8cd8e8b116ecf1e60bf71ef1346abe4489a35c821c879b6d02ad5fb66"
     },
     {
       "source": "docs/flow/guide/runtimes.md",

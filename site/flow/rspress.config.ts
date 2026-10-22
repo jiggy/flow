@@ -19,6 +19,7 @@ const sidebar = [
   {
     text: 'Build',
     items: [
+      { text: 'Design modular Flows', link: '/guide/design' },
       { text: 'Markdown methods', link: '/guide/markdown' },
       { text: 'Skill compatibility', link: '/guide/skills' },
       { text: 'TypeScript / JavaScript SDK', link: '/guide/typescript' },
