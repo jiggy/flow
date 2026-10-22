@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "repository": "https://github.com/jiggy/flow",
+  "manifest": {
+    "source": "skills/references.json",
+    "sha256": "e1d2376875b98c3dd6cc4d0c39ee06f5d48d22f4c71184eb8ca2ef59f51a06c5"
+  },
+  "files": [
+    {
+      "source": "docs/flow/guide/for-agents.md",
+      "destination": "guide/for-agents.md",
+      "sourceSha256": "a31125001090b97009f52ecc6c72b2d83baf24ce6d06e2f1ece477ca17cbcda1",
+      "outputSha256": "fecba1a969f36c9a51e3ada4d587748997d3af4c0862cbd8c54de40b53fbc92a"
+    },
+    {
+      "source": "docs/flow/guide/runtimes.md",
+      "destination": "guide/runtimes.md",
+      "sourceSha256": "a8cc9272ad4550b0bd68b138a4e1f068764bc94682f1ce8923d29e50a2230bd1",
+      "outputSha256": "e7fa1a44d78df75e7346cfcb739ce95de0cd08057fa349077e6e04f8081977fd"
+    },
+    {
+      "source": "docs/flow/guide/markdown.md",
+      "destination": "guide/markdown.md",
+      "sourceSha256": "11acb071ce26b5943389e902fc44b7dbb6ade85607c7dd30d2ea93c306378e48",
+      "outputSha256": "cf0c309e8ec1126bd13552e5188dd715c84e9737e2b125ebfc0fed97556a7868"
+    },
+    {
+      "source": "docs/flow/guide/typescript.md",
+      "destination": "guide/typescript.md",
+      "sourceSha256": "6a57f46891bda63125e14609d282b0e83d5750476bec2d30de1cf7f2ad82ccd5",
+      "outputSha256": "e39047f948ce8b2333294f17f7ecc4e106186dcf272ad7ba90f88eff1e04028c"
+    },
+    {
+      "source": "docs/flow/guide/python.md",
+      "destination": "guide/python.md",
+      "sourceSha256": "2d5258093873eb9c46639aae9928a2827fe258ef9b7f3cf2565e3b81ed79341f",
+      "outputSha256": "60841e19fb6bbe4bd85f29404b110423463db309e54f4901036c9c700386ac4e"
+    },
+    {
+      "source": "docs/flow/guide/skills.md",
+      "destination": "guide/skills.md",
+      "sourceSha256": "8ab141fd053bd9fa4782a146dccba03f82665b7183c58852e6176444c1d4cc34",
+      "outputSha256": "02518e5eb6526fd8db5fc335c3c707f9b2deb22a2a4396ad74f22c8bec91a99b"
+    },
+    {
+      "source": "docs/flow/spec/package-format.md",
+      "destination": "spec/package-format.md",
+      "sourceSha256": "8ab37b5f7d954cc071a7be454e2d71fff66a614716e4388d4290d7ee234c723c",
+      "outputSha256": "e661eb7cda06002e5737f075279ee1454b450aea69bd85bb0597c76b5539429f"
+    },
+    {
+      "source": "docs/flow/spec/markdown-runtime.md",
+      "destination": "spec/markdown-runtime.md",
+      "sourceSha256": "3d59991b1fd079134aa757c360bd5a22dcd173b7ef4ccc7d7606c577ef7b1e97",
+      "outputSha256": "cefe7121e77928814bf97aea7dd9947a8ee7a67c1ec6361c7b3fccc8d4e9479f"
+    },
+    {
+      "source": "docs/flow/spec/run-sdk.md",
+      "destination": "spec/run-sdk.md",
+      "sourceSha256": "f48d66948d72a4088a5296fc8196becab2b2b2e1a9b12ead0b3d81e5849ea1be",
+      "outputSha256": "5039ea5b3917cdde5d579e04268c8375c531bdd2135c74b58253b06cea8bc051"
+    },
+    {
+      "source": "docs/flow/spec/run-protocol.md",
+      "destination": "spec/run-protocol.md",
+      "sourceSha256": "47da1efa1a47464f95d1f73e897fa166e6865a5ba2fafd5885c4bdf2661d0127",
+      "outputSha256": "f0036cae5d016a7578468d19530dd8c75d8cceec844ce33415e1854397da341a"
+    },
+    {
+      "source": "docs/flow/spec/json-values.md",
+      "destination": "spec/json-values.md",
+      "sourceSha256": "e60755128197a89be6c7e4c29975a0f7e1d06619993cff8ae4bab93cc407b153",
+      "outputSha256": "9f843741683b4a35054bd4cea5b55dab970e3cbb536f2e0d7e7de23ef82b059d"
+    },
+    {
+      "source": "docs/flow/spec/invocation-contracts.md",
+      "destination": "spec/invocation-contracts.md",
+      "sourceSha256": "e228be1d96ea97230386fa302afc6f469d0272c8dba0e51c95547dbfc91b2da4",
+      "outputSha256": "426fe7c6d66c1460e71e4931bc00f721de395614f64e3d21e695b33559c76dc5"
+    },
+    {
+      "source": "docs/flow/spec/schema-files.md",
+      "destination": "spec/schema-files.md",
+      "sourceSha256": "58c9ff5fbbef8e55b49c9ef14296dfda16cefb2345d2f4e85d66a929f04cf0e1",
+      "outputSha256": "7977db11958c729de6122337d42c650017c1bf784e865d873a5cf2649f3ad93d"
+    },
+    {
+      "source": "docs/flow/spec/channel-contracts.md",
+      "destination": "spec/channel-contracts.md",
+      "sourceSha256": "208037d98e9ef5c07c520d8add8c801ad3d9b4f93e1900dbb90c55848047f26c",
+      "outputSha256": "06d5ae6a0a206834eb3a1ecab1a5372ac5bfa0f0b661332c87a19f13986504b3"
+    },
+    {
+      "source": "docs/flow/spec/machine/channel-contract-0.schema.json",
+      "destination": "spec/machine/channel-contract-0.schema.json",
+      "sourceSha256": "092fd2df6bf4a419faccc6297aa470b75266357803dd427e822710d423f66414",
+      "outputSha256": "092fd2df6bf4a419faccc6297aa470b75266357803dd427e822710d423f66414"
+    },
+    {
+      "source": "docs/flow/spec/machine/invocation-contract-0.schema.json",
+      "destination": "spec/machine/invocation-contract-0.schema.json",
+      "sourceSha256": "b862b551b0b3ea2ee054ca0c5589d27d232e75e62abeb213037192c8f832b083",
+      "outputSha256": "b862b551b0b3ea2ee054ca0c5589d27d232e75e62abeb213037192c8f832b083"
+    },
+    {
+      "source": "docs/flow/spec/machine/run-0-errors.json",
+      "destination": "spec/machine/run-0-errors.json",
+      "sourceSha256": "3bef46919ef2717298f7f463999c8d743ebf62e116759373dbd110479a9b5f4c",
+      "outputSha256": "3bef46919ef2717298f7f463999c8d743ebf62e116759373dbd110479a9b5f4c"
+    },
+    {
+      "source": "docs/flow/spec/machine/run-0.schema.json",
+      "destination": "spec/machine/run-0.schema.json",
+      "sourceSha256": "3cf075d60d50d2af1cbaec18b918d57c447e44d2f50ef8aa27203e1938c2072f",
+      "outputSha256": "3cf075d60d50d2af1cbaec18b918d57c447e44d2f50ef8aa27203e1938c2072f"
+    },
+    {
+      "source": "docs/flow/spec/machine/schema-0.json",
+      "destination": "spec/machine/schema-0.json",
+      "sourceSha256": "9f070a2551f1e91fddebd8b0692d8a2d2ce857a7dce50e457d97451a1dc30348",
+      "outputSha256": "9f070a2551f1e91fddebd8b0692d8a2d2ce857a7dce50e457d97451a1dc30348"
+    },
+    {
+      "source": "docs/flow/spec/examples/invocation-contracts/session-store.contract.json",
+      "destination": "spec/examples/invocation-contracts/session-store.contract.json",
+      "sourceSha256": "c2999baf71ce6989409afff290f8fe54c4c90d6ef112c011b8e59a488a340baa",
+      "outputSha256": "c2999baf71ce6989409afff290f8fe54c4c90d6ef112c011b8e59a488a340baa"
+    },
+    {
+      "source": "docs/flow/spec/examples/schema-files/FLOW.contract.json",
+      "destination": "spec/examples/schema-files/FLOW.contract.json",
+      "sourceSha256": "1aeb85a2d0aaf3a214998fb88f50fa174e6e44f3af05458925a0af9476e3b9a9",
+      "outputSha256": "1aeb85a2d0aaf3a214998fb88f50fa174e6e44f3af05458925a0af9476e3b9a9"
+    },
+    {
+      "source": "docs/flow/spec/examples/schema-files/settings.schema.json",
+      "destination": "spec/examples/schema-files/settings.schema.json",
+      "sourceSha256": "90ff7a57e8c56c1fad6fa23615cdbc06a232c7392be443ed2cfaf5bc60379528",
+      "outputSha256": "90ff7a57e8c56c1fad6fa23615cdbc06a232c7392be443ed2cfaf5bc60379528"
+    },
+    {
+      "source": "LICENSES.md",
+      "destination": "LICENSES.md",
+      "sourceSha256": "d8883788f5d426fc4a4a8dfc1ac741ee505b4d9cc8be094006eac768508d9297",
+      "outputSha256": "d8883788f5d426fc4a4a8dfc1ac741ee505b4d9cc8be094006eac768508d9297"
+    },
+    {
+      "source": "Notices.md",
+      "destination": "Notices.md",
+      "sourceSha256": "77febfb92c2f28b359e20341d999a20a059e23bf5f93ca9c25a8d914b6fa81e9",
+      "outputSha256": "77febfb92c2f28b359e20341d999a20a059e23bf5f93ca9c25a8d914b6fa81e9"
+    },
+    {
+      "source": "LICENSES/Apache-2.0.txt",
+      "destination": "LICENSES/Apache-2.0.txt",
+      "sourceSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "outputSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "source": "LICENSES/CC-BY-4.0.txt",
+      "destination": "LICENSES/CC-BY-4.0.txt",
+      "sourceSha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "outputSha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "source": "LICENSES/Community-Spec-1.0.md",
+      "destination": "LICENSES/Community-Spec-1.0.md",
+      "sourceSha256": "f134d4248b724f3115076ed4d8ed546921db8a180fd79f60e476181b500038a5",
+      "outputSha256": "f134d4248b724f3115076ed4d8ed546921db8a180fd79f60e476181b500038a5"
+    },
+    {
+      "source": "LICENSES/MPL-2.0.txt",
+      "destination": "LICENSES/MPL-2.0.txt",
+      "sourceSha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "outputSha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    }
+  ]
+}
