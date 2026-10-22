@@ -24,13 +24,14 @@ and invocation-contract semantics.
 - Admission, containment, permissions, persistence, providers, Agent policy, and
   routing belong to a host such as Jig, not FLOW.
 
-- `index.md` introduces the shared code/Agent composition promise through a
-  package explorer. It shows exactly one `FLOW.<suffix>` entrypoint, alternative
-  Markdown or code implementations, host-supported runtimes, ordinary
-  invocation, optional metadata and an invocation contract. Its progressive
-  disclosure describes package layers, not automatic Agent context loading.
-  `guide/understand.md` develops the same boundary through contact import on
-  Jig. Keep host examples distinct from portable requirements.
+- `index.md` owns the landing-page narrative and semantic content.
+  It introduces FLOW through useful Skills, applications, comparison, design
+  principles, a billing example, and first use. All story tabs remain in
+  generated Markdown. Presentation and interactions belong to
+  `site/theme/home.tsx` and `site/home.css`. Keep supported hosts separate from
+  projects invited to add support.
+- `guide/understand.md` develops the common calling boundary through contact
+  import on Jig. Keep host examples distinct from portable requirements.
 - `guide/start.mdx` routes authors to complete SDK or host tutorials without
   treating a source candidate as a published install. Its native language tabs
   preserve both examples in the generated `/guide/start.md` resource.

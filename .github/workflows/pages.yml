@@ -10,6 +10,7 @@ on:
       - site/justfile
       - site/theme/**
       - site/landing.css
+      - site/home.css
       - site/flow/**
       - docs/flow/**
       - scripts/build-site.sh
