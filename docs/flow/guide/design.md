@@ -58,13 +58,16 @@ A clear interface promise does not require every component to publish a named co
 
 Use the shortest name that makes the Flow's role unambiguous once the application's purpose is known.
 Use familiar domain vocabulary and prefer verb-object names for actions.
-In a support application, prefer `classify-request` to `classify`.
-The object identifies the capability without requiring the reader to inspect its implementation.
 
 Keep qualifiers that distinguish capabilities a caller could otherwise confuse.
 Remove words that only repeat the application's established context.
 Avoid abbreviations that make the role harder to recognize.
 Recheck the name's clarity when moving the Flow into a different application.
+
+**Example: Naming a capability.**
+
+In a support application, `classify-request` could clarify the subject when `classify` would be ambiguous.
+The appropriate name depends on what the application already makes clear.
 
 ## Choose meaningful small pieces
 
@@ -84,6 +87,8 @@ Keep an implementation helper private when exposing it would only add wiring.
 Measure size by the concepts a caller must retain.
 An extra package should remove knowledge or coordination from its consumers.
 
+**Examples of possible boundaries and private details:**
+
 | Useful boundary | Detail that can usually stay private |
 | --- | --- |
 | Classify a request for several callers | Trim whitespace before classification |
@@ -97,11 +102,15 @@ Avoid generic components whose many mode flags select unrelated jobs.
 Unrelated callers changing together often reveal a missing boundary.
 
 A single current caller can be a sufficient beneficiary when it receives a concrete benefit.
-In request processing, separate `classify-request` and `assign-request`: one suggests a category, while the other performs assignment.
-An `http-request` boundary depends on the chosen level of abstraction.
-Expose it when consumers need HTTP as an independently useful capability.
-Keep HTTP private within the integration when consumers only need the domain operation.
-Use domain knowledge to choose this boundary and make its benefit explicit.
+Use domain knowledge to choose boundaries and make each benefit explicit.
+
+**Example: Choosing boundaries in request processing.**
+
+If classification and assignment have independent value, a design could expose `classify-request` and `assign-request` as separate Flows.
+One would suggest a category, while the other would perform assignment.
+An `http-request` Flow could be useful if consumers benefit from an independent transport capability.
+HTTP could remain private within an integration when consumers only need its domain operation.
+These choices depend on the application's domain and chosen abstraction level.
 
 ## Make composition hide complexity
 
@@ -110,7 +119,8 @@ Let it own internal ordering, result translation, and the recovery decisions nee
 Expose the choices its caller actually needs.
 Keep internal steps and child wiring behind the boundary.
 
-Consider routing a support request.
+**Example: Composing a support-routing method.**
+
 This is an illustrative decomposition, not a supplied application or a new FLOW interface.
 
 | Component | Input | Result and responsibility |
@@ -124,10 +134,10 @@ It calls assignment only when that policy permits assignment.
 It returns an assigned result only after the required assignment succeeds.
 An uncertain suggestion can produce a manual-review result without requesting the assignment effect.
 
-Keep a policy private when extraction would add no meaningful boundary or benefit.
-Extract `apply-routing-policy` when intake and batch processing need the same independently maintained decision.
-Then both callers can compose that smaller capability without duplicating the rule.
-A single composite can also benefit from extracting policy for independent testing, replacement, or ownership.
+In this example, a policy could remain private when extraction adds no meaningful boundary or benefit.
+If intake and batch processing benefit from an independently maintained decision, an `apply-routing-policy` Flow could serve both.
+They could then compose that capability without duplicating the rule.
+A single composite could also benefit from policy extraction for independent testing, replacement, or ownership.
 
 The outside caller should only need to invoke `route-request` and interpret its documented result and effects.
 It should not coordinate the classifier's prompts, the ticket vendor's request format, or the children's cleanup.
@@ -175,14 +185,16 @@ Use calls and their outcomes to express finite work whose result the caller need
 Use channels for declared live messages while work runs.
 Keep optional observation independent from required control.
 
+**Examples of relationships:**
+
 | Relationship | Design default |
 | --- | --- |
 | A required classification before assignment | Call the classifier and handle its outcome before assigning |
 | Optional progress for a display | Expose an optional observation port with a documented failure policy |
 | A stream required by the method | Declare the required port, message meaning, direction, and failure behavior |
 
-Do not make a progress listener secretly perform assignment.
-That would make an apparently optional observer part of the required method.
+Keep required business work out of optional observers.
+For example, a progress listener that performs assignment would make an apparently optional observer part of the required method.
 For optional observation, removing the observer should preserve the promised domain result.
 Specify whether a slow observer may delay the method.
 Choose delivery and backpressure behavior that matches this policy.
