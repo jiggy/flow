@@ -3,10 +3,9 @@ import { createHash } from 'node:crypto'
 import { lstat, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { test } from 'node:test'
-import { buildSkills } from '../build-skills.mjs'
+import { syncSkills } from '../sync-skills.mjs'
 
 const repository = new URL('../../', import.meta.url)
-const revision = '1234567890abcdef1234567890abcdef12345678'
 const manifest = {
   version: 1,
   skills: {
@@ -39,12 +38,12 @@ async function put(root, path, content) {
 async function fixture(t) {
   const temporary = new URL('.tmp/', repository)
   await mkdir(temporary, { recursive: true })
-  const root = await mkdtemp(new URL('skill-bundle-test-', temporary).pathname)
+  const root = await mkdtemp(new URL('skill-sync-test-', temporary).pathname)
   t.after(() => rm(root, { recursive: true, force: true }))
   for (const [path, content] of Object.entries({
     'skills/references.json': JSON.stringify(manifest),
     'skills/flow/SKILL.md':
-      '---\nname: flow\ndescription: FLOW authoring.\n---\n\n# FLOW\n\nRead [Create](../../docs/flow/guide/create.md).\n',
+      '---\nname: flow\ndescription: FLOW authoring.\n---\n\n# FLOW\n\nRead [Create](reference/guide/create.md).\n',
     'docs/flow/guide/create.md': guide,
     'docs/flow/guide/more.md': '# More\n',
     'docs/flow/spec/package.md': '# Package\n\n## Metadata\n\n[Create](../guide/create.md)\n',
@@ -75,19 +74,19 @@ async function snapshot(root, prefix = '') {
   return entries
 }
 
-test('bundles readable references, exact machine bytes, code examples, provenance, and notices', async (t) => {
+test('synchronizes standalone references while preserving the skill, machine bytes, examples, and notices', async (t) => {
   const root = await fixture(t)
-  const output = join(root, 'built')
-  assert.deepEqual(await buildSkills({ root, output, revision }), ['flow'])
-  const skill = await readFile(join(output, 'flow/SKILL.md'), 'utf8')
-  assert.match(skill, /\[Create\]\(references\/guide\/create\.md\)/)
-  const generated = await readFile(join(output, 'flow/references/guide/create.md'), 'utf8')
+  const output = join(root, 'skills/flow/reference')
+  const skill = await readFile(join(root, 'skills/flow/SKILL.md'))
+  assert.ok((await syncSkills({ root })).length > 0)
+  assert.deepEqual(await readFile(join(root, 'skills/flow/SKILL.md')), skill)
+  const generated = await readFile(join(output, 'guide/create.md'), 'utf8')
   assert.ok(generated.startsWith('---\ntitle: Create\n---\n'))
   assert.match(generated, /Generated from docs\/flow\/guide\/create\.md/)
   assert.match(generated, /\[`Package`\]\(\.\.\/spec\/package\.md#metadata\)/)
   assert.match(generated, /\[More\]\(https:\/\/flow\.jig\.md\/guide\/more\.md\)/)
   assert.ok(
-    generated.includes(`https://github.com/jiggy/flow/blob/${revision}/packages/example/source.ts`),
+    generated.includes('https://github.com/jiggy/flow/blob/main/packages/example/source.ts'),
   )
   assert.match(generated, /\[Schema\]\(\.\.\/spec\/machine\/package\.json\)/)
   assert.ok(generated.includes('[package]: ../spec/package.md "Package"'))
@@ -96,7 +95,7 @@ test('bundles readable references, exact machine bytes, code examples, provenanc
   assert.ok(generated.includes('``An inline `tick` and [link](missing-inline.md)``'))
   assert.ok(generated.includes('    [Indented example](missing-indented.md)'))
   assert.deepEqual(
-    await readFile(join(output, 'flow/references/spec/machine/package.json')),
+    await readFile(join(output, 'spec/machine/package.json')),
     await readFile(join(root, 'docs/flow/spec/machine/package.json')),
   )
   for (const path of [
@@ -107,81 +106,94 @@ test('bundles readable references, exact machine bytes, code examples, provenanc
     'LICENSES/Community-Spec-1.0.md',
     'LICENSES/MPL-2.0.txt',
   ])
-    assert.deepEqual(await readFile(join(output, 'flow', path)), await readFile(join(root, path)))
-  const provenance = JSON.parse(await readFile(join(output, 'flow/provenance.json'), 'utf8'))
-  assert.equal(provenance.checkoutRevision, revision)
+    assert.deepEqual(await readFile(join(output, path)), await readFile(join(root, path)))
+  const provenance = JSON.parse(await readFile(join(output, 'provenance.json'), 'utf8'))
+  assert.equal(provenance.checkoutRevision, undefined)
   for (const file of provenance.files) {
     const hash = (bytes) => createHash('sha256').update(bytes).digest('hex')
     assert.equal(file.sourceSha256, hash(await readFile(join(root, file.source))))
-    assert.equal(file.outputSha256, hash(await readFile(join(output, 'flow', file.destination))))
+    assert.equal(file.outputSha256, hash(await readFile(join(output, file.destination))))
   }
   await rm(join(root, 'docs'), { recursive: true })
-  assert.ok(
-    (await readFile(join(output, 'flow/references/guide/create.md'), 'utf8')).includes('# Create'),
-  )
+  assert.ok((await readFile(join(output, 'guide/create.md'), 'utf8')).includes('# Create'))
 })
 
-test('identical sources generate identical bytes and changed docs update the next bundle', async (t) => {
+test('check detects drift without writing and synchronization is idempotent', async (t) => {
   const root = await fixture(t)
-  const first = join(root, 'first')
-  const second = join(root, 'second')
-  await buildSkills({ root, output: first, revision })
-  await buildSkills({ root, output: second, revision })
-  assert.deepEqual(await snapshot(first), await snapshot(second))
+  const output = join(root, 'skills/flow/reference')
+  await assert.rejects(syncSkills({ root, check: true }), /Skill references are stale/)
+  await assert.rejects(lstat(output), { code: 'ENOENT' })
+  await syncSkills({ root })
+  const original = await snapshot(output)
+  assert.deepEqual(await syncSkills({ root, check: true }), [])
+  assert.deepEqual(await syncSkills({ root }), [])
+  assert.deepEqual(await snapshot(output), original)
   await put(root, 'docs/flow/guide/create.md', guide + '\nNew canonical guidance.\n')
-  const third = join(root, 'third')
-  await buildSkills({ root, output: third, revision })
-  assert.match(
-    await readFile(join(third, 'flow/references/guide/create.md'), 'utf8'),
-    /New canonical guidance/,
-  )
-  assert.notDeepEqual(await snapshot(first), await snapshot(third))
+  await assert.rejects(syncSkills({ root, check: true }), /Skill references are stale/)
+  assert.deepEqual(await snapshot(output), original)
+  assert.ok((await syncSkills({ root })).includes('skills/flow/reference/guide/create.md'))
+  assert.match(await readFile(join(output, 'guide/create.md'), 'utf8'), /New canonical guidance/)
+  assert.deepEqual(await syncSkills({ root, check: true }), [])
+  assert.deepEqual(await syncSkills({ root }), [])
 })
 
-test('removed references disappear from a fresh bundle instead of surviving as stale files', async (t) => {
+test('repairs deleted or edited outputs and removes stale references only inside its generated subtree', async (t) => {
   const root = await fixture(t)
-  await buildSkills({ root, output: join(root, 'before'), revision })
+  const output = join(root, 'skills/flow/reference')
+  await syncSkills({ root })
+  const skill = await readFile(join(root, 'skills/flow/SKILL.md'))
+  await put(root, 'skills/flow/manual.txt', 'authored resource')
+  await put(root, 'skills/flow/reference/stale/old.md', 'obsolete generated reference')
+  await put(root, 'skills/flow/reference/guide/create.md', 'manual drift')
+  await rm(join(output, 'spec/package.md'))
   const reduced = structuredClone(manifest)
   reduced.skills.flow = reduced.skills.flow.filter((path) => !path.endsWith('machine/package.json'))
   await put(root, 'skills/references.json', JSON.stringify(reduced))
-  const output = join(root, 'after')
-  await buildSkills({ root, output, revision })
-  await assert.rejects(lstat(join(output, 'flow/references/spec/machine/package.json')), {
-    code: 'ENOENT',
-  })
-  assert.match(
-    await readFile(join(output, 'flow/references/guide/create.md'), 'utf8'),
-    /https:\/\/flow\.jig\.md\/schemas\/package\.json/,
-  )
+  await assert.rejects(syncSkills({ root, check: true }), /Skill references are stale/)
+  const changed = await syncSkills({ root })
+  assert.ok(changed.includes('skills/flow/reference/stale/old.md'))
+  await assert.rejects(lstat(join(output, 'stale')), { code: 'ENOENT' })
+  await assert.rejects(lstat(join(output, 'spec/machine/package.json')), { code: 'ENOENT' })
+  assert.match(await readFile(join(output, 'guide/create.md'), 'utf8'), /# Create/)
+  assert.match(await readFile(join(output, 'spec/package.md'), 'utf8'), /# Package/)
+  assert.deepEqual(await readFile(join(root, 'skills/flow/SKILL.md')), skill)
+  assert.equal(await readFile(join(root, 'skills/flow/manual.txt'), 'utf8'), 'authored resource')
+  assert.deepEqual(await syncSkills({ root, check: true }), [])
 })
 
-test('missing sources and broken prose links fail before exposing a partial bundle', async (t) => {
+test('validates all sources and prose links before changing existing generated references', async (t) => {
   const root = await fixture(t)
-  const output = join(root, 'built')
+  const output = join(root, 'skills/flow/reference')
+  await syncSkills({ root })
+  const original = await snapshot(output)
+  await put(root, 'docs/flow/guide/create.md', guide + '\nChanged canonical guidance.\n')
   await rm(join(root, 'docs/flow/spec/package.md'))
-  await assert.rejects(buildSkills({ root, output, revision }), /Missing source/)
-  await assert.rejects(lstat(output), { code: 'ENOENT' })
+  await assert.rejects(syncSkills({ root }), /Missing source/)
+  assert.deepEqual(await snapshot(output), original)
   await put(root, 'docs/flow/spec/package.md', '# Package\n\n[Missing](unknown.md)\n')
-  await assert.rejects(buildSkills({ root, output, revision }), /Missing source/)
-  await assert.rejects(lstat(output), { code: 'ENOENT' })
+  await assert.rejects(syncSkills({ root }), /Missing source/)
+  assert.deepEqual(await snapshot(output), original)
 })
 
-test('every source-relative skill pointer must be included in the manifest', async (t) => {
+test('skill pointers must resolve within the installable skill and cover generated references', async (t) => {
   const root = await fixture(t)
-  await put(
-    root,
-    'skills/flow/SKILL.md',
-    '---\nname: flow\ndescription: FLOW authoring.\n---\n\n[More](../../docs/flow/guide/more.md)\n',
-  )
-  await assert.rejects(
-    buildSkills({ root, output: join(root, 'built'), revision }),
-    /add required reference to the manifest/,
-  )
+  for (const path of ['../../docs/flow/guide/more.md', 'reference/guide/more.md']) {
+    await put(
+      root,
+      'skills/flow/SKILL.md',
+      `---\nname: flow\ndescription: FLOW authoring.\n---\n\n[More](${path})\n`,
+    )
+    await assert.rejects(
+      syncSkills({ root }),
+      /link must stay inside the skill|reference is missing from the manifest/,
+    )
+    await assert.rejects(lstat(join(root, 'skills/flow/reference')), { code: 'ENOENT' })
+  }
 })
 
 test('parses YAML metadata and rejects malformed or invalid required fields', async (t) => {
   const root = await fixture(t)
-  const output = join(root, 'built')
+  const output = join(root, 'skills/flow/reference')
   for (const invalid of [
     '---\nname: flow\ndescription: Missing closing delimiter\n',
     '---\nname: flow\nname: flow\ndescription: Duplicate key\n---\n',
@@ -192,7 +204,7 @@ test('parses YAML metadata and rejects malformed or invalid required fields', as
     `---\nname: flow\ndescription: ${'x'.repeat(1025)}\n---\n`,
   ]) {
     await put(root, 'skills/flow/SKILL.md', invalid)
-    await assert.rejects(buildSkills({ root, output, revision }), /SKILL\.md needs/)
+    await assert.rejects(syncSkills({ root }), /SKILL\.md needs/)
     await assert.rejects(lstat(output), { code: 'ENOENT' })
   }
   await put(
@@ -200,41 +212,37 @@ test('parses YAML metadata and rejects malformed or invalid required fields', as
     'skills/flow/SKILL.md',
     '---\nname: "flow"\ndescription: >-\n  FLOW authoring\n  and review.\ndisable-model-invocation: true\n---\n\n# FLOW\n',
   )
-  assert.deepEqual(await buildSkills({ root, output, revision }), ['flow'])
+  assert.ok((await syncSkills({ root })).length > 0)
 })
 
-test('rejects private, escaping, and symbolic-link inputs', async (t) => {
+test('rejects private, escaping, and symbolic-link inputs before writing', async (t) => {
   const root = await fixture(t)
-  const output = join(root, 'built')
+  const output = join(root, 'skills/flow/reference')
   for (const invalid of ['docs/flow/AGENTS.md', 'docs/flow/../private.md', '.agents/secret.md']) {
     await put(
       root,
       'skills/references.json',
       JSON.stringify({ version: 1, skills: { flow: [invalid] } }),
     )
-    await assert.rejects(
-      buildSkills({ root, output, revision }),
-      /Invalid or repeated documentation/,
-    )
+    await assert.rejects(syncSkills({ root }), /Invalid or repeated documentation/)
   }
   await put(root, 'skills/references.json', JSON.stringify(manifest))
   await rm(join(root, 'docs/flow/spec/package.md'))
   await symlink('../guide/create.md', join(root, 'docs/flow/spec/package.md'))
-  await assert.rejects(buildSkills({ root, output, revision }), /symbolic link/)
+  await assert.rejects(syncSkills({ root }), /symbolic link/)
   await assert.rejects(lstat(output), { code: 'ENOENT' })
 })
 
-test('an existing output or invalid output parent is never replaced', async (t) => {
+test('refuses generated output symlinks without touching their targets', async (t) => {
   const root = await fixture(t)
-  const output = join(root, 'owned')
-  await put(root, 'owned/keep.txt', 'retain this file')
-  await assert.rejects(buildSkills({ root, output, revision }), /already exists/)
-  assert.equal(await readFile(join(output, 'keep.txt'), 'utf8'), 'retain this file')
-  await assert.rejects(buildSkills({ root, output: join(output, 'keep.txt/child'), revision }), {
-    code: 'ENOTDIR',
-  })
-  await assert.rejects(
-    buildSkills({ root, output: join(root, 'built'), revision: 'main' }),
-    /full source checkout revision/,
-  )
+  const output = join(root, 'skills/flow/reference')
+  await put(root, 'unrelated/keep.txt', 'retain this file')
+  await symlink('../../unrelated', output)
+  await assert.rejects(syncSkills({ root }), /real directory/)
+  assert.equal(await readFile(join(root, 'unrelated/keep.txt'), 'utf8'), 'retain this file')
+  await rm(output)
+  await syncSkills({ root })
+  await symlink('../../../unrelated', join(output, 'outside'))
+  await assert.rejects(syncSkills({ root }), /symbolic link/)
+  assert.equal(await readFile(join(root, 'unrelated/keep.txt'), 'utf8'), 'retain this file')
 })

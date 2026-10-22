@@ -223,6 +223,6 @@ Default section order:
 - [packages/AGENTS.md](packages/AGENTS.md) — Publishable SDK and independent authoring implementations, with package-local tests and artifacts.
 - [scripts/AGENTS.md](scripts/AGENTS.md) — Build, verification,
   release-candidate, and site-assembly entrypoints.
-- [skills/AGENTS.md](skills/AGENTS.md) — Distributable FLOW authoring skills
-  and documentation references generated from canonical sources.
+- [skills/AGENTS.md](skills/AGENTS.md) — Installable FLOW authoring skills
+  and committed documentation references synchronized from canonical sources.
 - [site/AGENTS.md](site/AGENTS.md) — FLOW public-site configuration, static root files, and deployment.

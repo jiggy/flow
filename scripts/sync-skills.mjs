@@ -1,10 +1,8 @@
-import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { lstat, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { lstat, mkdir, readFile, readdir, rm, rmdir, writeFile } from 'node:fs/promises'
 import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { parse } from 'yaml'
-import { promoteDirectory } from './promote-directory.mjs'
 
 const repositoryURL = 'https://github.com/jiggy/flow'
 const docsPrefix = 'docs/flow/'
@@ -142,36 +140,16 @@ async function rewriteMarkdown(text, rewrite) {
 }
 
 function generatedNotice(text, source) {
-  const notice = `<!-- Generated from ${source}. Edit the source, then rebuild the skill bundle. -->\n\n`
+  const notice = `<!-- Generated from ${source}. Edit the source, then run just sync-skills. -->\n\n`
   const frontmatter = /^(---\r?\n[\s\S]*?\r?\n---\r?\n)/.exec(text)
   return frontmatter
     ? frontmatter[1] + '\n' + notice + text.slice(frontmatter[1].length)
     : notice + text
 }
 
-async function skillFiles(root, name, references, revision, manifestBytes) {
+async function validateSkill(root, name, references) {
   const skillSource = `skills/${name}/SKILL.md`
-  const sources = new Map([
-    [skillSource, 'SKILL.md'],
-    ...references.map((source) => [source, `references/${source.slice(docsPrefix.length)}`]),
-    ...notices.map((source) => [source, source]),
-  ])
-  const inputs = new Map()
-  const siteSources = new Map()
-  for (const source of sources.keys()) {
-    const bytes = await sourceBytes(root, source)
-    inputs.set(source, bytes)
-    if (source.startsWith(docsPrefix) && source.endsWith('.md')) {
-      const url = `https://flow.jig.md/${source.slice(docsPrefix.length)}`
-      siteSources.set(url, source)
-      siteSources.set(url.replace(/\.md$/, ''), source)
-    }
-    if (source.endsWith('.json')) {
-      const data = JSON.parse(decodeText(bytes, source))
-      if (typeof data.$id === 'string') siteSources.set(data.$id, source)
-    }
-  }
-  const skill = decodeText(inputs.get(skillSource), skillSource)
+  const skill = decodeText(await sourceBytes(root, skillSource), skillSource)
   const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(skill)?.[1]
   let metadata
   try {
@@ -191,6 +169,42 @@ async function skillFiles(root, name, references, revision, manifestBytes) {
     throw new Error(
       `${skillSource} needs its directory name and a nonempty description of at most 1024 characters`,
     )
+  await rewriteMarkdown(skill, async (target) => {
+    if (/^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(target)) return target
+    const path = decodeURIComponent(target.split(/[?#]/, 1)[0])
+    const local = posix(
+      relative(dirname(join(root, skillSource)), resolve(root, dirname(skillSource), path)),
+    )
+    if (!safePath(local))
+      throw new Error(`${skillSource}: link must stay inside the skill: ${target}`)
+    if (local.startsWith('reference/')) {
+      if (!references.has(local.slice('reference/'.length)))
+        throw new Error(`${skillSource}: reference is missing from the manifest: ${target}`)
+    } else await sourceBytes(root, `skills/${name}/${local}`)
+    return target
+  })
+}
+
+async function referenceFiles(root, name, references, manifestBytes) {
+  const sources = new Map([
+    ...references.map((source) => [source, source.slice(docsPrefix.length)]),
+    ...notices.map((source) => [source, source]),
+  ])
+  const inputs = new Map()
+  const siteSources = new Map()
+  for (const source of sources.keys()) {
+    const bytes = await sourceBytes(root, source)
+    inputs.set(source, bytes)
+    if (source.startsWith(docsPrefix) && source.endsWith('.md')) {
+      const url = `https://flow.jig.md/${source.slice(docsPrefix.length)}`
+      siteSources.set(url, source)
+      siteSources.set(url.replace(/\.md$/, ''), source)
+    }
+    if (source.endsWith('.json')) {
+      const data = JSON.parse(decodeText(bytes, source))
+      if (typeof data?.$id === 'string') siteSources.set(data.$id, source)
+    }
+  }
 
   const files = new Map()
   const records = []
@@ -218,11 +232,9 @@ async function skillFiles(root, name, references, revision, manifestBytes) {
         const stat = await sourceStat(root, linkedSource)
         const bundled = sources.get(linkedSource)
         if (bundled) return encodePath(posix(relative(dirname(destination), bundled))) + suffix
-        if (source === skillSource)
-          throw new Error(`${source}: add required reference to the manifest: ${linkedSource}`)
         if (linkedSource.startsWith(docsPrefix) && /\.(?:md|mdx)$/.test(linkedSource))
           return `https://flow.jig.md/${encodePath(linkedSource.slice(docsPrefix.length).replace(/\.mdx$/, '.md'))}${suffix}`
-        return `${repositoryURL}/${stat.isDirectory() ? 'tree' : 'blob'}/${revision}/${encodePath(linkedSource)}${suffix}`
+        return `${repositoryURL}/${stat.isDirectory() ? 'tree' : 'blob'}/main/${encodePath(linkedSource)}${suffix}`
       })
       output = Buffer.from(source.startsWith('docs/') ? generatedNotice(text, source) : text)
     }
@@ -236,7 +248,6 @@ async function skillFiles(root, name, references, revision, manifestBytes) {
         {
           version: 1,
           repository: repositoryURL,
-          checkoutRevision: revision,
           manifest: { source: manifestPath, sha256: digest(manifestBytes) },
           files: records,
         },
@@ -245,55 +256,97 @@ async function skillFiles(root, name, references, revision, manifestBytes) {
       ) + '\n',
     ),
   )
+  await validateSkill(root, name, files)
   return files
 }
 
-export async function buildSkills({ root, output, revision }) {
-  root = resolve(root)
-  output = resolve(output)
-  if (!/^[0-9a-f]{40,64}$/.test(revision ?? ''))
-    throw new Error('Supply the full source checkout revision')
+async function existingReferences(directory) {
+  const files = new Map()
   try {
-    await lstat(output)
-    throw new Error(`output already exists: ${output}`)
+    const stat = await lstat(directory)
+    if (!stat.isDirectory() || stat.isSymbolicLink())
+      throw new Error(`Generated reference path must be a real directory: ${directory}`)
+  } catch (error) {
+    if (error.code === 'ENOENT') return files
+    throw error
+  }
+  async function visit(prefix) {
+    for (const entry of await readdir(join(directory, prefix))) {
+      const path = join(prefix, entry)
+      const stat = await lstat(join(directory, path))
+      if (stat.isSymbolicLink())
+        throw new Error(`Generated reference cannot be a symbolic link: ${path}`)
+      if (stat.isDirectory()) await visit(path)
+      else if (stat.isFile()) files.set(posix(path), await readFile(join(directory, path)))
+      else throw new Error(`Generated reference must be a regular file: ${path}`)
+    }
+  }
+  await visit('')
+  return files
+}
+
+async function removeEmptyDirectories(directory) {
+  let entries
+  try {
+    entries = await readdir(directory, { withFileTypes: true })
   } catch (error) {
     if (error.code !== 'ENOENT') throw error
+    return
   }
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue
+    const path = join(directory, entry.name)
+    await removeEmptyDirectories(path)
+    if (!(await readdir(path)).length) await rmdir(path)
+  }
+}
+
+export async function syncSkills({ root, check = false }) {
+  root = resolve(root)
   const manifestBytes = await sourceBytes(root, manifestPath)
   const manifest = JSON.parse(decodeText(manifestBytes, manifestPath))
   validateManifest(manifest)
-  const bundles = new Map()
-  for (const name of Object.keys(manifest.skills).sort())
-    bundles.set(name, await skillFiles(root, name, manifest.skills[name], revision, manifestBytes))
-  await mkdir(dirname(output), { recursive: true })
-  const staging = await mkdtemp(join(dirname(output), '.flow-skills-'))
-  try {
-    for (const [name, files] of bundles) {
-      for (const [path, bytes] of files) {
-        const target = join(staging, name, path)
-        await mkdir(dirname(target), { recursive: true })
-        await writeFile(target, bytes)
-      }
-    }
-    await promoteDirectory(staging, output)
-  } finally {
-    await rm(staging, { recursive: true, force: true })
+  const plans = []
+  const changes = []
+  for (const name of Object.keys(manifest.skills).sort()) {
+    const files = await referenceFiles(root, name, manifest.skills[name], manifestBytes)
+    const directory = join(root, 'skills', name, 'reference')
+    const existing = await existingReferences(directory)
+    const removed = [...existing.keys()].filter((path) => !files.has(path))
+    const updated = [...files.keys()].filter((path) => !existing.get(path)?.equals(files.get(path)))
+    changes.push(...[...removed, ...updated].map((path) => `skills/${name}/reference/${path}`))
+    plans.push({ directory, files, removed, updated })
   }
-  return [...bundles.keys()]
+  changes.sort()
+  if (check) {
+    if (changes.length)
+      throw new Error(`Skill references are stale:\n${changes.join('\n')}\nRun just sync-skills.`)
+    return changes
+  }
+  // Validate every input and output subtree before changing any generated files.
+  for (const { directory, files, removed, updated } of plans) {
+    for (const path of removed) await rm(join(directory, path))
+    await removeEmptyDirectories(directory)
+    for (const path of updated) {
+      const target = join(directory, path)
+      await mkdir(dirname(target), { recursive: true })
+      await writeFile(target, files.get(path))
+    }
+  }
+  return changes
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
-    if (process.argv.length !== 3)
-      throw new Error('usage: node scripts/build-skills.mjs <new-output>')
+    if (process.argv.length > 3 || (process.argv.length === 3 && process.argv[2] !== '--check'))
+      throw new Error('usage: node scripts/sync-skills.mjs [--check]')
     const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-    const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: root,
-      encoding: 'utf8',
-    }).trim()
-    const names = await buildSkills({ root, output: process.argv[2], revision })
+    const check = process.argv[2] === '--check'
+    const changes = await syncSkills({ root, check })
     console.log(
-      `Built ${names.join(', ')} skills from checkout ${revision}; provenance records exact input hashes.`,
+      check
+        ? 'Skill references are current.'
+        : `Synchronized ${changes.length} generated skill files.`,
     )
   } catch (error) {
     console.error(error.message)

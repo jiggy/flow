@@ -70,21 +70,70 @@ test('npm publication uses OIDC without a bootstrap token', async () => {
   assert.ok(!JSON.stringify(ci).includes('NPM_TOKEN'))
 })
 
-test('CI builds and uploads complete skills without source write permissions', async () => {
+test('CI checks committed skill references without source write permissions', async () => {
   const workflow = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
   const job = workflow.jobs['quick-checks']
   const permissions = job.permissions ?? workflow.permissions
   assert.equal(permissions.contents, 'read')
-  const buildIndex = job.steps.findIndex(
-    (step) => step.run === 'just build-skills "$RUNNER_TEMP/skills"',
+  assert.ok(job.steps.some((step) => step.run === 'just check-skills'))
+  assert.ok(
+    !job.steps.some(
+      (step) =>
+        step.uses?.startsWith('actions/upload-artifact@') &&
+        step.with?.name.startsWith('flow-skills-'),
+    ),
   )
-  assert.ok(buildIndex >= 0, 'CI must build skill references from the checked source')
-  const uploadIndex = job.steps.findIndex(
+})
+
+test('skill synchronization updates only same-repository PR heads and dispatches fresh CI', async () => {
+  const workflow = parse(await readFile(new URL('sync-skill-references.yml', workflows), 'utf8'))
+  assert.deepEqual(workflow.on.pull_request.types, ['opened', 'reopened', 'synchronize'])
+  assert.equal(workflow.on.pull_request_target, undefined)
+  assert.equal(workflow.on.push, undefined)
+  const job = workflow.jobs.sync
+  assert.ok(job.if.includes('github.event.pull_request.head.repo.full_name == github.repository'))
+  assert.ok(
+    job.if.includes('github.event.pull_request.head.ref != github.event.repository.default_branch'),
+  )
+  assert.deepEqual(job.permissions, { contents: 'write', actions: 'write' })
+  const checkout = job.steps.find((step) => step.uses?.startsWith('actions/checkout@'))
+  assert.equal(checkout.with.ref, '${{ github.event.pull_request.head.sha }}')
+  assert.equal(checkout.with['persist-credentials'], false)
+  const installIndex = job.steps.findIndex((step) => step.run === 'bun install --ignore-scripts')
+  const syncIndex = job.steps.findIndex((step) => step.run === 'node scripts/sync-skills.mjs')
+  const commitIndex = job.steps.findIndex((step) => step.id === 'commit')
+  assert.ok(installIndex >= 0 && syncIndex > installIndex && commitIndex > syncIndex)
+  assert.equal(job.steps[installIndex].env?.GH_TOKEN, undefined)
+  assert.equal(job.steps[syncIndex].env?.GH_TOKEN, undefined)
+  const commit = job.steps[commitIndex]
+  assert.ok(commit.run.includes("git add -- ':(glob)skills/*/reference/**'"))
+  assert.ok(commit.run.includes('commit --signoff'))
+  assert.ok(commit.run.includes('git push origin "HEAD:refs/heads/$PR_BRANCH"'))
+  assert.ok(!commit.run.includes('--force'))
+  const dispatchIndex = job.steps.findIndex(
     (step) =>
-      step.uses?.startsWith('actions/upload-artifact@') &&
-      step.with?.path === '${{ runner.temp }}/skills',
+      step.run ===
+      'gh workflow run ci.yml --ref "$PR_BRANCH" --field docs_base_revision="$PR_BASE_SHA"',
   )
-  assert.ok(uploadIndex > buildIndex, 'CI must deliver the completed skill folder')
-  assert.equal(job.steps[uploadIndex].with['if-no-files-found'], 'error')
-  assert.ok(job.steps[uploadIndex].with.name.includes('${{ github.sha }}'))
+  assert.ok(dispatchIndex > commitIndex)
+  assert.equal(job.steps[dispatchIndex].if, "steps.commit.outputs.pushed == 'true'")
+  assert.equal(
+    job.steps[dispatchIndex].env.PR_BASE_SHA,
+    '${{ github.event.pull_request.base.sha }}',
+  )
+})
+
+test('dispatched CI preserves the original pull request documentation baseline', async () => {
+  const workflow = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
+  const input = workflow.on.workflow_dispatch.inputs.docs_base_revision
+  assert.equal(input.type, 'string')
+  assert.equal(input.required, false)
+  const baselines = workflow.jobs.sites.steps
+    .map((step) => step.env?.DOCS_BASE_REVISION)
+    .filter(Boolean)
+  assert.ok(baselines.length)
+  for (const baseline of baselines)
+    assert.ok(
+      baseline.includes('github.event.pull_request.base.sha || inputs.docs_base_revision ||'),
+    )
 })
