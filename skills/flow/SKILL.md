@@ -16,8 +16,12 @@ Complete this step when the caller's need and the method's acceptance criteria a
 ## 2. Design the boundaries
 
 Apply the design guide's principles to the actual task.
+Identify the application's domain and choose the level of abstraction its components should expose.
 Describe each proposed component's purpose, input, result, outcomes, dependencies, effects, and state ownership.
 Use a short outline or existing package documentation, without adding a required design artifact.
+
+Apply the guide's [naming guidance](reference/guide/design.md#choose-short-clear-names) to each component.
+Check for further useful splits under its [decomposition rules](reference/guide/design.md#choose-meaningful-small-pieces).
 
 Choose small, cohesive capabilities and explain which knowledge each boundary hides from its caller.
 Make a composed Flow expose a clear capability while owning its children's coordination.
