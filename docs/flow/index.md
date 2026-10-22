@@ -1,12 +1,12 @@
 ---
 pageType: home
 navbar: false
-title: "Put your Skills to work in software."
+title: "Turn a Skill into a method your app can call."
 description: "A proposed successor to SKILL.md. Put your agent know-how inside your software, reuse it across projects, and give the next builder a head start."
 head:
   - - meta
     - property: og:title
-      content: "FLOW — Put your Skills to work in software."
+      content: "FLOW — Turn a Skill into a method your app can call."
 ---
 
 <div class="home-skip"><a class="skip-link" href="#main">Skip to content</a></div>

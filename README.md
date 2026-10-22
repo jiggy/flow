@@ -1,4 +1,4 @@
-[![FLOW — Put your Skills to work in software.](site/flow/public/social/flow-readme.png)](https://flow.jig.md/)
+[![FLOW — Turn a Skill into a method your app can call.](site/flow/public/social/flow-readme.png)](https://flow.jig.md/)
 
 # FLOW
 
