@@ -22,7 +22,7 @@ import resvg_py
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "site/flow/public/social"
-TITLE = "FLOW — Put your Skills to work in software."
+TITLE = "FLOW — Turn a Skill into a method your app can call."
 DESCRIPTION = "A proposed successor to SKILL.md, on a soft periwinkle cloudscape."
 INK = "#181925"
 LAVENDER = "#7063C8"
@@ -137,16 +137,15 @@ def banner(name, width, height):
         'fill="#FFFFFF" fill-opacity=".76" stroke="#E8E4F4"/>' + label
     )
     if wide:
-        first, _ = art.text("Put your Skills", left, 308, 88, face="semibold", tracking=-3.6)
-        second, advance = art.text("to work in ", left, 410, 88, face="semibold", tracking=-3.6)
-        last, _ = art.text("software.", left + advance, 410, 88, LAVENDER, "semibold", -3.6)
-        body += first + second + last
+        first, _ = art.text("Turn a Skill into a method", left, 308, 88, face="semibold", tracking=-3.6)
+        second, _ = art.text("your app can call.", left, 410, 88, LAVENDER, "semibold", -3.6)
+        body += first + second
         subtitle_y = 493
     else:
         for line, baseline, colour in [
-            ("Put your Skills", 294, INK),
-            ("to work in", 383, INK),
-            ("software.", 472, LAVENDER),
+            ("Turn a Skill", 294, INK),
+            ("into a method", 383, INK),
+            ("your app can call.", 472, LAVENDER),
         ]:
             line_svg, _ = art.text(line, left, baseline, 80, colour, "semibold", -3.1)
             body += line_svg

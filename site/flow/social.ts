@@ -5,5 +5,5 @@ export const socialImage: SocialImage = {
   width: 1200,
   height: 630,
   type: 'image/png',
-  alt: 'FLOW — Put your Skills to work in software. A proposed successor to SKILL.md.',
+  alt: 'FLOW — Turn a Skill into a method your app can call. A proposed successor to SKILL.md.',
 }
