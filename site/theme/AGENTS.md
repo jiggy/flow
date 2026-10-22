@@ -2,29 +2,19 @@
 
 ## Purpose
 
-Make FLOW's capability compounding and Jig's agency understandable through a
-shared reading experience.
+Make FLOW's capability compounding understandable while preserving the shared
+documentation reading experience.
 
 ## Ownership
 
-- `index.tsx` extends the default layout with homepage composition, document
-  context, an accessible brand title, and a direct Markdown resource link beside
-  Rspress's copy action.
+- `index.tsx` routes the homepage to its own composition and preserves the
+  default documentation layout, context, brand title, and Markdown resource link.
+- `home.tsx` renders canonical homepage content from `docs/flow/index.md`.
+  Its scoped effects provide keyboard tabs, previous/next controls, and optional
+  heading transitions. Listeners and timers end when the homepage unmounts.
+  Generated Markdown retains every story panel and the complete narrative.
 - `brand-title.tsx` composes the theme-selected decorative emblem with the live
   product name, which provides the navigation link's accessible name.
-- `hero-video.tsx` renders a shared, accessible product video player with sound
-  controls and reduced-motion awareness from homepage frontmatter.
-- `package-showcase.tsx` renders the FLOW package explorer from frontmatter,
-  preserving every stage, language, and optional layer in generated Markdown.
-  Show only one selected entrypoint. Implementation alternatives replace rather
-  than accompany the Markdown entrypoint. It uses native Rspress code rendering
-  and the shared One Light/One Dark Pro palettes. Snippets demonstrate the
-  protocol and do not execute in the browser.
-- `showcase.tsx` renders Jig’s illustrative implementations from homepage
-  frontmatter, showing a request, selectable method steps, and an illustrative
-  result. A native disclosure reveals the unchanged caller and implementation.
-  All inputs, variants, results, and qualifications remain in generated
-  Markdown. It never executes product work.
 - `search.tsx` uses Rspress's native local search with conditional mounting,
   modal semantics, keyboard controls, focus containment, and focus restoration.
 - `navigation.tsx` presents the flat primary links in a native mobile disclosure
@@ -41,9 +31,9 @@ shared reading experience.
   backgrounds.
 - `llms.ts` orders generated page links using the same sidebar as human readers.
   Unlisted public pages remain discoverable rather than silently disappearing.
-- `fonts/` owns self-hosted Latin variable Manrope and JetBrains Mono fonts,
-  taken unchanged from Fontsource packages 5.3.0. It also owns Quicksand
-  SemiBold and Bold for the Jig and FLOW wordmarks. Their individual OFL notices
+- `fonts/` owns self-hosted OpenRunde Regular and Semibold for the homepage.
+  It retains Latin variable Manrope and JetBrains Mono from Fontsource 5.3.0,
+  plus Quicksand SemiBold and Bold for the Jig and FLOW wordmarks. Their individual OFL notices
   are copied to each site's `/font-licenses/` directory during assembly.
 - `landing.css` composes each site's emblem with its live product wordmark in
   the balanced monochrome lockup.
@@ -53,11 +43,15 @@ shared reading experience.
   variants of local Archify SVGs during HTML builds. Site appearance selects the
   visible image. Native zoom and the original Markdown image remain intact. This
   avoids relying on WebKit inheriting color schemes inside SVG images.
-- Public prose stays in `docs/`. Shared presentation stays in `../landing.css`.
+- Public prose stays in `docs/`. Shared documentation presentation stays in
+  `../landing.css`. Homepage presentation stays in `../home.css`, scoped to
+  `.flow-home` so it cannot restyle documentation.
 
 ## Local Contracts
 
 - Preserve default documentation navigation, search, and accessibility.
+- Homepage markup owns its navigation, skip link, main landmark, and footer.
+  Keep all interactive content available in generated Markdown.
 - Keep the shared nav lockup monochrome and balanced. Pair the Jig striped mark
   with Quicksand SemiBold `jig`. Pair the FLOW unstriped mark with Quicksand
   Bold `FLOW`. Keep the accessible product names as live text. Do not duplicate
@@ -67,14 +61,13 @@ shared reading experience.
 ## Work Guidance
 
 - Prefer the default theme and small extensions over a copied theme.
-- Landing pages move from an early interactive demonstration to product-specific
-  structure and one first-use path. Keep implementation details in disclosures,
-  resource routing compact, and motion brief, optional, and reduced-motion
-  aware.
-- Place both the FLOW package explorer’s and Jig execution demo’s captions below
-  their instruments using the shared caption styling. Supporting side visuals
-  use separated, lightly tinted elements and open space rather than a single
-  filled text panel. Retain a visible boundary where it explains containment.
+- Lead from familiar Skills to application uses, comparison, design principles,
+  a concrete example, and first use.
+- Keep story changes manual. Preserve visible tabs, side controls, keyboard
+  navigation, and a stable accessible hero heading. Reduced motion keeps one
+  heading phrase visible. Heading transitions pause while the page is hidden.
+- Keep runtime examples open-ended and host support distinct from requested
+  integrations. Show code and instructions behind one caller-facing interface.
 
 ## Verification
 

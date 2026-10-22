@@ -8,7 +8,7 @@ Own this repository's Rspress configuration, assets, assembly, and direct GitHub
 
 - `../docs/flow/` owns public prose, specifications, and source diagrams.
 - `flow/` owns product navigation, public roots, origins, and assets.
-- `theme/` and `landing.css` own independently copied presentation.
+- `theme/`, `landing.css`, and `home.css` own independently copied presentation.
 - `package.json` and `bun.lock` pin site dependencies.
 - `../scripts/build-site.sh` owns fresh assembly, schema inventory, and Markdown publication checks.
 
