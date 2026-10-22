@@ -4,6 +4,9 @@
 @build-flow:
     bun node_modules/@rspress/core/bin/rspress.js build -c flow/rspress.config.ts
 
+@social-assets:
+    uv run ../scripts/generate-social-assets.py
+
 [positional-arguments]
 @dev-flow *args:
     bun node_modules/@rspress/core/bin/rspress.js dev -c flow/rspress.config.ts "$@"

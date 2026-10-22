@@ -8,6 +8,8 @@ import { usePage, useSite } from '@rspress/core/runtime'
 import { Arrow } from './icons'
 import { BrandTitle } from './brand-title'
 import { FlowHome } from './home'
+import { SocialHead } from './social-head'
+import { socialImage } from '../flow/social'
 import '../landing.css'
 
 export * from '@rspress/core/theme-original'
@@ -49,7 +51,8 @@ export function Layout() {
   const { page } = usePage()
   const home = page.frontmatter?.pageType === 'home'
   const isCustom = page.frontmatter?.pageType === 'custom'
-  if (home) return <DefaultLayout HomeLayout={HomeLayout} />
+  if (home)
+    return <DefaultLayout HomeLayout={HomeLayout} top={<SocialHead image={socialImage} />} />
   return (
     <div className="experience" data-product={site.title.toLowerCase()}>
       {!import.meta.env.SSG_MD && isCustom && (
@@ -58,6 +61,7 @@ export function Layout() {
         </a>
       )}
       <DefaultLayout
+        top={<SocialHead image={socialImage} />}
         navTitle={<BrandTitle />}
         beforeDocContent={<DocContext />}
         bottom={isCustom ? <HomeFooter /> : undefined}

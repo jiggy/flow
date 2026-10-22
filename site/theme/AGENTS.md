@@ -13,6 +13,9 @@ documentation reading experience.
   Its scoped effects provide keyboard tabs, previous/next controls, and optional
   heading transitions. Listeners and timers end when the homepage unmounts.
   Generated Markdown retains every story panel and the complete narrative.
+- `social-head.ts` supplies share-image defaults and each page's public URL.
+  Product image data stays in `../flow/social.ts`. Native Rspress retains titles
+  and descriptions. Frontmatter head tags can override individual defaults.
 - `brand-title.tsx` composes the theme-selected decorative emblem with the live
   product name, which provides the navigation link's accessible name.
 - `search.tsx` uses Rspress's native local search with conditional mounting,

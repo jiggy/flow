@@ -6,8 +6,10 @@ Own this repository's Rspress configuration, assets, assembly, and direct GitHub
 
 ## Ownership
 
+- `../DESIGN.md` owns website presentation principles and the visual system.
 - `../docs/flow/` owns public prose, specifications, and source diagrams.
 - `flow/` owns product navigation, public roots, origins, and assets.
+- `flow/social.ts` owns default share-image data. `flow/public/social/` holds committed banner sources and PNG exports.
 - `theme/`, `landing.css`, and `home.css` own independently copied presentation.
 - `package.json` and `bun.lock` pin site dependencies.
 - `../scripts/build-site.sh` owns fresh assembly, schema inventory, and Markdown publication checks.
@@ -20,10 +22,14 @@ Preserve human pages, exact machine resources, indexed Markdown, font notices, a
 Keep shared presentation changes coherent with the sibling product through deliberate review.
 A neighboring checkout is never a build input.
 
+Social defaults preserve native page titles, descriptions, and explicit frontmatter overrides.
+Image generation is an optional authoring task. Normal builds copy committed exports without invoking the generator.
+
 ## Verification
 
 Run `scripts/build-site.sh flow .tmp/flow-site` with a fresh destination.
 Use `scripts/check-site.sh` for a deployed endpoint.
+For share changes, inspect exported images and built HTML metadata, including absolute URLs and page-specific overrides.
 
 ## Child DOX Index
 
