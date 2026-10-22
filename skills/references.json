@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "flow": [
+      "docs/flow/guide/for-agents.md",
+      "docs/flow/guide/runtimes.md",
+      "docs/flow/guide/markdown.md",
+      "docs/flow/guide/typescript.md",
+      "docs/flow/guide/python.md",
+      "docs/flow/guide/skills.md",
+      "docs/flow/spec/package-format.md",
+      "docs/flow/spec/markdown-runtime.md",
+      "docs/flow/spec/run-sdk.md",
+      "docs/flow/spec/run-protocol.md",
+      "docs/flow/spec/json-values.md",
+      "docs/flow/spec/invocation-contracts.md",
+      "docs/flow/spec/schema-files.md",
+      "docs/flow/spec/channel-contracts.md",
+      "docs/flow/spec/machine/channel-contract-0.schema.json",
+      "docs/flow/spec/machine/invocation-contract-0.schema.json",
+      "docs/flow/spec/machine/run-0-errors.json",
+      "docs/flow/spec/machine/run-0.schema.json",
+      "docs/flow/spec/machine/schema-0.json",
+      "docs/flow/spec/examples/invocation-contracts/session-store.contract.json",
+      "docs/flow/spec/examples/schema-files/FLOW.contract.json",
+      "docs/flow/spec/examples/schema-files/settings.schema.json"
+    ]
+  }
+}

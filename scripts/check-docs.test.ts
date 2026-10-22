@@ -132,6 +132,13 @@ test('the actual CLI rejects invalid baselines and checks new files against Git'
   renameSync(join(root, 'docs/jig/guide/legacy.md'), join(root, 'docs/jig/guide/moved.md'))
   expect(run().status).toBe(0) // Moving an unchanged paragraph does not add a violation.
   expect(run('--base', 'not-a-commit').status).not.toBe(0)
+  const skill = '---\nname: flow\ndescription: FLOW authoring.\n---\n\n# FLOW\n\n'
+  put(root, 'skills/flow/SKILL.md', skill + 'Read [missing](../../docs/absent.md).\n')
+  expect(run().stderr).toContain('Missing local link')
+  put(root, 'skills/flow/SKILL.md', skill + 'Read the guide; start the work.\n')
+  expect(run().stderr).toContain('Remove prose semicolons')
+  put(root, 'skills/flow/SKILL.md', skill + 'Read [the guide](../../docs/jig/guide/page.md).\n')
+  expect(run().status).toBe(0)
   put(root, 'docs/jig/guide/new.md', '# New page\n\nRead the guide; start the work.\n')
   const failed = run()
   expect(failed.status).toBe(1)

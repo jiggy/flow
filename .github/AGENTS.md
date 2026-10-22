@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Own independent source checks, artifact qualification, package publication, and FLOW Pages deployment.
+Own independent source checks, skill artifacts, artifact qualification, package publication, and FLOW Pages deployment.
 
 ## Local Contracts
 
@@ -21,6 +21,9 @@ Configure its trusted publisher before publishing qualified release archives thr
 
 Documentation checks compare PRs with their base and pushes with their previous commit.
 For first pushes and manual runs, use the checked revision's parent instead of a missing or all-zero baseline.
+
+Quick checks build complete skills from the checked source and upload them as CI artifacts.
+Skill artifacts include generated references. Their build needs only repository read permissions.
 
 ## Verification
 

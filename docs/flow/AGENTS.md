@@ -34,7 +34,7 @@ and invocation-contract semantics.
   preserve both examples in the generated `/guide/start.md` resource.
 
 - `guide/overview.md` owns task-based discovery. `guide/for-agents.md` owns
-  machine-readable entry paths. `guide/concepts.md` owns introductory vocabulary
+  machine-readable entry paths and authoring-skill installation. `guide/concepts.md` owns introductory vocabulary
   and common questions. These guides defer to the linked exact contracts.
 
 ## Local Contracts

@@ -311,6 +311,7 @@ export function main(args = process.argv.slice(2)): number {
     (file) =>
       file.endsWith('.md') &&
       (file.startsWith('docs/') ||
+        /^skills\/[^/]+\/SKILL\.md$/.test(file) ||
         file.endsWith('AGENTS.md') ||
         file.endsWith('-guidance.md') ||
         file === '.agents/maintainer-guide.md'),
@@ -318,7 +319,8 @@ export function main(args = process.argv.slice(2)): number {
   // The owner excludes this tutorial's style while it awaits replacement.
   const technical = (file: string) =>
     file !== 'docs/jig/guide/software-factory.md' &&
-    (file.endsWith('AGENTS.md') ||
+    (/^skills\/[^/]+\/SKILL\.md$/.test(file) ||
+      file.endsWith('AGENTS.md') ||
       file.endsWith('-guidance.md') ||
       file === '.agents/maintainer-guide.md' ||
       /^docs\/(?:flow|jig)\/(?:guide|spec)\//.test(file))
