@@ -4,7 +4,12 @@ on:
     branches:
       - main
   pull_request: null
-  workflow_dispatch: null
+  workflow_dispatch:
+    inputs:
+      docs_base_revision:
+        description: Baseline commit for documentation checks
+        required: false
+        type: string
 permissions:
   contents: read
 concurrency:
@@ -64,16 +69,8 @@ jobs:
           just-version: 1.43.1
       - run: bun install --ignore-scripts
       - run: just test-tooling
-      - name: Build portable skills from canonical documentation
-        run: just build-skills "$RUNNER_TEMP/skills"
-      - name: Upload complete skills
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: flow-skills-${{ github.sha }}-r${{ github.run_id }}-a${{ github.run_attempt }}
-          path: ${{ runner.temp }}/skills
-          retention-days: 30
-          if-no-files-found: error
-          overwrite: true
+      - name: Check skill references against canonical documentation
+        run: just check-skills
   source-tests:
     name: Source and protocol checks
     runs-on: ubuntu-24.04
@@ -122,14 +119,14 @@ jobs:
           just-version: 1.43.1
       - name: Check documentation source and checker regressions
         env:
-          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
+          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || inputs.docs_base_revision || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
         run: |-
           bun test scripts/check-docs.test.ts
           bun scripts/check-docs.ts
       - run: bun install --cwd site --frozen-lockfile --ignore-scripts
       - name: Build FLOW documentation
         env:
-          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
+          DOCS_BASE_REVISION: ${{ github.event.pull_request.base.sha || inputs.docs_base_revision || (github.event.before != '0000000000000000000000000000000000000000' && github.event.before) || format('{0}^', github.sha) }}
         run: |-
           scripts/build-site.sh flow "$RUNNER_TEMP/sites/flow"
           bun scripts/check-docs.ts --sites "$RUNNER_TEMP/sites"

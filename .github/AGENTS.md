@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Own independent source checks, skill artifacts, artifact qualification, package publication, and FLOW Pages deployment.
+Own independent source checks, skill reference synchronization, artifact qualification, package publication, and FLOW Pages deployment.
 
 ## Local Contracts
 
@@ -22,8 +22,13 @@ Configure its trusted publisher before publishing qualified release archives thr
 Documentation checks compare PRs with their base and pushes with their previous commit.
 For first pushes and manual runs, use the checked revision's parent instead of a missing or all-zero baseline.
 
-Quick checks build complete skills from the checked source and upload them as CI artifacts.
-Skill artifacts include generated references. Their build needs only repository read permissions.
+Quick checks verify committed skill references against canonical sources with read-only permissions.
+The skill sync workflow updates same-repository pull request branches with generated references and a signed-off commit.
+Only that job receives contents and actions write permissions. It stages only `skills/*/reference/**` and uses a normal push.
+
+After pushing, dispatch CI explicitly because token-created pushes do not start new push workflows.
+Pass the original pull request base to preserve documentation checks across generated commits.
+Keep default-branch and fork checks read-only. Fork contributors run `just sync-skills` before pushing.
 
 ## Verification
 

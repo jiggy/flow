@@ -34,8 +34,8 @@ and invocation-contract semantics.
   preserve both examples in the generated `/guide/start.md` resource.
 
 - `guide/overview.md` owns task-based discovery. `guide/for-agents.md` owns
-  machine-readable entry paths and authoring-skill installation. `guide/concepts.md` owns introductory vocabulary
-  and common questions. These guides defer to the linked exact contracts.
+  machine-readable entry paths and FLOW skill installation. `guide/concepts.md` owns
+  introductory vocabulary and common questions. These guides defer to the linked exact contracts.
 
 ## Local Contracts
 
@@ -46,6 +46,7 @@ and invocation-contract semantics.
   Stewardship information remains in its own supporting material.
 - FLOW Run/0 owns wire behavior. Run SDK/0 defers to it when they differ.
 - Explanatory pages are not a second conformance source.
+- [Installable skills](../../skills/AGENTS.md) reuse canonical documentation through CI synchronization.
 - Explain `flow/run` as component entry and `flow/call` as dependency
   invocation. Every launched component, including a child, receives `flow/run`.
   Ordinary authors use one `handle()`/context `call()` API.

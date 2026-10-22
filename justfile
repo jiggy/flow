@@ -8,9 +8,11 @@ mod site "site/justfile"
 
 build: flow::build authoring::build
 
-[positional-arguments]
-@build-skills output:
-    node scripts/build-skills.mjs "$1"
+@sync-skills:
+    node scripts/sync-skills.mjs
+
+@check-skills:
+    node scripts/sync-skills.mjs --check
 
 [positional-arguments]
 @test *args:

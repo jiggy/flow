@@ -25,28 +25,13 @@ plain-text version. The HTML page `/spec/run-protocol` corresponds to
 The `flow` skill guides an Agent through creating, changing, adapting, and
 reviewing Flows. It selects documentation for the current task.
 
-1. Choose a successful [CI run](https://github.com/jiggy/flow/actions/workflows/ci.yml) for your selected revision.
-2. Download its `flow-skills-…` artifact and extract it.
-3. Install the complete `flow/` directory using your coding agent's skill installation instructions.
-
-Keep `SKILL.md`, `references/`, provenance, and license files together.
-Invoke `flow` by name, or let an agent supporting automatic skill discovery select it.
-Executing the resulting Flows requires a compatible host.
-
-### Build the skill from source
-
-After [setting up the repository](https://github.com/jiggy/flow/blob/main/CONTRIBUTING.md), run:
-
 ```sh
-just build-skills .tmp/flow-skills
+npx skills add jiggy/flow
 ```
 
-Use a fresh output path. Install the generated `.tmp/flow-skills/flow/` directory.
-Source skills link to repository documentation. Use the generated bundle when installing outside the checkout.
-
-CI builds the same complete directory from the checked revision.
-The [reference manifest](https://github.com/jiggy/flow/blob/main/skills/references.json) selects canonical documentation for each skill.
-Edit those source documents to update bundled guidance. The build synchronizes references, adjusts links, and preserves their licenses.
+Select the `flow` skill when prompted. The installed skill includes its reference files.
+Invoke `flow` by name, or let an agent supporting automatic skill discovery select it.
+Executing the resulting Flows requires a compatible host.
 
 ## The architecture to preserve
 
