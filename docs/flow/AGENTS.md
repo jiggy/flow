@@ -9,6 +9,8 @@ and invocation-contract semantics.
 
 - `spec/` owns normative FLOW specifications and machine companions.
 - `index.md` and `guide/` explain and navigate the current portable surface.
+- `guide/design.md` owns opinionated authoring and review guidance for modular boundaries, composition, portability, and local reasoning.
+  Its design recommendations do not add normative requirements.
 - `guide/python.md` and `guide/typescript.md` own SDK installation and local
   protocol tutorials. `guide/runtimes.md` owns the language and runtime support
   matrix and new SDK implementation guidance. SDK availability stays independent

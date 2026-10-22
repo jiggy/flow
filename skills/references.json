@@ -3,6 +3,7 @@
   "skills": {
     "flow": [
       "docs/flow/guide/for-agents.md",
+      "docs/flow/guide/design.md",
       "docs/flow/guide/runtimes.md",
       "docs/flow/guide/markdown.md",
       "docs/flow/guide/typescript.md",

@@ -21,6 +21,7 @@ A compatible host supplies local powers.
 | I want to… | Read |
 | --- | --- |
 | See code and Agent work compose through one boundary | [Understand FLOW](./understand.md), then [the Jig example](https://jig.md/guide/contact-import) |
+| Design small, composable methods that stay easy to reason about | [Design modular Flows](./design.md) |
 | Package a reusable procedure | [Start building](./start.mdx), then [Package/0](../spec/package-format.md) |
 | Write a Markdown method with inputs, child calls and outcomes | [Markdown authoring](./markdown.md) |
 | Bring an existing Skill and understand execution differences | [Skill compatibility](./skills.md) |

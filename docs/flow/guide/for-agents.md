@@ -22,8 +22,8 @@ plain-text version. The HTML page `/spec/run-protocol` corresponds to
 
 ## Install the FLOW authoring skill
 
-The `flow` skill guides an Agent through creating, changing, adapting, and
-reviewing Flows. It selects documentation for the current task.
+The `flow` skill guides an Agent through designing, creating, changing, adapting, and
+reviewing Flows. It applies architectural judgment and selects documentation for the current task.
 
 ```sh
 npx skills add jiggy/flow
@@ -34,6 +34,8 @@ Invoke `flow` by name, or let an agent supporting automatic skill discovery sele
 Executing the resulting Flows requires a compatible host.
 
 ## The architecture to preserve
+
+Read [Design modular Flows](./design.md) before choosing component boundaries or reviewing an existing package.
 
 Executable Flows give code, Agent judgment, and mixed methods one boundary for
 input, outcome, and result. Compose through the method's contract.
@@ -61,7 +63,7 @@ receiving host remain responsible for their powers.
 
 ## Choose only the context you need
 
-- **Package author:** [authoring path](./start.mdx), [Package/0](../spec/package-format.md), and your SDK guide.
+- **Package author:** [design guidance](./design.md), then the [authoring path](./start.mdx), [Package/0](../spec/package-format.md), and your SDK guide.
 - **Host implementer:** [Run/0](../spec/run-protocol.md), [JSON/0](../spec/json-values.md), and the public conformance corpus.
 - **SDK implementer:** [Run SDK/0](../spec/run-sdk.md) together with Run/0.
 - **Interface author:** [invocation contracts](../spec/invocation-contracts.md) or [channel contracts](../spec/channel-contracts.md).
