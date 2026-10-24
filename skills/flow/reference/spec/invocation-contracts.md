@@ -1,6 +1,15 @@
+---
+title: FLOW Invocation Contract/0
+description: Optional descriptors for input, complete results, outcomes, channels, and exact interface identity.
+---
+
 <!-- Generated from docs/flow/spec/invocation-contracts.md. Edit the source, then run just sync-skills. -->
 
+
 # FLOW Invocation Contract/0
+
+> **Reader guide (non-normative).** Read this specification when implementing descriptors or checking an exact invocation agreement.
+> Use [When contracts help](https://flow.jig.md/understand/contracts.md) to choose a declaration, then [Validate inputs and results](../build/validation.md) to apply it.
 
 > *Status: prerelease specification candidate. The structural companion is
 > [`invocation-contract-0.schema.json`](machine/invocation-contract-0.schema.json).*

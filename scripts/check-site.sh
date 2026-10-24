@@ -12,7 +12,8 @@ case $site_name in
   flow)
     default_base=https://flow.jig.md
     home_title='<title>FLOW</title>'
-    guide_title='<title>FLOW specifications - FLOW</title>'
+    guide_route=start/
+    guide_title='<title>FLOW documentation - FLOW</title>'
     json_map='docs/flow/spec/machine/invocation-contract-0.schema.json|schemas/invocation-contract-0.schema.json
 docs/flow/spec/machine/channel-contract-0.schema.json|schemas/channel-contract-0.schema.json
 docs/flow/spec/machine/run-0-errors.json|schemas/run-0-errors.json
@@ -22,6 +23,7 @@ docs/flow/spec/machine/schema-0.json|schemas/schema-0.json'
   jig)
     default_base=https://jig.md
     home_title='<title>Jig</title>'
+    guide_route=guide/
     guide_title='<title>Get started with Jig - Jig</title>'
     json_map='packages/reporting/src/reporting.json|contracts/reporting.json
 docs/jig/spec/machine/jig-lock-1.schema.json|schemas/jig-lock-1.schema.json
@@ -67,9 +69,17 @@ cleanup() {
 trap cleanup EXIT HUP INT TERM
 
 curl --fail --location --silent --show-error "$base/" > "$temporary/index.html"
-curl --fail --location --silent --show-error "$base/guide/" > "$temporary/guide.html"
+curl --fail --location --silent --show-error "$base/$guide_route" > "$temporary/guide.html"
 grep -Fq "$home_title" "$temporary/index.html"
 grep -Fq "$guide_title" "$temporary/guide.html"
+
+if [ "$site_name" = flow ]; then
+  for route in start/run start/application build/ understand/ implement/ reference/ reference/support; do
+    curl --fail --location --silent --show-error \
+      "$base/$route" > "$temporary/entry.html"
+    grep -Eq '<title>[^<]+ - FLOW</title>' "$temporary/entry.html"
+  done
+fi
 
 if [ "$site_name" = jig ]; then
   for contract in reporting agent-run project-command http-request run-checkpoint acp-public-updates finite-acp; do

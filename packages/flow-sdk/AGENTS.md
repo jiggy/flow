@@ -3,7 +3,7 @@
 ## Purpose
 
 Implements the dependency-free `@jigging/flow` TypeScript projection of Run
-SDK/1 and Run/0.
+SDK/0 and Run/0.
 
 ## Ownership
 

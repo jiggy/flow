@@ -7,8 +7,8 @@ description: FLOW design and authoring. Use when designing, creating, composing,
 
 ## 1. Establish the method
 
-Read the [design guide](reference/guide/design.md) before choosing boundaries or reviewing an existing design.
-Use the [agent guide](reference/guide/for-agents.md) for FLOW's scope and execution assumptions.
+Read the [design guide](reference/build/design.md) before choosing boundaries or reviewing an existing design.
+Use the [agent guide](reference/for-agents.md) for FLOW's scope and execution assumptions.
 For an existing package, inspect its entrypoint, declarations, resources, and dependency calls.
 Identify the requested input, expected result, required effects, and failure cases.
 Complete this step when the caller's need and the method's acceptance criteria are explicit.
@@ -20,8 +20,8 @@ Identify the application's domain and choose the level of abstraction its compon
 Describe each proposed component's purpose, input, result, outcomes, dependencies, effects, and state ownership.
 Use a short outline or existing package documentation, without adding a required design artifact.
 
-Apply the guide's [naming guidance](reference/guide/design.md#choose-short-clear-names) to each component.
-Check for further useful splits under its [decomposition rules](reference/guide/design.md#choose-meaningful-small-pieces).
+Apply the guide's [naming guidance](reference/build/design.md#choose-short-clear-names) to each component.
+Check for further useful splits under its [decomposition rules](reference/build/design.md#choose-meaningful-small-pieces).
 
 Choose small, cohesive capabilities and explain which knowledge each boundary hides from its caller.
 Make a composed Flow expose a clear capability while owning its children's coordination.
@@ -36,17 +36,17 @@ Complete this step when the decomposition is understandable from its public prom
 
 Read [Package/0](reference/spec/package-format.md) before implementing or judging package mechanics.
 
-When choosing an implementation, check [runtime support](reference/guide/runtimes.md) for the intended host.
+When choosing an implementation, check [runtime support](reference/reference/support.md) for the intended host.
 Confirm support in the chosen host and any SDK the method uses.
 Read each relevant branch before editing or judging its behavior.
 
 | Task | Reference |
 | --- | --- |
-| Markdown instructions or recipes | [Markdown guide](reference/guide/markdown.md) and [Markdown/0](reference/spec/markdown-runtime.md) |
-| TypeScript or JavaScript implementation | [TypeScript guide](reference/guide/typescript.md) |
-| Python implementation | [Python guide](reference/guide/python.md) |
-| Existing Skill adaptation | [Skill compatibility](reference/guide/skills.md) |
-| Code dependencies, cancellation, or artifact handling | [Run SDK/0](reference/spec/run-sdk.md) |
+| Markdown instructions or recipes | [Markdown guide](reference/build/markdown.md) and [Markdown/0](reference/spec/markdown-runtime.md) |
+| TypeScript or JavaScript implementation | [TypeScript guide](reference/build/typescript.md) |
+| Python implementation | [Python guide](reference/build/python.md) |
+| Existing Skill adaptation | [Adaptation guide](reference/build/skills.md) and [Skill compatibility](reference/reference/skill-compatibility.md) |
+| Code dependencies, cancellation, or artifact handling | [Composition](reference/build/compose.md), [outcomes](reference/build/outcomes.md), and [Run SDK/0](reference/spec/run-sdk.md) |
 | Input/result validation, custom outcomes, caller ports, or shared interfaces | [Invocation Contract/0](reference/spec/invocation-contracts.md) |
 | Schema declarations or configurable implementation settings | [Schema/0](reference/spec/schema-files.md) |
 | Message channels | [Channel Contract/0](reference/spec/channel-contracts.md) |
@@ -69,7 +69,7 @@ Complete this step when the method is implemented or findings are substantiated,
 
 Use the target project's checks and the selected guide's execution path.
 Exercise representative input and the failure cases affected by the change.
-Apply the relevant [design probes](reference/guide/design.md#review-the-design-with-concrete-changes) to the implemented boundaries.
+Apply the relevant [design probes](reference/build/design.md#review-the-design-with-concrete-changes) to the implemented boundaries.
 Check independent use and relocation when claiming portability, and substitution when claiming replaceability.
 
 For review, run checks needed to substantiate findings.

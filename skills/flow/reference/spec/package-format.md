@@ -1,6 +1,15 @@
+---
+title: FLOW Package/0
+description: Canonical files, metadata, paths, and identity for a portable Flow package.
+---
+
 <!-- Generated from docs/flow/spec/package-format.md. Edit the source, then run just sync-skills. -->
 
+
 # FLOW Package/0
+
+> **Reader guide (non-normative).** Read this specification when implementing package inspection or checking an exact file-layout requirement.
+> For authoring, follow [Write a method](https://flow.jig.md/build/index.md). Use [Reference](https://flow.jig.md/reference/index.md) to find related contracts.
 
 > *Status: prerelease specification candidate.*
 

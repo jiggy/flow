@@ -12,6 +12,12 @@ transition; `home.css` scopes its presentation to the homepage. Guides keep the
 Rspress documentation layout, navigation, search, and appearance controls.
 All story tabs remain in the generated homepage Markdown.
 
+Documentation starts at `/start/` and follows five areas with focused sidebars:
+first use, building, understanding, implementation, and reference.
+The same navigation orders `llms.txt`. Every public page remains in the Markdown bundle.
+Normative specifications keep their `/spec/` routes and exact machine resources.
+`/for-agents` provides Markdown and authoring-skill access.
+
 ## Share previews and banners
 
 The website's default social image is `/social/flow-social.png` at 1200 × 630 pixels.

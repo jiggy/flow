@@ -9,6 +9,7 @@ documentation reading experience.
 
 - `index.tsx` routes the homepage to its own composition and preserves the
   default documentation layout, context, brand title, and Markdown resource link.
+  Documentation context identifies the current learning, implementation, reference, specification, or evidence area.
 - `home.tsx` renders canonical homepage content from `docs/flow/index.md`.
   Its scoped effects provide keyboard tabs, previous/next controls, and optional
   heading transitions. Listeners and timers end when the homepage unmounts.
@@ -32,6 +33,7 @@ documentation reading experience.
 - `code-themes.ts` retains the One Light and One Dark Pro palettes with native
   Shiki color replacements targeting 7:1 text contrast against their code
   backgrounds.
+- `flow-language.ts` highlights Markdown recipe verbs and operands without parsing or executing them.
 - `llms.ts` orders generated page links using the same sidebar as human readers.
   Unlisted public pages remain discoverable rather than silently disappearing.
 - `fonts/` owns self-hosted OpenRunde Regular and Semibold for the homepage.
