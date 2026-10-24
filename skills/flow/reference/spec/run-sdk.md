@@ -1,6 +1,16 @@
+---
+title: FLOW Run SDK/0
+description: Exact TypeScript and Python SDK interfaces for invocation, results, calls, channels, and cancellation.
+---
+
 <!-- Generated from docs/flow/spec/run-sdk.md. Edit the source, then run just sync-skills. -->
 
+
 # FLOW Run SDK/0
+
+> **Reader guide (non-normative).** Read this specification when implementing the SDK or checking an API's exact behavior.
+> Use [SDK reference](../reference/sdk.md) for authoring or [Implement an SDK](https://flow.jig.md/implement/sdk.md) for an implementation walkthrough.
+> [Run/0 machine resources](run-protocol.md#10-machine-interface-and-sdk-projection) describe the companion wire shapes.
 
 > *Status: prerelease SDK projection of [`FLOW Run/0`](run-protocol.md).*
 

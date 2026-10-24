@@ -161,7 +161,6 @@ Remove `output` from the greeter's return value, then run again.
 The SDK rejects the invalid result. The host exits unsuccessfully and prints no successful result.
 A component also fails completion when it emits trailing stdout or exits nonzero after responding.
 
-
 ## Bound the claim
 
 Protocol evidence establishes the tested exchange and lifecycle behavior.

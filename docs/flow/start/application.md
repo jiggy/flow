@@ -32,7 +32,6 @@ jig review --allow-resolution-network
 ```
 
 Inspect the proposal and approve the intended revision.
-An operator reviews and approves the revision.
 The application below invokes that already approved work.
 
 ## Make one application call
@@ -112,9 +111,8 @@ Suggested queue: billing
 
 The caller checks execution, cleanup, the method's outcome, and its output before using the suggestion.
 Those checks remain useful if the implementation later uses Agent instructions or combines other methods.
-Each host supplies its own application interface.
-Jig provides this client.
-The FLOW SDK serves method handlers.
+This client belongs to Jig.
+The FLOW SDK serves method handlers, and each host supplies its own application interface.
 
 ## Supply another request
 

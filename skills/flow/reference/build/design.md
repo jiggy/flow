@@ -1,9 +1,9 @@
 ---
-title: Design modular Flows
+title: Design reusable Flows
 description: Build small, understandable capabilities that compose, hide complexity, and move between applications.
 ---
 
-<!-- Generated from docs/flow/guide/design.md. Edit the source, then run just sync-skills. -->
+<!-- Generated from docs/flow/build/design.md. Edit the source, then run just sync-skills. -->
 
 
 # Design Flows that fit in your head
@@ -45,7 +45,7 @@ This exercise needs no additional manifest or required file.
 For example, `classify-request` suggests a support queue from supplied message content.
 It might return `billing`, `technical`, or `manual`, with the evidence needed to judge that suggestion.
 Its caller should understand this promise without reading prompts, parser helpers, or provider response objects.
-The [FLOW introduction](https://flow.jig.md/guide/understand.md) shows code, Agent, and mixed implementations behind this boundary.
+The [FLOW introduction](https://flow.jig.md/understand/index.md) shows code, Agent, and mixed implementations behind this boundary.
 
 Keep inputs and results specific to the task.
 Pass the needed values explicitly instead of sharing a mutable object containing the whole application.
@@ -88,7 +88,7 @@ A pipeline stage earns a public boundary when it hides a meaningful choice or su
 Extract a Flow when it enables independent reuse, replacement, testing, or ownership of a meaningful effect.
 Keep an implementation helper private when exposing it would only add wiring.
 Measure size by the concepts a caller must retain.
-An extra package should remove knowledge or coordination from its consumers.
+An extra package should reduce what its consumers must know or coordinate.
 
 **Examples of possible boundaries and private details:**
 
@@ -104,7 +104,7 @@ Extract a private helper when a concrete caller or replacement need gives it an 
 Avoid generic components whose many mode flags select unrelated jobs.
 Unrelated callers changing together often reveal a missing boundary.
 
-A single current caller can be a sufficient beneficiary when it receives a concrete benefit.
+One caller is enough when it gains a concrete benefit from the split.
 Use domain knowledge to choose boundaries and make each benefit explicit.
 
 **Example: Choosing boundaries in request processing.**
@@ -145,7 +145,7 @@ A single composite could also benefit from policy extraction for independent tes
 The outside caller should only need to invoke `route-request` and interpret its documented result and effects.
 It should not coordinate the classifier's prompts, the ticket vendor's request format, or the children's cleanup.
 This is how several small pieces become one larger piece that still fits in your head.
-Apply the same rule again when composing that piece into a larger application.
+Apply this principle at each level of composition.
 
 Keep reusable children independent of the application that composes them.
 Put coordination in the parent when siblings would otherwise need each other's internals.
@@ -229,7 +229,7 @@ Keep provider-specific formats within the integration that owns them.
 Move the complete package and its declared dependency requirements into a separate consumer project.
 Check that it can be configured and invoked without the author's application or checkout.
 Keep runtime and capability requirements explicit.
-Portability depends on [compatible host support](runtimes.md), not merely on a valid package.
+Portability depends on [compatible host support](../reference/support.md), not merely on a valid package.
 
 Replace a dependency with another suitable implementation when replacement is part of the design.
 Check relevant behavior, outcomes, effects, and required powers as well as the interface shape.

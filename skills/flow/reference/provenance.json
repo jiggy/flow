@@ -3,98 +3,140 @@
   "repository": "https://github.com/jiggy/flow",
   "manifest": {
     "source": "skills/references.json",
-    "sha256": "61ce886d46f16ac6656b57d543460cd83df52a9286a26306d329d913f6f5f700"
+    "sha256": "dc6d884c57bbc971edcc9ec75901abd027edeec5e4258285d746deb7ccc880f2"
   },
   "files": [
     {
-      "source": "docs/flow/guide/for-agents.md",
-      "destination": "guide/for-agents.md",
-      "sourceSha256": "272fac3082df4d6b53cf831686cb1cfc248cc9b1645c78a2a6fb0fc62afadab3",
-      "outputSha256": "892c59dc11c490031061cd5d9312f94e645f9cc06c919238af60f3ee2024a4f9"
+      "source": "docs/flow/for-agents.md",
+      "destination": "for-agents.md",
+      "sourceSha256": "8ac1f21eb00af90ef749149216c64b139cd3f65ecfaeafcc61e4e4ff8dd1007f",
+      "outputSha256": "d3a2f09cab09096fcc2510a5b552132f149a8bca8c2084746a5b0c31ac0a26bc"
     },
     {
-      "source": "docs/flow/guide/design.md",
-      "destination": "guide/design.md",
-      "sourceSha256": "dba41d8f4497a9f874daa6a55e9d887307deae36a8aaab6de807c1ffe5bacaf5",
-      "outputSha256": "b7cc003f48b2d29229a4be9d7bbdea8fc29a7ade4e79be8c9634b21921c04251"
+      "source": "docs/flow/build/design.md",
+      "destination": "build/design.md",
+      "sourceSha256": "4e0cc68a1ff6607ba38d9c4dea2dd19885fdc57ee08bc9bea638c34a1be07177",
+      "outputSha256": "f898217d9d492151b31461b16f75535e60514b091b939a5ee909319a2f3b8406"
     },
     {
-      "source": "docs/flow/guide/runtimes.md",
-      "destination": "guide/runtimes.md",
-      "sourceSha256": "12c14911f7a216cb5a90308d8f0ff74bedad49f30e498f79bfbd2a6e4f3c6e4e",
-      "outputSha256": "81214b2c5daf939bc73ce8fb6a59bcc09f4c652d8bd6939da0cfdafa379b46f3"
+      "source": "docs/flow/reference/support.md",
+      "destination": "reference/support.md",
+      "sourceSha256": "75c02d50fcade5a02945cce18af900c21f4aee65a8735d426be0e5ffe9a95e32",
+      "outputSha256": "b0cbc372b55cd1f5f0b12f0020b04a860969d7328b05cc8d4d56684bdc4a4e84"
     },
     {
-      "source": "docs/flow/guide/markdown.md",
-      "destination": "guide/markdown.md",
-      "sourceSha256": "11acb071ce26b5943389e902fc44b7dbb6ade85607c7dd30d2ea93c306378e48",
-      "outputSha256": "cf0c309e8ec1126bd13552e5188dd715c84e9737e2b125ebfc0fed97556a7868"
+      "source": "docs/flow/build/markdown.md",
+      "destination": "build/markdown.md",
+      "sourceSha256": "af6c1914154bc50e22899f8b8931605ad33a6eaddb4a1b76c3fc59fb0d435824",
+      "outputSha256": "78b4f84246ed2a2afb7a73cdcc0f137a4ca6c06aafe0a1b07b789356bdb40b37"
     },
     {
-      "source": "docs/flow/guide/typescript.md",
-      "destination": "guide/typescript.md",
-      "sourceSha256": "6a57f46891bda63125e14609d282b0e83d5750476bec2d30de1cf7f2ad82ccd5",
-      "outputSha256": "e39047f948ce8b2333294f17f7ecc4e106186dcf272ad7ba90f88eff1e04028c"
+      "source": "docs/flow/build/typescript.md",
+      "destination": "build/typescript.md",
+      "sourceSha256": "b1a3969059457dcf2046f64ced96eaa2a07681f3fe6022251a8de4e8ec14f33f",
+      "outputSha256": "8bffad2338944b1b7933af961519b22339c186eaca1fbe280afe733ac8a3f2f4"
     },
     {
-      "source": "docs/flow/guide/python.md",
-      "destination": "guide/python.md",
-      "sourceSha256": "2d5258093873eb9c46639aae9928a2827fe258ef9b7f3cf2565e3b81ed79341f",
-      "outputSha256": "60841e19fb6bbe4bd85f29404b110423463db309e54f4901036c9c700386ac4e"
+      "source": "docs/flow/build/python.md",
+      "destination": "build/python.md",
+      "sourceSha256": "5e2a036be8abebf4e8526215b6f679d728143deba1a9b0d19acefdc1640e9424",
+      "outputSha256": "cd1d0a7bc158ba323fef4180cd54616e21c22ff5a90c5677ee92318ce4951c08"
     },
     {
-      "source": "docs/flow/guide/skills.md",
-      "destination": "guide/skills.md",
-      "sourceSha256": "8ab141fd053bd9fa4782a146dccba03f82665b7183c58852e6176444c1d4cc34",
-      "outputSha256": "02518e5eb6526fd8db5fc335c3c707f9b2deb22a2a4396ad74f22c8bec91a99b"
+      "source": "docs/flow/build/skills.md",
+      "destination": "build/skills.md",
+      "sourceSha256": "a912f12894c1f4dc6d8b983351d355f2f77534995161068913f58230e31d825e",
+      "outputSha256": "eea2e6fe8e789466f6bc4f0b6f8e48404ed60fffcfc88319ff5615a86caffd1e"
+    },
+    {
+      "source": "docs/flow/build/compose.md",
+      "destination": "build/compose.md",
+      "sourceSha256": "bb5115483939e3777bf11a9ebb702ac330524fe7cb03ee91dc35bf0384dc168d",
+      "outputSha256": "d2c97d4defabfd3e92ab492898ac5ecdf3491b66cc178853a76dd697798921d1"
+    },
+    {
+      "source": "docs/flow/build/outcomes.md",
+      "destination": "build/outcomes.md",
+      "sourceSha256": "3c0d48bbb6de3d0c9697910df4fca7b7d5085db919c21e97f4ed0f1f24da80d3",
+      "outputSha256": "f9b8a938ec1cecfe3506f31c390d573e8d290e3a39ef34fe5f838bb38c71119e"
+    },
+    {
+      "source": "docs/flow/build/validation.md",
+      "destination": "build/validation.md",
+      "sourceSha256": "9f76d51d493954ef01ba49c0ab115838b050dc77dd28bddccc926b76cc4e9bd8",
+      "outputSha256": "1b101b1bec753436b7da92e96b8069d7999d7ad56f54ad734a5cbd6c6cfc8608"
+    },
+    {
+      "source": "docs/flow/build/messages.md",
+      "destination": "build/messages.md",
+      "sourceSha256": "c9ecbe5c12cbbc343cdc8f0a29899e039f5f36b1b4c6fee61e66e5a653fa8942",
+      "outputSha256": "b70904b1d7559657ad884d797c54579d0bef84b98cddf5c44f6aee9b0b60b2aa"
+    },
+    {
+      "source": "docs/flow/reference/skill-compatibility.md",
+      "destination": "reference/skill-compatibility.md",
+      "sourceSha256": "b419583f80cd01a77fc0aa6a3d49072e7403ad1ce92bbaa6e154610495f1cd03",
+      "outputSha256": "c37719c3bb1717da052f05db6ef232f9d5769daee408d63c916d3ce32d03030d"
+    },
+    {
+      "source": "docs/flow/reference/markdown.md",
+      "destination": "reference/markdown.md",
+      "sourceSha256": "60cdf03fd21286b1048b5c5af9dad7a26b4fcfa66100a6167af44269e8d6fac7",
+      "outputSha256": "dfc4f14e0af221d18fc59697dcd9eaebd8f321d2e8be9e051ed4a0961e246b43"
+    },
+    {
+      "source": "docs/flow/reference/sdk.md",
+      "destination": "reference/sdk.md",
+      "sourceSha256": "59dd2d0b7a2c7edd725253e82d32d5025498da2adaee64a5c2c3ed6249a74520",
+      "outputSha256": "5bcb804b4cbffc4167fd5e84b6b57d8eb044c86637af9004f461d2964c435bc7"
     },
     {
       "source": "docs/flow/spec/package-format.md",
       "destination": "spec/package-format.md",
-      "sourceSha256": "8ab37b5f7d954cc071a7be454e2d71fff66a614716e4388d4290d7ee234c723c",
-      "outputSha256": "e661eb7cda06002e5737f075279ee1454b450aea69bd85bb0597c76b5539429f"
+      "sourceSha256": "0bf40a0b808152acf3fa8b4c6f17da2ba1cc39f4114210b20b96462a449d57b1",
+      "outputSha256": "56a6363f659d98ab976e689c434cc68295c242b9c5c362523b2a937153540dd6"
     },
     {
       "source": "docs/flow/spec/markdown-runtime.md",
       "destination": "spec/markdown-runtime.md",
-      "sourceSha256": "3d59991b1fd079134aa757c360bd5a22dcd173b7ef4ccc7d7606c577ef7b1e97",
-      "outputSha256": "cefe7121e77928814bf97aea7dd9947a8ee7a67c1ec6361c7b3fccc8d4e9479f"
+      "sourceSha256": "e87bf8eaa9e3d1d58f89afa5ed1688630f75e8076d1ea2c8304c76848fee38f0",
+      "outputSha256": "0db43789db4e204617686bcca8de33700df815e54c15a62aac73a40a0f875194"
     },
     {
       "source": "docs/flow/spec/run-sdk.md",
       "destination": "spec/run-sdk.md",
-      "sourceSha256": "f48d66948d72a4088a5296fc8196becab2b2b2e1a9b12ead0b3d81e5849ea1be",
-      "outputSha256": "5039ea5b3917cdde5d579e04268c8375c531bdd2135c74b58253b06cea8bc051"
+      "sourceSha256": "dc5d40189a3a17fc73ee6e2a4b7085e2619adcd13417b2fc444686de3917e627",
+      "outputSha256": "4cb7c38340a2b2aa030d4433ee3599858626ef85a2ba0fb45e6f996d2e3e2795"
     },
     {
       "source": "docs/flow/spec/run-protocol.md",
       "destination": "spec/run-protocol.md",
-      "sourceSha256": "47da1efa1a47464f95d1f73e897fa166e6865a5ba2fafd5885c4bdf2661d0127",
-      "outputSha256": "f0036cae5d016a7578468d19530dd8c75d8cceec844ce33415e1854397da341a"
+      "sourceSha256": "074f6064bb614ebcf8c4bb06ea4c41fd1e534d760023fa9d0248e9c003969093",
+      "outputSha256": "d73964bb442d3752dbfd86b4804b8a6311340e50bc2376e4b090c5c865675a93"
     },
     {
       "source": "docs/flow/spec/json-values.md",
       "destination": "spec/json-values.md",
-      "sourceSha256": "e60755128197a89be6c7e4c29975a0f7e1d06619993cff8ae4bab93cc407b153",
-      "outputSha256": "9f843741683b4a35054bd4cea5b55dab970e3cbb536f2e0d7e7de23ef82b059d"
+      "sourceSha256": "48a5c2959ad0978ab61547d562ddc8f044ea721afdf4ab8d379664b5a0624bbc",
+      "outputSha256": "f22cb84890b87133df05d6a7f0aae5ad77aa79ececd8dab01fd61ccf586892fa"
     },
     {
       "source": "docs/flow/spec/invocation-contracts.md",
       "destination": "spec/invocation-contracts.md",
-      "sourceSha256": "e228be1d96ea97230386fa302afc6f469d0272c8dba0e51c95547dbfc91b2da4",
-      "outputSha256": "426fe7c6d66c1460e71e4931bc00f721de395614f64e3d21e695b33559c76dc5"
+      "sourceSha256": "4991577663d7b3df636a6fb38d5f84fbc345d6dea5f9aa99ea791c6e869f1a59",
+      "outputSha256": "4c5329f2a55a6cf9f2f39ece13980f41ca3ae93b8562e8c890f575f84a8bf179"
     },
     {
       "source": "docs/flow/spec/schema-files.md",
       "destination": "spec/schema-files.md",
-      "sourceSha256": "58c9ff5fbbef8e55b49c9ef14296dfda16cefb2345d2f4e85d66a929f04cf0e1",
-      "outputSha256": "7977db11958c729de6122337d42c650017c1bf784e865d873a5cf2649f3ad93d"
+      "sourceSha256": "f1a134ef434486bd99a3293e683fa7c39d976ac8f570129dc6802b0c31ab0bfc",
+      "outputSha256": "46610f0f9d20d0bd95572874a907fc5dc0183350e93028d91285ab4127ebebbf"
     },
     {
       "source": "docs/flow/spec/channel-contracts.md",
       "destination": "spec/channel-contracts.md",
-      "sourceSha256": "208037d98e9ef5c07c520d8add8c801ad3d9b4f93e1900dbb90c55848047f26c",
-      "outputSha256": "06d5ae6a0a206834eb3a1ecab1a5372ac5bfa0f0b661332c87a19f13986504b3"
+      "sourceSha256": "6ade1836687a7dbbf698f51c7e9fe04ba6b512369db1ac293c46487017d7908f",
+      "outputSha256": "b6be837bd5832b10f7f999368133b07a74abdd44b456c9116a7c663aa82ff82f"
     },
     {
       "source": "docs/flow/spec/machine/channel-contract-0.schema.json",
@@ -147,8 +189,8 @@
     {
       "source": "LICENSES.md",
       "destination": "LICENSES.md",
-      "sourceSha256": "21a52c1a4490dfd120ac190b35ee6ded60b525f5b43a6b1519112106fcab8e54",
-      "outputSha256": "21a52c1a4490dfd120ac190b35ee6ded60b525f5b43a6b1519112106fcab8e54"
+      "sourceSha256": "fcfec7864ba1c33e4c7ea534e144e95cfe8d16a7ec1e06f95c75ed4eae7d934c",
+      "outputSha256": "fcfec7864ba1c33e4c7ea534e144e95cfe8d16a7ec1e06f95c75ed4eae7d934c"
     },
     {
       "source": "Notices.md",

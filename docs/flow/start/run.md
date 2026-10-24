@@ -161,5 +161,4 @@ The method raises `INVALID_INPUT`, and Jig reports failed execution instead of a
 Correct the input before starting another invocation.
 The [outcomes guide](../build/outcomes.md) explains domain outcomes and operational failures.
 
-You have now run, checked, and adapted a callable method.
 Next, [call it from an application](./application.md), or [bring a Skill](../build/skills.md) behind the same boundary.

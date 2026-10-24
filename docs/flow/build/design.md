@@ -85,7 +85,7 @@ A pipeline stage earns a public boundary when it hides a meaningful choice or su
 Extract a Flow when it enables independent reuse, replacement, testing, or ownership of a meaningful effect.
 Keep an implementation helper private when exposing it would only add wiring.
 Measure size by the concepts a caller must retain.
-An extra package should remove knowledge or coordination from its consumers.
+An extra package should reduce what its consumers must know or coordinate.
 
 **Examples of possible boundaries and private details:**
 
@@ -101,7 +101,7 @@ Extract a private helper when a concrete caller or replacement need gives it an 
 Avoid generic components whose many mode flags select unrelated jobs.
 Unrelated callers changing together often reveal a missing boundary.
 
-A single current caller can be a sufficient beneficiary when it receives a concrete benefit.
+One caller is enough when it gains a concrete benefit from the split.
 Use domain knowledge to choose boundaries and make each benefit explicit.
 
 **Example: Choosing boundaries in request processing.**
@@ -142,7 +142,7 @@ A single composite could also benefit from policy extraction for independent tes
 The outside caller should only need to invoke `route-request` and interpret its documented result and effects.
 It should not coordinate the classifier's prompts, the ticket vendor's request format, or the children's cleanup.
 This is how several small pieces become one larger piece that still fits in your head.
-Apply the same rule again when composing that piece into a larger application.
+Apply this principle at each level of composition.
 
 Keep reusable children independent of the application that composes them.
 Put coordination in the parent when siblings would otherwise need each other's internals.

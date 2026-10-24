@@ -57,7 +57,7 @@ The host supplies the context and qualifies the execution runtime.
 | `run.signal` | Handler task cancellation | Root cancellation. |
 
 Declarations name needed interfaces. The host supplies actual implementations, context, and authority.
-The SDK exposes the deadline while the host enforces it.
+The SDK exposes the deadline, and the host enforces it.
 
 ## Call a dependency
 

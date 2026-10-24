@@ -33,6 +33,7 @@ documentation reading experience.
 - `code-themes.ts` retains the One Light and One Dark Pro palettes with native
   Shiki color replacements targeting 7:1 text contrast against their code
   backgrounds.
+- `flow-language.ts` highlights Markdown recipe verbs and operands without parsing or executing them.
 - `llms.ts` orders generated page links using the same sidebar as human readers.
   Unlisted public pages remain discoverable rather than silently disappearing.
 - `fonts/` owns self-hosted OpenRunde Regular and Semibold for the homepage.

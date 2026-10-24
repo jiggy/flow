@@ -71,7 +71,7 @@ Enforce the host's deadline and termination policy.
 
 Map settled operational failures to the FLOW error envelope.
 Keep uncertain dispatch or side effects visible. Apply the host's recovery policy before attempting more work.
-An Agent disconnect, malformed answer, and verified task refusal need their appropriate distinct outcomes.
+Report Agent disconnects, malformed answers, and verified task refusals as distinct outcomes.
 
 | Responsibility | Owner |
 | --- | --- |

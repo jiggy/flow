@@ -5,12 +5,11 @@ description: Give a useful procedure an input and result that applications, work
 
 # What FLOW adds
 
-A Skill captures instructions and resources for useful work. FLOW gives a procedure a common boundary that software can call.
+A Skill captures instructions and resources for useful work. FLOW packages a procedure as a method your software can call.
 Your application supplies input and receives an outcome with output data.
 The method can use code, Agent judgment, or both.
 
-FLOW proposes an evolution of the familiar Skill model: package the complete method, then build with it through one calling interface.
-A **Flow** is the package containing that reusable method.
+A **Flow** is the package containing that method.
 A compatible **host** executes it with the required runtime and local powers.
 
 ## Start with the result your application needs
@@ -29,9 +28,9 @@ The classifier returns an outcome and useful data:
 {"outcome":"done","output":{"queue":"billing"}}
 ```
 
-The application handles that result through the same boundary whether the classifier uses instructions or code.
+The application handles the result the same way whether the classifier uses instructions or code.
 It still checks the suggestion before taking a consequential action.
-Successful execution establishes that a method finished, while application checks establish whether its answer is suitable.
+Successful execution establishes that the method finished. Application checks establish whether its answer is suitable.
 
 ## Choose how the method does its work
 
@@ -54,19 +53,18 @@ The [Skill compatibility reference](../reference/skill-compatibility.md) describ
 
 ## Build another capability from it
 
-The classifier could become one part of a larger intake method.
-That method might combine classification, a policy check, and preparation of a draft response.
+An intake method could combine the classifier with a policy check and a method that drafts a response.
 Its caller receives one result without coordinating each child's internal steps.
 These are illustrative choices for this application.
 
-This is **capability compounding**: useful methods become the means to accomplish more together.
+This is **capability compounding**: combine useful methods to accomplish more.
 Evaluation establishes whether the combination helps.
 A portable method can still carry unsuitable assumptions or produce a wrong answer.
 
 ## Keep the boundary small
 
 FLOW specifies the package and finite invocation boundary.
-The method owns its procedure, and its runtime owns the program or graph advancing that work.
+The method owns its procedure. Its runtime advances the program or graph that performs the work.
 The host supplies execution support and authorized powers.
 The application decides what the result means for its users.
 

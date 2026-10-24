@@ -23,6 +23,7 @@ Check [Hosts, runtimes, and SDKs](../reference/support.md) before selecting one.
 
 ## Create the method
 
+Choose a directory outside the first tutorial's project.
 Create a separate project and method:
 
 ```sh
@@ -121,7 +122,7 @@ The handler publishes through the endpoint supplied in `run.channels.progress`.
 The CLI consumes concurrently, so the producer can advance while its receiver waits for messages.
 
 Selected-channel machine output is newline-delimited JSON, rather than a single result object.
-Its records have this order for this one-channel example:
+For this one-channel example, records appear in this order:
 
 | Record | Meaning |
 | --- | --- |

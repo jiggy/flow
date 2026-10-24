@@ -5,12 +5,11 @@ description: Give instructions a callable input and result, then run them throug
 
 # Write a Flow in Markdown
 
-A `FLOW.md` packages instructions as a method another program can call.
+A `FLOW.md` file packages instructions as a method another program can call.
 The host's Agent interprets those instructions and returns an outcome with data.
 Code and Markdown methods expose the same caller-facing boundary.
 
-This guide uses an illustrative request classifier.
-It suggests a support queue from a supplied message.
+The illustrative classifier suggests a support queue from a supplied message.
 The application decides whether to use that suggestion.
 
 ## What you need
@@ -26,6 +25,7 @@ The [support reference](../reference/support.md) distinguishes the standard from
 
 ## Write the instructions
 
+Choose a directory outside the first tutorial's project.
 Create a Jig project with an Agent:
 
 ```sh
@@ -82,7 +82,7 @@ For this message, the expected method result is:
 
 The host's response also reports execution status and diagnostics.
 The Agent chooses the queue, so test its answer against the task's criteria.
-The interpreter checks the result envelope, while your application judges the suggestion.
+The interpreter checks the result envelope. Your application judges the suggestion.
 The timeout bounds the invocation, its dependencies, and cleanup.
 
 ## Make the instructions yours

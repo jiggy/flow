@@ -1,6 +1,15 @@
+---
+title: FLOW JSON/0 value model
+description: Portable JSON syntax, Unicode, numbers, equality, and value limits.
+---
+
 <!-- Generated from docs/flow/spec/json-values.md. Edit the source, then run just sync-skills. -->
 
+
 # FLOW JSON/0 value model
+
+> **Reader guide (non-normative).** Read this specification when implementing portable values or investigating a cross-language validation difference.
+> For application checks, follow [Validate inputs and results](../build/validation.md). See [Schema/0](schema-files.md) for schema declarations.
 
 FLOW uses JSON as a bounded cross-language value format. JSON/0 fixes the
 parts which ordinary host parsers otherwise disagree about; it is not a new
