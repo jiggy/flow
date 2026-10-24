@@ -16,7 +16,7 @@ head:
       ><img src="/mark.svg" alt="" width="29" height="29" /><span>FLOW</span></a
     >
     <div class="nav-links">
-      <a href="#why-flow">Explore</a><a href="/guide/overview">Docs</a
+      <a href="#why-flow">Explore</a><a href="/start/">Docs</a
       ><a class="nav-github" href="https://github.com/jiggy/flow" aria-label="FLOW on GitHub"
         ><img src="/home/assets/brands/github.svg" width="19" height="19" alt="" /><span
           class="nav-github-label"
@@ -24,7 +24,7 @@ head:
         ></a
       >
     </div>
-    <a class="nav-start" href="/guide/start">Start building <span aria-hidden="true">↗</span></a>
+    <a class="nav-start" href="/start/run">Start building <span aria-hidden="true">↗</span></a>
   </nav>
 </header>
 <main id="main">
@@ -50,7 +50,7 @@ head:
     </p>
     <div class="actions">
       <a class="button primary" href="#why-flow">Meet FLOW <span aria-hidden="true">↓</span></a
-      ><a class="button secondary" href="/guide/understand"
+      ><a class="button secondary" href="/understand/"
         >Read the proposal <span aria-hidden="true">↗</span></a
       >
     </div>
@@ -167,7 +167,7 @@ head:
             Call a method when a file arrives. Pass its result to checks, review, or the next task.
           </p>
           <p class="story-payoff">The same contact mapper can power a step in a larger process.</p>
-          <a class="text-link" href="/guide/understand#let-capability-build-on-capability"
+          <a class="text-link" href="/understand/"
             >Build with small methods <span aria-hidden="true">↗</span></a
           >
         </div>
@@ -546,7 +546,7 @@ head:
     </div>
     <p class="comparison-note">
       Existing Skills may need adaptation. FLOW requires a compatible host.
-      <a href="/guide/skills">Check compatibility <span aria-hidden="true">↗</span></a>
+      <a href="/build/skills">Check compatibility <span aria-hidden="true">↗</span></a>
     </p>
   </section>
 
@@ -571,7 +571,7 @@ head:
             Keep instructions in a readable <code>FLOW.md</code>. Add resources or optional
             contracts as the method grows.
           </p>
-          <a class="text-link" href="/guide/skills"
+          <a class="text-link" href="/build/skills"
             >From SKILL.md to FLOW <span aria-hidden="true">↗</span></a
           >
         </div>
@@ -612,7 +612,7 @@ head:
             Use code, prompt instructions, or agents. Your application calls each through the same
             interface.
           </p>
-          <a class="text-link" href="/guide/understand"
+          <a class="text-link" href="/understand/"
             >Explore the common interface <span aria-hidden="true">↗</span></a
           >
         </div>
@@ -658,7 +658,7 @@ head:
             Give each method one clear job. Combine specialists into a capability you can understand
             and improve.
           </p>
-          <a class="text-link" href="/guide/understand#let-capability-build-on-capability"
+          <a class="text-link" href="/understand/"
             >See how capability compounds <span aria-hidden="true">↗</span></a
           >
         </div>
@@ -739,7 +739,7 @@ head:
       <p class="runtime-principle">
         The extension is open. FLOW treats them equally.<br />Each host chooses what it can run.
       </p>
-      <a class="text-link" href="/guide/runtimes"
+      <a class="text-link" href="/reference/support"
         >Explore the runtime model <span aria-hidden="true">↗</span></a
       >
     </div>
@@ -856,7 +856,7 @@ head:
           Review what your Skill needs. Adapt it into a <code>FLOW.md</code>, or choose code when
           the procedure calls for it.
         </p>
-        <a href="/guide/skills">Bring a Skill to FLOW <span aria-hidden="true">↗</span></a>
+        <a href="/build/skills">Bring a Skill to FLOW <span aria-hidden="true">↗</span></a>
       </article>
       <article>
         <span class="start-number">02</span>
@@ -876,7 +876,7 @@ head:
           Call other methods. Add optional contracts when collaborators need exact inputs, results,
           or channels.
         </p>
-        <a href="/guide/platforms">Build a host or integration <span aria-hidden="true">↗</span></a>
+        <a href="/implement/">Build a host or integration <span aria-hidden="true">↗</span></a>
       </article>
     </div>
   </section>
@@ -1003,7 +1003,7 @@ head:
             <path d="M4 12 12 4M4 4h8v8" /></svg
         ></a>
       </div>
-      <a class="host-integration-link" href="/guide/platforms"
+      <a class="host-integration-link" href="/implement/"
         >Build an integration with the host guide <span aria-hidden="true">↗</span></a
       >
     </div>
@@ -1020,7 +1020,7 @@ head:
         <p>
           Simple instruction-based Skills can become Markdown Flows when their package and
           requirements fit the runtime. Scripts, tools, resources, and session assumptions may need
-          adaptation. <a href="/guide/skills">Read the compatibility guide ↗</a>
+          adaptation. <a href="/build/skills">Read the compatibility guide ↗</a>
         </p>
       </details>
       <details>
@@ -1028,7 +1028,7 @@ head:
         <p>
           Your method owns its procedure and internal orchestration. A compatible host supplies
           runtime support, providers, credentials, powers, and policy. FLOW defines the shared
-          package and invocation boundary. <a href="/guide/concepts">Explore the concepts ↗</a>
+          package and invocation boundary. <a href="/reference/glossary">Explore the concepts ↗</a>
         </p>
       </details>
       <details>
@@ -1047,7 +1047,7 @@ head:
         <p>
           FLOW is in public alpha. Specifications and SDKs may evolve. Jig is the first supporting
           host. FLOW is runtime agnostic; each host determines which implementations it can execute.
-          <a href="/guide/runtimes">Check runtime support ↗</a>
+          <a href="/reference/support">Check runtime support ↗</a>
         </p>
       </details>
     </div>
@@ -1060,7 +1060,7 @@ head:
       <h2>Your next project<br />can start ahead.</h2>
       <p>Build on a method you already use.<br />Give the next builder something to build on.</p>
       <div class="actions">
-        <a class="button primary" href="/guide/skills"
+        <a class="button primary" href="/build/skills"
           >Bring a Skill to FLOW <span aria-hidden="true">↗</span></a
         ><a class="button secondary" href="https://github.com/jiggy/flow"
           >Build with us on GitHub <span aria-hidden="true">↗</span></a
@@ -1081,13 +1081,13 @@ head:
     <div class="footer-links">
       <div>
         <h3>Build</h3>
-        <a href="/guide/start">Get started</a><a href="/guide/skills">Bring a Skill</a
-        ><a href="/guide/platforms">Build a host</a>
+        <a href="/start/run">Get started</a><a href="/build/skills">Bring a Skill</a
+        ><a href="/implement/">Build a host</a>
       </div>
       <div>
         <h3>Explore</h3>
-        <a href="/guide/overview">Documentation</a><a href="/guide/">Specifications</a
-        ><a href="/guide/for-agents">For agents</a>
+        <a href="/start/">Documentation</a><a href="/reference/">Specifications</a
+        ><a href="/for-agents">For agents</a>
       </div>
       <div>
         <h3>Open by design</h3>

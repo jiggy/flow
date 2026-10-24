@@ -10,6 +10,7 @@ Use explicit inputs. Build artifacts into fresh destinations. Preserve exact arc
 Build candidates from clean Git source. Never rebuild during publication.
 
 Site assembly publishes FLOW pages, schemas, fonts, and indexed Markdown together.
+Its route inventory covers first use, authoring, explanation, implementation, and reference while preserving exact machine mappings.
 `generate-social-assets.py` exports branded SVG and PNG banners from repository assets using pinned inline dependencies.
 Keep its exports deterministic and committed. Site builds consume them without running the optional exporter.
 

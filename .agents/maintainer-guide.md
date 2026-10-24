@@ -27,7 +27,10 @@ Preserve notices and earlier grants under [the licensing map](../LICENSES.md).
 
 ## Write clear technical English
 
-Use active voice, precise actors, and one instruction per sentence.
+Use active voice, concrete language, precise actors, and one instruction per sentence.
+Develop one topic per paragraph and keep related words together.
+Cut needless words and repeated introductions. Put the useful action or result in clear view.
+
 Keep instructions within 20 words and descriptions within 25 words.
 Keep each paragraph within six sentences. Avoid prose semicolons.
 Preserve all requirements, uncertainty, and public identifiers.

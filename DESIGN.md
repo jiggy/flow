@@ -7,7 +7,7 @@ These defaults describe the visual language implemented by the website.
 The [brand guide](.agents/brand.md) owns names, emblems, and lockup proportions.
 The [communication guide](.agents/communication.md) owns positioning and narrative.
 The [product compass](.agents/product-compass.md) governs both.
-For package architecture, use [Design modular Flows](docs/flow/guide/design.md).
+For package architecture, use [Design reusable Flows](docs/flow/build/design.md).
 
 ## Design principles
 
@@ -56,6 +56,12 @@ The homepage and documentation serve different reading tasks:
 | --- | --- |
 | Homepage | Light canvas, OpenRunde, lavender actions, periwinkle atmosphere, expressive examples, and generous spacing. |
 | Documentation | Manrope, native Rspress navigation and search, light/dark themes, and a denser reading layout. |
+
+Documentation follows five areas: Start here, Build, Understand, Implement FLOW, and Reference.
+Give each area a focused sidebar and keep agent access available as a utility.
+Lead tutorials with their useful result and execution prerequisites.
+Use task cards at entrypoints, then quiet reading pages with highlighted code and a clear outline.
+Keep evidence reports distinct from guides and normative specifications.
 
 Documentation uses FLOW blue for links and active controls: `#0369A1` in light mode and `#38BDF8` in dark mode.
 Keep homepage styles scoped to `.flow-home` so they cannot restyle guides or specifications.

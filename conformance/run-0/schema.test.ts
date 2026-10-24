@@ -59,9 +59,9 @@ describe('Run/0 message schemas', () => {
       'flow/call': 'flowCallRequest',
       'request/cancel': 'requestCancelNotification',
     }
-    for (const guide of ['platforms', 'runtimes']) {
+    for (const guide of ['host', 'sdk', 'acp']) {
       const source = readFileSync(
-        new URL(`../../docs/flow/guide/${guide}.md`, import.meta.url),
+        new URL(`../../docs/flow/implement/${guide}.md`, import.meta.url),
         'utf8',
       )
       let messages = 0

@@ -2,20 +2,21 @@
 
 # FLOW
 
-**Capability compounding through independently reusable methods.**
+Package a useful procedure as a method your application can call.
+A Flow receives input and returns an outcome with data, whether its implementation uses code, Agent instructions, or both.
+FLOW defines that shared boundary. A compatible host supplies execution and local powers.
 
-FLOW is the independent standard for packaging and invoking reusable procedures.
-A Flow can use code, Agent judgment, or both behind one invocation contract.
-Hosts supply execution policy and powers.
-
-- [Start building](https://flow.jig.md/guide/start)
+- [Run a Flow](https://flow.jig.md/start/run) and [call it from your application](https://flow.jig.md/start/application)
+- [Bring a Skill](https://flow.jig.md/build/skills) or [write a method](https://flow.jig.md/build/)
+- [Compose methods](https://flow.jig.md/build/compose) and [design reusable Flows](https://flow.jig.md/build/design)
 - [TypeScript SDK](packages/flow-sdk/README.md) and [Python SDK](packages/jiggy-flow/README.md)
-- [Specifications](docs/flow/spec/run-protocol.md) and [conformance evidence](conformance/AGENTS.md)
+- [Implement FLOW](https://flow.jig.md/implement/), [find an exact contract](https://flow.jig.md/reference/), or inspect [conformance evidence](conformance/run-0/README.md)
 - [Independent contract authoring](packages/flow-authoring/README.md)
 - [Governance](Governance.md), [working-group scope](Scope.md), and [licenses](LICENSES.md)
 
 [Jig](https://github.com/jiggy/jig) is one FLOW host.
-Jig owns its host policy, flavored Flows, reporting profiles, and applications.
+Check [host and runtime support](https://flow.jig.md/reference/support) before choosing an execution path.
+FLOW is a public alpha, and its specifications and APIs may change.
 
 ## Development
 

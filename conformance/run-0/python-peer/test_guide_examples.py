@@ -1,4 +1,4 @@
-"""Execute the public platform-guide host snippet against controlled peers."""
+"""Execute the public implementation-guide host snippet against controlled peers."""
 
 import json
 import os
@@ -12,7 +12,7 @@ import unittest
 
 
 REPOSITORY = Path(__file__).resolve().parents[3]
-GUIDE = REPOSITORY / "docs/flow/guide/platforms.md"
+GUIDE = REPOSITORY / "docs/flow/implement/verify.md"
 NODE = shutil.which("node")
 
 # The fixtures validate the host's actual wire requests. They deliberately do

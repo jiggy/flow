@@ -2,88 +2,63 @@
 
 ## Purpose
 
-Owns FLOW's independently implementable package, value, process-protocol, SDK,
-and invocation-contract semantics.
+Help readers use, adapt, compose, and implement independently reusable methods.
+Keep exact portable meaning owned by the specifications.
 
 ## Ownership
 
-- `spec/` owns normative FLOW specifications and machine companions.
-- `index.md` and `guide/` explain and navigate the current portable surface.
-- `guide/design.md` owns opinionated authoring and review guidance for naming, decomposition, composition, portability, and local reasoning.
-  Its design recommendations do not add normative requirements.
-- `guide/python.md` and `guide/typescript.md` own SDK installation and local
-  protocol tutorials. `guide/runtimes.md` owns the language and runtime support
-  matrix and new SDK implementation guidance. SDK availability stays independent
-  of host support.
-- `guide/markdown.md` owns Markdown authoring, composition and outcome examples.
-  `guide/skills.md` explains current Skill compatibility and execution gaps.
-  `guide/platforms.md` owns host and platform integration across ACP and coding
-  agents, including the runnable trusted-code caller/child test-peer exercise.
-- `guide/*.diagram.json` and matching SVGs own explanatory diagrams alongside
-  their guides. The shared diagram workflow is in `docs/AGENTS.md`.
-- Admission, containment, permissions, persistence, providers, Agent policy, and
-  routing belong to a host such as Jig, not FLOW.
-
-- `index.md` owns the landing-page narrative and semantic content.
-  It introduces FLOW through useful Skills, applications, comparison, design
-  principles, a billing example, and first use. All story tabs remain in
-  generated Markdown. Presentation and interactions belong to
-  `site/theme/home.tsx` and `site/home.css`. Keep supported hosts separate from
-  projects invited to add support.
-- `guide/understand.md` develops the common calling boundary through contact
-  import on Jig. Keep host examples distinct from portable requirements.
-- `guide/start.mdx` routes authors to complete SDK or host tutorials without
-  treating a source candidate as a published install. Its native language tabs
-  preserve both examples in the generated `/guide/start.md` resource.
-
-- `guide/overview.md` owns task-based discovery. `guide/for-agents.md` owns
-  machine-readable entry paths and FLOW skill installation. `guide/concepts.md` owns
-  introductory vocabulary and common questions. These guides defer to the linked exact contracts.
+- `index.md` owns the website's landing-page narrative and semantic content.
+  Presentation and interactions belong to `site/home.css` and `site/theme/home.tsx`.
+- `start/` owns task discovery, the first supported run, and application consumption.
+- `build/` owns authoring, Skill adaptation, composition, outcomes, validation, channels, and design guidance.
+- `understand/` explains the shared calling boundary, hosts, runtimes, channels, and optional contracts.
+- `implement/` owns host, SDK, runtime, and ACP integration guides and conformance exercises.
+- `reference/` owns API lookup, recipes, support, compatibility, glossary, and the specification navigator.
+- `evidence/` owns bounded experiment reports and their limits.
+- `spec/` owns normative package, value, protocol, SDK, and interoperability semantics and machine companions.
+- `for-agents.md` owns Markdown entrypoints and FLOW skill installation.
+- Guide diagrams remain beside their owning prose and retain source JSON and exported SVG together.
 
 ## Local Contracts
 
-- Keep FLOW host-neutral. A host example cannot turn a Jig implementation choice
-  into a portable requirement.
-- Present Jig by the same support and evidence criteria as other FLOW hosts.
-  Adopter cards explain capabilities without assuming a shared project history.
-  Stewardship information remains in its own supporting material.
+- Keep FLOW host-neutral. A host tutorial illustrates its own execution and authority model.
+- State actual supporting hosts and qualified implementations separately from SDK availability.
+- Exact requirements stay in `spec/`. Guides and examples never become a second conformance source.
 - FLOW Run/0 owns wire behavior. Run SDK/0 defers to it when they differ.
-- Explanatory pages are not a second conformance source.
-- [Installable skills](../../skills/AGENTS.md) reuse canonical documentation through CI synchronization.
-- Explain `flow/run` as component entry and `flow/call` as dependency
-  invocation. Every launched component, including a child, receives `flow/run`.
-  Ordinary authors use one `handle()`/context `call()` API.
-- The public origin is `https://flow.jig.md`. Route changes must reconcile the
-  FLOW site navigation, `llms.txt`, and assembly mappings.
+- Explain `flow/run` as component entry and `flow/call` as dependency invocation.
+  Every launched component receives `flow/run`, including a launched dependency.
+- Authors use `handle()` and context `call()` through the same SDK.
+- Hosts own admission, containment, permissions, persistence, providers, Agent policy, execution support, and routing.
+- The public origin is `https://flow.jig.md`.
+  Route changes reconcile navigation, homepage links, assembly inventories, Markdown publication, and skill references.
+- Preserve exact machine-resource URLs and bytes when reorganizing explanatory pages.
+- Installable skills reuse canonical sources through [reference synchronization](../../skills/AGENTS.md).
 
 ## Work Guidance
 
-- Label examples explicitly and state the assumptions behind their design choices.
-- Lead introductions with the applications readers can build by composing
-  executable methods. Keep stewardship and governance in supporting reference
-  material, after the technical value is clear.
-- Make public-alpha status prominent and concise: specifications and APIs may
-  change, and early users can help shape them. Avoid lengthy compatibility
-  declarations in introductory copy.
-- Skill compatibility evidence separates parsing, execution qualification, task
-  achievement and constraint preservation. Identify synthetic tests, live
-  interpreter experiments and installed-host checks separately. `done` alone
-  proves neither a completed task nor compliance with prose instructions.
-- Keep Python installation guidance independent of the current alpha number:
-  link to the PyPI project and use `--pre`. Exact versions belong in manifests
-  and immutable release records.
-- Prefer the smallest portable boundary that permits an independent host and
-  component to interoperate.
+- Lead the learning path from running a method to calling, adapting, and composing it.
+- Keep the first-use example connected and explicitly illustrative.
+- Separate routine authoring from implementing the standard and looking up exact requirements.
+- State public-alpha status concisely and link prerequisites where a task needs them.
+- Distinguish parsing, execution qualification, task achievement, and constraint preservation.
+- Label synthetic tests, live interpreter experiments, and installed-host evidence separately.
+  A `done` outcome alone establishes neither a correct answer nor compliance with instructions.
+- Keep Python installation prose independent of the current alpha number.
+  Link to PyPI and use `--pre`. Exact versions belong in manifests and release records.
 
 ## Verification
 
-- Build the FLOW site into a fresh directory with `scripts/build-site.sh`.
-- `bun test conformance/run-0/schema.test.ts` checks implementer-guide wire
-  examples against the normative schemas. The Python conformance tests execute
-  the platform guide's host snippet against controlled peer fixtures, including
-  invalid results and failed process completion.
+- Run `bun scripts/check-docs.ts` for metadata, links, anchors, and technical prose.
+- Build a fresh site with `scripts/build-site.sh flow .tmp/flow-site`.
+- Run guide wire-schema checks and the exact-host-snippet Python regression tests after moving implementer examples.
+- Synchronize installed skill references after changing their canonical sources.
 
 ## Child DOX Index
 
-- [spec/AGENTS.md](spec/AGENTS.md) — Normative FLOW specifications and their
-  machine-readable schemas and examples.
+- [start/AGENTS.md](start/AGENTS.md) — First use and application consumption.
+- [build/AGENTS.md](build/AGENTS.md) — Authoring, composition, and design.
+- [understand/AGENTS.md](understand/AGENTS.md) — Explanations and mental models.
+- [implement/AGENTS.md](implement/AGENTS.md) — Host, SDK, runtime, and agent integration.
+- [reference/AGENTS.md](reference/AGENTS.md) — APIs, recipes, support, and exact-contract navigation.
+- [evidence/AGENTS.md](evidence/AGENTS.md) — Bounded experiments and their limits.
+- [spec/AGENTS.md](spec/AGENTS.md) — Normative specifications and machine companions.
