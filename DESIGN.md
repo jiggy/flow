@@ -145,7 +145,7 @@ Simplify decorative details before sacrificing readable content.
 | Navigation | Compact dark pill, monochrome FLOW identity, clear destinations, and an official GitHub mark. |
 | Hero | One recognizable starting point, one useful promise, and a clear next action. |
 | Story tabs | Visible tabs plus previous/next controls, with one coherent example across contexts. |
-| Reuse example | One unchanged method across apps, with replaceable dependencies; explain contracts after the benefit is visible. |
+| Reuse example | Show the same method across apps at a glance. Explain contracts briefly beneath the visual. |
 | Feature cards | One benefit and one simple visual, connected by an accent colour. |
 | Comparison | Short capability rows, check/dash symbols, and a concise legend explaining their meaning. |
 | Runtime example | An open `FLOW.<ext>` boundary, with named languages presented as examples. |

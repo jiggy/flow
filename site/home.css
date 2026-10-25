@@ -1153,263 +1153,165 @@ html:root:has(.flow-home) {
   margin-inline: auto;
 }
 .flow-home .reuse-section {
-  padding-top: 25px;
-  padding-bottom: 70px;
+  padding: 25px 0 65px;
+}
+.flow-home .reuse-section .section-intro {
+  margin-bottom: 15px;
+}
+.flow-home .reuse-section h2 {
+  font-size: clamp(34px, 4.1vw, 48px);
+  line-height: 1.14;
+}
+.flow-home .reuse-section h2 em {
+  color: #7063c8;
+  font-style: normal;
 }
 .flow-home .reuse-section .section-intro > p {
-  max-width: 560px;
+  max-width: 420px;
+  font-size: 17px;
 }
-.flow-home .reuse-example {
-  padding: 22px 30px 0;
-  border: 1px solid #eceaf3;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #f7f6fc, #f7f8fa);
+.flow-home .reuse-gallery {
+  margin: 0;
+  padding: 40px 34px 18px;
+  border-radius: 32px;
+  background: radial-gradient(ellipse at 50% 70%, #ebe6fcaa, transparent 70%),
+    radial-gradient(ellipse at 12% 45%, #eaf5ed99, transparent 45%),
+    radial-gradient(ellipse at 88% 45%, #fff0e999, transparent 45%);
 }
-.flow-home .reuse-example-top {
+.flow-home .reuse-apps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto 32px;
+}
+.flow-home .reuse-app {
+  min-width: 0;
+  border: 1px solid #e9e5ef;
+  border-radius: 17px;
+  background: #ffffffed;
+  box-shadow: 0 14px 32px #3d31520b, 0 3px 8px #3d315204;
+}
+.flow-home .reuse-notes {
+  --app-accent: #387451;
+  --app-tint: #eaf4ee;
+  transform: rotate(-4deg) translateY(9px);
+}
+.flow-home .reuse-inbox {
+  --app-accent: #aa634b;
+  --app-tint: #fbede6;
+  transform: translateY(-9px);
+}
+.flow-home .reuse-research {
+  --app-accent: #506fa7;
+  --app-tint: #eaf0fa;
+  transform: rotate(4deg) translateY(9px);
+}
+.flow-home .reuse-app-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 22px;
-  color: #686374;
+  gap: 10px;
+  padding: 19px 20px;
+  border-bottom: 1px solid #f0edf5;
+}
+.flow-home .reuse-app-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--app-accent);
+  background: var(--app-tint);
+}
+.flow-home .reuse-app-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.flow-home .reuse-app h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+.flow-home .reuse-document {
+  padding: 21px 23px 7px;
+  height: 124px;
+}
+.flow-home .reuse-document > span {
+  display: block;
+  color: #7c7785;
   font-size: 13px;
+  margin-bottom: 13px;
 }
-.flow-home .reuse-switcher {
-  display: flex;
-  padding: 4px;
-  gap: 3px;
-  border: 1px solid #e4e0ee;
-  border-radius: 99px;
-  background: #efedf5;
+.flow-home .reuse-document i {
+  display: block;
+  height: 5px;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  background: #f0edf4;
 }
-.flow-home .reuse-switcher button {
-  padding: 9px 17px;
-  min-height: 44px;
-  border: 0;
-  border-radius: 99px;
-  background: transparent;
-  color: #686374;
-  font-size: 13px;
-}
-.flow-home .reuse-switcher button[aria-pressed="true"] {
-  background: #fff;
-  color: #51439b;
-  box-shadow: 0 2px 6px #34265a0d;
-}
-.flow-home .reuse-switcher button:hover {
-  color: #463985;
-}
-.flow-home .reuse-app-window {
-  overflow: hidden;
-  border: 1px solid #e4e1ec;
-  border-radius: 15px;
-  background: #fff;
-  box-shadow: 0 8px 28px #30244c05;
-}
-.flow-home .reuse-app-top,
-.flow-home .reuse-app-top > span:first-child {
+.flow-home .reuse-document i:nth-of-type(2) { width: 85%; }
+.flow-home .reuse-document i:nth-of-type(3) { width: 93%; }
+.flow-home .reuse-document i:nth-of-type(4) { width: 62%; background: var(--app-tint); }
+.flow-home .reuse-shared-flow {
   display: flex;
   align-items: center;
   gap: 9px;
+  margin: 15px 19px 20px;
+  padding: 12px 13px;
+  border: 1px solid #ddd3f0;
+  border-radius: 11px;
+  background: #f0eafb;
+  color: #62508c;
 }
-.flow-home .reuse-app-top {
-  justify-content: space-between;
-  padding: 15px 22px;
-  border-bottom: 1px solid #eeecf3;
-  font-size: 14px;
-  color: #5d5968;
-}
-.flow-home .reuse-app-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #9c91d6;
-}
-.flow-home .reuse-window-dots {
-  font-size: 22px;
-  letter-spacing: 2px;
-  line-height: 1;
-  color: #8c8799;
-}
-.flow-home .reuse-connections {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 148px minmax(0, 1fr);
-  align-items: center;
-  padding: 38px;
-}
-.flow-home .reuse-method,
-.flow-home .reuse-provider {
-  min-width: 0;
-  min-height: 225px;
-  padding: 25px;
-  border: 1px solid #ded8f0;
-  border-radius: 15px;
-}
-.flow-home .reuse-method {
-  position: relative;
-  background: #f3f0fc;
-  box-shadow: 0 5px 18px #6454940a;
-}
-.flow-home .reuse-flow-label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 15px;
-  color: #61508f;
-  font-size: 13px;
-  font-weight: 600;
-}
-.flow-home .reuse-flow-label img {
-  width: 21px;
-  height: 21px;
-}
-.flow-home .reuse-method h3,
-.flow-home .reuse-provider h3 {
-  margin: 0 0 9px;
-  font-size: 21px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.7px;
-}
-.flow-home .reuse-method p,
-.flow-home .reuse-provider p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #686374;
-}
-.flow-home .reuse-unchanged {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 20px;
-  border: 1px solid #d9d0ef;
-  border-radius: 99px;
-  padding: 4px 10px;
-  color: #62518c;
-  background: #fff9;
-  font-size: 13px;
-}
-.flow-home .reuse-connection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 1px;
-  background: #c7bedf;
-}
-.flow-home .reuse-connection::before,
-.flow-home .reuse-connection::after {
-  content: "";
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border: 1px solid #b0a3cf;
-  border-radius: 50%;
-  background: #fff;
-}
-.flow-home .reuse-connection::before { left: -3px; }
-.flow-home .reuse-connection::after { right: -3px; }
-.flow-home .reuse-connection > span {
-  margin-top: -33px;
-  color: #756887;
-  font-size: 13px;
-  white-space: nowrap;
-}
-.flow-home .reuse-provider {
-  border-color: #e5e8eb;
-  background: #fafbfc;
-}
-.flow-home .reuse-provider-icon {
-  display: flex;
-  width: 35px;
-  height: 35px;
-  margin-bottom: 9px;
-  color: #6080a6;
-}
-.flow-home .reuse-provider-icon svg {
-  width: 32px;
-  height: 32px;
-  stroke: currentColor;
-  stroke-width: 1.5;
-}
-.flow-home .reuse-provider-label {
-  display: block;
-  margin-bottom: 7px;
-  color: #66788f;
-  font-size: 13px;
-}
-.flow-home .reuse-caption {
-  margin: 18px 0;
-  color: #73687f;
+.flow-home .reuse-shared-flow img { flex-shrink: 0; width: 24px; height: 24px; }
+.flow-home .reuse-shared-flow strong { font-size: 16px; font-weight: 500; }
+.flow-home .reuse-shared-flow > span { margin-left: auto; font-size: 12px; color: #766590; }
+.flow-home .reuse-gallery figcaption { text-align: center; color: #766c84; font-size: 14px; }
+.flow-home .reuse-contract-line {
+  margin: 7px 0 0;
   text-align: center;
   font-size: 14px;
+  color: #746c80;
 }
-.flow-home .reuse-explanation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  padding: 28px 0 0;
-}
-.flow-home .reuse-explanation h3 {
-  margin: 0 0 9px;
-  font-size: 20px;
-  letter-spacing: -0.6px;
-  font-weight: 500;
-}
-.flow-home .reuse-explanation p {
-  max-width: 640px;
-  margin: 0;
-  color: #686374;
-  font-size: 15px;
-}
-.flow-home .reuse-explanation a {
-  flex-shrink: 0;
-  color: #62528e;
-}
-.flow-home .reuse-contract-note {
-  max-width: 680px;
-  margin: 14px 0 0;
-  color: #74707c;
-  font-size: 13px;
-}
-.flow-home .reuse-contract-note strong {
-  font-weight: 500;
-}
-.flow-home .reuse-section [hidden] {
-  display: none;
+.flow-home .reuse-contract-line a {
+  color: #61508c;
+  white-space: nowrap;
+  margin-left: 5px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 @media (max-width: 850px) {
-  .flow-home .reuse-example { padding: 20px 20px 0; }
-  .flow-home .reuse-connections { padding: 28px 22px; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr); }
-  .flow-home .reuse-method,
-  .flow-home .reuse-provider { padding: 21px; min-height: 235px; }
-  .flow-home .reuse-method h3,
-  .flow-home .reuse-provider h3 { font-size: 19px; }
-  .flow-home .reuse-explanation { gap: 22px; }
+  .flow-home .reuse-gallery { padding-inline: 18px; }
+  .flow-home .reuse-apps { gap: 17px; }
+  .flow-home .reuse-app-header { padding: 16px 14px; gap: 8px; }
+  .flow-home .reuse-app-icon { width: 28px; height: 28px; border-radius: 8px; }
+  .flow-home .reuse-app h3 { font-size: 14px; }
+  .flow-home .reuse-document { padding-inline: 17px; }
+  .flow-home .reuse-shared-flow { margin-inline: 13px; }
+  .flow-home .reuse-shared-flow > span { display: none; }
 }
 @media (max-width: 640px) {
-  .flow-home .reuse-section { padding-top: 5px; padding-bottom: 55px; }
-  .flow-home .reuse-section .section-intro { margin-bottom: 26px; }
-  .flow-home .reuse-example { padding: 16px 13px 0; border-radius: 18px; }
-  .flow-home .reuse-example-top { flex-direction: column; gap: 12px; margin-bottom: 16px; }
-  .flow-home .reuse-switcher { width: 100%; }
-  .flow-home .reuse-switcher button { flex: 1; padding: 9px 8px; }
-  .flow-home .reuse-app-top { padding: 13px 16px; font-size: 13px; }
-  .flow-home .reuse-connections { grid-template-columns: minmax(0, 1fr); padding: 23px; }
-  .flow-home .reuse-method,
-  .flow-home .reuse-provider { min-height: 0; padding: 22px; }
-  .flow-home .reuse-method h3,
-  .flow-home .reuse-provider h3 { font-size: 21px; }
-  .flow-home .reuse-connection { width: 1px; height: 62px; justify-self: center; }
-  .flow-home .reuse-connection::before { left: -2.5px; top: -3px; }
-  .flow-home .reuse-connection::after { left: -2.5px; right: auto; bottom: -3px; }
-  .flow-home .reuse-connection > span { margin: 0 0 0 123px; padding: 4px 0; background: #fff; }
-  .flow-home .reuse-caption { margin: 16px 0; }
-  .flow-home .reuse-explanation { display: block; padding-top: 24px; }
-  .flow-home .reuse-explanation a { display: inline-flex; margin-top: 16px; }
-  .flow-home .reuse-contract-note { margin-top: 16px; }
+  .flow-home .reuse-section { padding-top: 5px; padding-bottom: 48px; }
+  .flow-home .reuse-section .section-intro > p { font-size: 15px; max-width: 290px; }
+  .flow-home .reuse-gallery { padding: 20px 0 14px; }
+  .flow-home .reuse-apps { grid-template-columns: minmax(0, 1fr); gap: 13px; max-width: 420px; margin-bottom: 21px; }
+  .flow-home .reuse-app { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; gap: 8px; transform: none; border-radius: 14px; }
+  .flow-home .reuse-app-header { padding: 0; border: 0; min-width: 0; }
+  .flow-home .reuse-app-icon { width: 26px; height: 26px; }
+  .flow-home .reuse-app h3 { font-size: 14px; line-height: 1.4; }
+  .flow-home .reuse-document { display: none; }
+  .flow-home .reuse-shared-flow { flex-shrink: 0; margin: 0; padding: 9px; gap: 7px; border-radius: 9px; }
+  .flow-home .reuse-shared-flow img { width: 18px; height: 18px; }
+  .flow-home .reuse-shared-flow strong { font-size: 14px; }
+  .flow-home .reuse-gallery figcaption { font-size: 13px; }
+  .flow-home .reuse-contract-line { max-width: 330px; margin: 0 auto; line-height: 1.8; }
 }
 .flow-home .comparison-section {
   padding-top: 22px;
