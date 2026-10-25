@@ -310,6 +310,65 @@ head:
     </article>
   </section>
 
+  <section class="reuse-section wrap" id="reuse" aria-labelledby="reuse-title">
+    <div class="section-intro">
+      <span class="section-tag">Useful beyond one app</span>
+      <h2 id="reuse-title">Bring the same FLOW<br />to your next app.</h2>
+      <p>
+        Keep the method you already rely on. Use it in another app, workflow, or agent
+        without rebuilding it for each one.
+      </p>
+    </div>
+    <div class="reuse-example" aria-label="An illustrative example of reuse across apps">
+      <div class="reuse-example-top">
+        <span>An example of reuse</span>
+        <div class="reuse-switcher" role="group" aria-label="Choose an example app">
+          <button type="button" data-reuse-app="storefront" aria-pressed="true">Storefront</button>
+          <button type="button" data-reuse-app="operations" aria-pressed="false">Operations app</button>
+        </div>
+      </div>
+      <div class="reuse-app-window">
+        <div class="reuse-app-top">
+          <span><span class="reuse-app-dot" aria-hidden="true"></span><span data-reuse-content="storefront">Your storefront</span><span data-reuse-content="operations" hidden>Your operations app</span></span>
+          <span class="reuse-window-dots" aria-hidden="true">···</span>
+        </div>
+        <div class="reuse-connections">
+          <article class="reuse-method">
+            <span class="reuse-flow-label"><img src="/mark.svg" width="21" height="21" alt="" /> FLOW</span>
+            <h3>Check stock</h3>
+            <p>Decide whether an order can be filled.</p>
+            <span class="reuse-unchanged"><span aria-hidden="true">✓</span> Same FLOW</span>
+          </article>
+          <div class="reuse-connection" aria-hidden="true"><span>Gets stock from</span></div>
+          <article class="reuse-provider">
+            <div data-reuse-content="storefront">
+              <span class="reuse-provider-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><ellipse cx="16" cy="7" rx="10" ry="4" /><path d="M6 7v9c0 2.2 4.5 4 10 4s10-1.8 10-4V7M6 16v9c0 2.2 4.5 4 10 4s10-1.8 10-4v-9" /></svg></span>
+              <span class="reuse-provider-label">Inventory FLOW</span>
+              <h3>From your database</h3>
+              <p>Your storefront’s stock records.</p>
+            </div>
+            <div data-reuse-content="operations" hidden>
+              <span class="reuse-provider-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="22" rx="5" /><path d="m12 12-4 4 4 4m8-8 4 4-4 4m-2-9-4 12" /></svg></span>
+              <span class="reuse-provider-label">Inventory FLOW</span>
+              <h3>From your API</h3>
+              <p>Your operations system’s stock records.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="reuse-caption">Same FLOW. Different apps.</p>
+      <span class="sr-only" id="reuse-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="reuse-explanation">
+      <div>
+        <h3>Contracts make that possible.</h3>
+        <p>A contract defines what a FLOW needs without tying it to one implementation. Each app can connect a compatible FLOW to provide it.</p>
+      </div>
+      <a class="text-link" href="/spec/invocation-contracts">Explore contracts <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="reuse-contract-note">Here, both inventory FLOWs fulfill the same <strong>Inventory lookup</strong> contract. Each app runs on a host that supports its FLOWs.</p>
+  </section>
+
   <section
     class="comparison-section wrap"
     id="skills-comparison"

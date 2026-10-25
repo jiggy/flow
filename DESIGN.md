@@ -31,6 +31,7 @@ Develop the reader's understanding through connected questions:
 | --- | --- |
 | Why should I care? | Useful know-how can become a capability software calls. |
 | How would I use it? | Show a recognizable task inside an application, workflow, or agent. |
+| Can I use it elsewhere? | Show the same method in another app before explaining how contracts enable different connections. |
 | What does FLOW add? | Offer a concise comparison before distinctive features. |
 | How does that work? | Introduce composition, runtime independence, and a concrete example. |
 | What can I do next? | Offer authoring guidance, verified supporting hosts, and integration paths. |
@@ -144,6 +145,7 @@ Simplify decorative details before sacrificing readable content.
 | Navigation | Compact dark pill, monochrome FLOW identity, clear destinations, and an official GitHub mark. |
 | Hero | One recognizable starting point, one useful promise, and a clear next action. |
 | Story tabs | Visible tabs plus previous/next controls, with one coherent example across contexts. |
+| Reuse example | One unchanged method across apps, with replaceable dependencies; explain contracts after the benefit is visible. |
 | Feature cards | One benefit and one simple visual, connected by an accent colour. |
 | Comparison | Short capability rows, check/dash symbols, and a concise legend explaining their meaning. |
 | Runtime example | An open `FLOW.<ext>` boundary, with named languages presented as examples. |

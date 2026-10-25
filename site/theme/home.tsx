@@ -73,6 +73,26 @@ export function FlowHome() {
       )
     }
 
+    const reuseButtons = [...element.querySelectorAll<HTMLButtonElement>('[data-reuse-app]')]
+    const reuseContent = [...element.querySelectorAll<HTMLElement>('[data-reuse-content]')]
+    const reuseStatus = element.querySelector<HTMLElement>('#reuse-status')
+
+    for (const button of reuseButtons) {
+      button.addEventListener(
+        'click',
+        () => {
+          const app = button.dataset.reuseApp
+          for (const other of reuseButtons) other.setAttribute('aria-pressed', String(other === button))
+          for (const content of reuseContent) content.hidden = content.dataset.reuseContent !== app
+          if (reuseStatus) {
+            const source = app === 'operations' ? 'API' : 'database'
+            reuseStatus.textContent = `${button.textContent?.trim()}. Same Check stock FLOW, with inventory from your ${source}.`
+          }
+        },
+        options,
+      )
+    }
+
     // The changing visual text leaves the heading's accessible name stable.
     const phrases = [...element.querySelectorAll<HTMLElement>('.hero-changing > span')]
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
