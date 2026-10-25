@@ -32,7 +32,7 @@ and invocation-contract semantics.
   projects invited to add support.
 
   Establish cross-application reuse before explaining contracts. Keep the reuse
-  example illustrative, with one unchanged method and replaceable dependencies.
+  example illustrative and immediately legible, with the same method across apps.
 - `guide/understand.md` develops the common calling boundary through contact
   import on Jig. Keep host examples distinct from portable requirements.
 - `guide/start.mdx` routes authors to complete SDK or host tutorials without

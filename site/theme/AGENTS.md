@@ -11,8 +11,7 @@ documentation reading experience.
   default documentation layout, context, brand title, and Markdown resource link.
 - `home.tsx` renders canonical homepage content from `docs/flow/index.md`.
   Its scoped effects provide keyboard tabs, previous/next controls, and optional
-  heading transitions. The reuse example switches application context while
-  keeping the method visible. Listeners and timers end when the homepage unmounts.
+  heading transitions. Listeners and timers end when the homepage unmounts.
   Generated Markdown retains every story panel and the complete narrative.
 - `social-head.ts` supplies share-image defaults and each page's public URL.
   Product image data stays in `../flow/social.ts`. Native Rspress retains titles
@@ -67,8 +66,8 @@ documentation reading experience.
 - Prefer the default theme and small extensions over a copied theme.
 - Lead from familiar Skills to application uses, reuse, comparison, design principles,
   a concrete example, and first use.
-- Show reuse before explaining contracts. Keep the method fixed while the
-  example app and its dependency implementation change.
+- Show reuse at a glance before explaining contracts. Repeat one recognizable
+  method across app contexts and keep the mechanism in a short supporting line.
 - Keep story changes manual. Preserve visible tabs, side controls, keyboard
   navigation, and a stable accessible hero heading. Reduced motion keeps one
   heading phrase visible. Heading transitions pause while the page is hidden.

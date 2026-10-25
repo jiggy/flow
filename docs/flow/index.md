@@ -312,61 +312,40 @@ head:
 
   <section class="reuse-section wrap" id="reuse" aria-labelledby="reuse-title">
     <div class="section-intro">
-      <span class="section-tag">Useful beyond one app</span>
-      <h2 id="reuse-title">Bring the same FLOW<br />to your next app.</h2>
-      <p>
-        Keep the method you already rely on. Use it in another app, workflow, or agent
-        without rebuilding it for each one.
-      </p>
+      <span class="section-tag">Start with what works</span>
+      <h2 id="reuse-title">Reuse the FLOW.<br /><em>Skip the rewrite.</em></h2>
+      <p>Use the same method in the next app you build.</p>
     </div>
-    <div class="reuse-example" aria-label="An illustrative example of reuse across apps">
-      <div class="reuse-example-top">
-        <span>An example of reuse</span>
-        <div class="reuse-switcher" role="group" aria-label="Choose an example app">
-          <button type="button" data-reuse-app="storefront" aria-pressed="true">Storefront</button>
-          <button type="button" data-reuse-app="operations" aria-pressed="false">Operations app</button>
-        </div>
+    <figure class="reuse-gallery">
+      <div class="reuse-apps">
+        <article class="reuse-app reuse-notes">
+          <div class="reuse-app-header">
+            <span class="reuse-app-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="8" y="3" width="8" height="12" rx="4" /><path d="M5 11v1a7 7 0 0 0 14 0v-1M12 19v3m-4 0h8" /></svg></span>
+            <h3>Meeting notes</h3>
+          </div>
+          <div class="reuse-document" aria-hidden="true"><span>Weekly catch-up</span><i></i><i></i><i></i><i></i></div>
+          <div class="reuse-shared-flow"><img src="/mark.svg" alt="" width="24" height="24" /><strong>Summarize</strong><span>FLOW</span></div>
+        </article>
+        <article class="reuse-app reuse-inbox">
+          <div class="reuse-app-header">
+            <span class="reuse-app-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-5 4V5a1 1 0 0 1 1-1Z" /><path d="M8 9h8M8 13h5" /></svg></span>
+            <h3>Customer inbox</h3>
+          </div>
+          <div class="reuse-document" aria-hidden="true"><span>A conversation, continued</span><i></i><i></i><i></i><i></i></div>
+          <div class="reuse-shared-flow"><img src="/mark.svg" alt="" width="24" height="24" /><strong>Summarize</strong><span>FLOW</span></div>
+        </article>
+        <article class="reuse-app reuse-research">
+          <div class="reuse-app-header">
+            <span class="reuse-app-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l5 5v13H6zM14 3v6h5M9 13h7M9 17h5" /></svg></span>
+            <h3>Research desk</h3>
+          </div>
+          <div class="reuse-document" aria-hidden="true"><span>Notes on a new idea</span><i></i><i></i><i></i><i></i></div>
+          <div class="reuse-shared-flow"><img src="/mark.svg" alt="" width="24" height="24" /><strong>Summarize</strong><span>FLOW</span></div>
+        </article>
       </div>
-      <div class="reuse-app-window">
-        <div class="reuse-app-top">
-          <span><span class="reuse-app-dot" aria-hidden="true"></span><span data-reuse-content="storefront">Your storefront</span><span data-reuse-content="operations" hidden>Your operations app</span></span>
-          <span class="reuse-window-dots" aria-hidden="true">···</span>
-        </div>
-        <div class="reuse-connections">
-          <article class="reuse-method">
-            <span class="reuse-flow-label"><img src="/mark.svg" width="21" height="21" alt="" /> FLOW</span>
-            <h3>Check stock</h3>
-            <p>Decide whether an order can be filled.</p>
-            <span class="reuse-unchanged"><span aria-hidden="true">✓</span> Same FLOW</span>
-          </article>
-          <div class="reuse-connection" aria-hidden="true"><span>Gets stock from</span></div>
-          <article class="reuse-provider">
-            <div data-reuse-content="storefront">
-              <span class="reuse-provider-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><ellipse cx="16" cy="7" rx="10" ry="4" /><path d="M6 7v9c0 2.2 4.5 4 10 4s10-1.8 10-4V7M6 16v9c0 2.2 4.5 4 10 4s10-1.8 10-4v-9" /></svg></span>
-              <span class="reuse-provider-label">Inventory FLOW</span>
-              <h3>From your database</h3>
-              <p>Your storefront’s stock records.</p>
-            </div>
-            <div data-reuse-content="operations" hidden>
-              <span class="reuse-provider-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="22" rx="5" /><path d="m12 12-4 4 4 4m8-8 4 4-4 4m-2-9-4 12" /></svg></span>
-              <span class="reuse-provider-label">Inventory FLOW</span>
-              <h3>From your API</h3>
-              <p>Your operations system’s stock records.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-      <p class="reuse-caption">Same FLOW. Different apps.</p>
-      <span class="sr-only" id="reuse-status" role="status" aria-live="polite"></span>
-    </div>
-    <div class="reuse-explanation">
-      <div>
-        <h3>Contracts make that possible.</h3>
-        <p>A contract defines what a FLOW needs without tying it to one implementation. Each app can connect a compatible FLOW to provide it.</p>
-      </div>
-      <a class="text-link" href="/spec/invocation-contracts">Explore contracts <span aria-hidden="true">↗</span></a>
-    </div>
-    <p class="reuse-contract-note">Here, both inventory FLOWs fulfill the same <strong>Inventory lookup</strong> contract. Each app runs on a host that supports its FLOWs.</p>
+      <figcaption><span class="sr-only">Illustrative example: </span>One Summarize FLOW. Three places to use it.</figcaption>
+    </figure>
+    <p class="reuse-contract-line">Contracts let each app supply what the FLOW needs. <a href="/spec/invocation-contracts">See how <span aria-hidden="true">↗</span></a></p>
   </section>
 
   <section
