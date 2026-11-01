@@ -7,29 +7,31 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
+import { parse } from 'yaml'
 import { authorize, validateReleaseRun } from './flow-release.mjs'
 import { downloadArtifact } from './artifact-transfer.mjs'
 import { comparePrerelease, publishNpm } from './publish-npm.mjs'
 
 const revision = 'a'.repeat(40)
 const repository = 'fixture/flow'
+const workflow = parse(
+  await readFile(new URL('../../.github/workflows/ci.yml', import.meta.url), 'utf8'),
+)
+const npm = workflow.jobs['npm-installed']
+const python = workflow.jobs['python-installed']
+const matrixName = (job, matrix) =>
+  job.name.replace(/\$\{\{\s*matrix\.(\w+)\s*\}\}/g, (_expression, key) => {
+    assert.ok(Object.hasOwn(matrix, key), `Missing matrix value: ${key}`)
+    return String(matrix[key])
+  })
 const names = [
-  'Build candidates',
-  'Source and protocol checks',
-  'Quick development checks',
-  'Build public sites',
-  'test',
-  ...['ubuntu-24.04', 'macos-14'].flatMap((os) =>
-    ['22', '24'].map((node) => `Npm installed (${os}, ${node})`),
+  ...Object.entries(workflow.jobs)
+    .filter(([, job]) => !job.strategy?.matrix)
+    .map(([id, job]) => job.name ?? id),
+  ...npm.strategy.matrix.os.flatMap((os) =>
+    npm.strategy.matrix.node.map((node) => matrixName(npm, { os, node })),
   ),
-  ...[
-    ['ubuntu-24.04', '3.11'],
-    ['ubuntu-24.04', '3.12'],
-    ['ubuntu-24.04', '3.13'],
-    ['ubuntu-24.04', '3.14'],
-    ['macos-14', '3.14'],
-    ['windows-2022', '3.13'],
-  ].map(([os, python]) => `Python ${python} on ${os}`),
+  ...python.strategy.matrix.include.map((matrix) => matrixName(python, matrix)),
 ]
 const run = {
   id: 20,
@@ -74,6 +76,10 @@ test('all SDK, authoring, interpreter and site profiles must complete on the exa
     [...jobs, jobs[0]],
     jobs.map((job, i) => (i ? job : { ...job, conclusion: 'skipped' })),
     jobs.map((job, i) => (i ? job : { ...job, run_attempt: 1 })),
+    jobs.filter((job) => !job.name.includes('macos-')),
+    jobs.map((job) =>
+      job.name.includes('macos-') ? { ...job, conclusion: 'cancelled' } : job,
+    ),
   ])
     assert.throws(() => validateReleaseRun(run, changed, repository, 20, 2))
 })

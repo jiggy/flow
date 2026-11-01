@@ -15,6 +15,9 @@ The existing publication environments are `npm` and `pypi`.
 Pages uses `github-pages`. Keep workflow environment names aligned with registry trust configuration.
 Jig host qualification belongs to the Jig repository.
 
+Keep installed macOS checks on supported explicit runner labels.
+Update release qualification names whenever CI matrix labels change.
+
 Publish npm packages through OIDC without a registry token secret.
 Bootstrap a new package locally with an empty `0.0.0` version under the `bootstrap` tag.
 Configure its trusted publisher before publishing qualified release archives through Actions.
