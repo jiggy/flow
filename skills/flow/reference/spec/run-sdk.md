@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/run-sdk.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Run SDK/0
 
 > *Status: prerelease SDK projection of [`FLOW Run/0`](run-protocol.md).*

@@ -3,9 +3,6 @@ title: Bring a Skill to FLOW
 description: What transfers from SKILL.md, what Markdown/0 supports, and which differences affect execution.
 ---
 
-<!-- Generated from docs/flow/guide/skills.md. Edit the source, then run just sync-skills. -->
-
-
 # Bring a Skill to FLOW
 
 A Skill can preserve a useful procedure in instructions, references, and scripts.

@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/channel-contracts.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Channel Contract/0
 
 > *Status: prerelease specification candidate for JSON channels.*

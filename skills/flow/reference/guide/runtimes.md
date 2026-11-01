@@ -3,9 +3,6 @@ title: Runtimes and language support
 description: Separate SDK availability from host support and implement another FLOW SDK.
 ---
 
-<!-- Generated from docs/flow/guide/runtimes.md. Edit the source, then run just sync-skills. -->
-
-
 # Runtimes and language support
 
 FLOW's invocation boundary is independent of the language used inside a method.

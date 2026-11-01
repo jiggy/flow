@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/markdown-runtime.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Markdown/0
 
 > *Status: prerelease specification candidate for sequential Markdown execution.*

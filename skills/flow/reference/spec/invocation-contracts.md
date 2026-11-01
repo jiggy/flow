@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/invocation-contracts.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Invocation Contract/0
 
 > *Status: prerelease specification candidate. The structural companion is

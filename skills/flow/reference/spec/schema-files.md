@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/schema-files.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Schema/0 files
 
 > *Status: prerelease specification candidate. The machine meta-schema is
