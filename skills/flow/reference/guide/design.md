@@ -3,9 +3,6 @@ title: Design modular Flows
 description: Build small, understandable capabilities that compose, hide complexity, and move between applications.
 ---
 
-<!-- Generated from docs/flow/guide/design.md. Edit the source, then run just sync-skills. -->
-
-
 # Design Flows that fit in your head
 
 Build applications from small Flows that each provide a recognizable capability.

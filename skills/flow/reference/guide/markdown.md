@@ -3,9 +3,6 @@ title: Write a Flow in Markdown
 description: Receive input, call another method, return outcomes, and exchange messages from FLOW.md.
 ---
 
-<!-- Generated from docs/flow/guide/markdown.md. Edit the source, then run just sync-skills. -->
-
-
 # Write a Flow in Markdown
 
 A `FLOW.md` method receives input and returns an outcome with data, just like a

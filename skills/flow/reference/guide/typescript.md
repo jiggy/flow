@@ -3,9 +3,6 @@ title: Write a Flow in TypeScript or JavaScript
 description: Install the FLOW SDK, handle input, call methods, and exercise a local Run/0 exchange.
 ---
 
-<!-- Generated from docs/flow/guide/typescript.md. Edit the source, then run just sync-skills. -->
-
-
 # Write a Flow in TypeScript or JavaScript
 
 `@jigging/flow` lets a method receive one FLOW Run/0 invocation, call

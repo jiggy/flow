@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/json-values.md. Edit the source, then run just sync-skills. -->
-
 # FLOW JSON/0 value model
 
 FLOW uses JSON as a bounded cross-language value format. JSON/0 fixes the

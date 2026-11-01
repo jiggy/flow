@@ -3,9 +3,6 @@ title: Documentation for agents
 description: Read FLOW's public specifications and guides as Markdown. Use the index to select pages or read the complete bundle.
 ---
 
-<!-- Generated from docs/flow/guide/for-agents.md. Edit the source, then run just sync-skills. -->
-
-
 # Read FLOW as Markdown
 
 Agents and developers share the same public source of truth. Each page has a

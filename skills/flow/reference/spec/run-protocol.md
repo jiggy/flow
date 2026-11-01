@@ -1,5 +1,3 @@
-<!-- Generated from docs/flow/spec/run-protocol.md. Edit the source, then run just sync-skills. -->
-
 # FLOW Run/0
 
 > *Status: prerelease specification candidate.*

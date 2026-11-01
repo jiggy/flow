@@ -2,9 +2,6 @@
 title: Write a Flow in Python
 ---
 
-<!-- Generated from docs/flow/guide/python.md. Edit the source, then run just sync-skills. -->
-
-
 # Write a Flow in Python
 
 `jiggy-flow` lets a Python method receive one FLOW Run/0 invocation, call
