@@ -11,7 +11,7 @@ const expectedJobs = [
   'Quick development checks',
   'Build public sites',
   'test',
-  ...['ubuntu-24.04', 'macos-14'].flatMap((os) =>
+  ...['ubuntu-24.04', 'macos-15'].flatMap((os) =>
     ['22', '24'].map((node) => `Npm installed (${os}, ${node})`),
   ),
   ...[
@@ -19,7 +19,7 @@ const expectedJobs = [
     ['ubuntu-24.04', '3.12'],
     ['ubuntu-24.04', '3.13'],
     ['ubuntu-24.04', '3.14'],
-    ['macos-14', '3.14'],
+    ['macos-15', '3.14'],
     ['windows-2022', '3.13'],
   ].map(([os, python]) => `Python ${python} on ${os}`),
 ]
