@@ -52,7 +52,8 @@ and invocation-contract semantics.
   Stewardship information remains in its own supporting material.
 - FLOW Run/0 owns wire behavior. Run SDK/0 defers to it when they differ.
 - Explanatory pages are not a second conformance source.
-- [Installable skills](../../skills/AGENTS.md) reuse canonical documentation through CI synchronization.
+- [Installable skills](https://github.com/jiggy/skills) bundle canonical FLOW documentation and retain its licenses.
+  Edit documentation here. Edit skill instructions and reference selection in `jiggy/skills`.
 - Explain `flow/run` as component entry and `flow/call` as dependency
   invocation. Every launched component, including a child, receives `flow/run`.
   Ordinary authors use one `handle()`/context `call()` API.

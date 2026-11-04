@@ -19,7 +19,7 @@ Only missing metadata permits waiting. Conflicting bytes or registry access fail
 ## Verification
 
 Run `node --test scripts/ci/*.test.mjs` and `just test-release`.
-Workflow contract tests parse YAML 1.2 and check GitHub trigger keys and registry environments.
+Workflow contract tests parse YAML 1.2 and check triggers, registry environments, and skill notification permissions.
 Release qualification tests derive job names from CI workflow matrices to catch drift.
 
 ## Child DOX Index
