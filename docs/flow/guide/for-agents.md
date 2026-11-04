@@ -26,10 +26,10 @@ The `flow` skill guides an Agent through designing, creating, changing, adapting
 reviewing Flows. It applies architectural judgment and selects documentation for the current task.
 
 ```sh
-npx skills add jiggy/flow
+npx skills add jiggy/skills --skill flow
 ```
 
-Select the `flow` skill when prompted. The installed skill includes its reference files.
+The installed skill includes its reference files from [Jiggy skills](https://github.com/jiggy/skills).
 Invoke `flow` by name, or let an agent supporting automatic skill discovery select it.
 Executing the resulting Flows requires a compatible host.
 

@@ -70,70 +70,52 @@ test('npm publication uses OIDC without a bootstrap token', async () => {
   assert.ok(!JSON.stringify(ci).includes('NPM_TOKEN'))
 })
 
-test('CI checks committed skill references without source write permissions', async () => {
+test('source CI has read-only permissions and leaves skill generation to jiggy/skills', async () => {
   const workflow = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
   const job = workflow.jobs['quick-checks']
   const permissions = job.permissions ?? workflow.permissions
   assert.equal(permissions.contents, 'read')
-  assert.ok(job.steps.some((step) => step.run === 'just check-skills'))
-  assert.ok(
-    !job.steps.some(
-      (step) =>
-        step.uses?.startsWith('actions/upload-artifact@') &&
-        step.with?.name.startsWith('flow-skills-'),
-    ),
-  )
+  assert.ok(job.steps.some((step) => step.run === 'just test-tooling'))
+  assert.doesNotMatch(JSON.stringify(workflow), /sync-skills|check-skills|flow-skills-/)
 })
 
-test('skill synchronization updates only same-repository PR heads and dispatches fresh CI', async () => {
-  const workflow = parse(await readFile(new URL('sync-skill-references.yml', workflows), 'utf8'))
-  assert.deepEqual(workflow.on.pull_request.types, ['opened', 'reopened', 'synchronize'])
+test('skill notifications delegate main updates without checking out code or granting repository permissions', async () => {
+  const workflow = parse(await readFile(new URL('notify-skills.yml', workflows), 'utf8'))
+  assert.deepEqual(workflow.on.push.branches, ['main'])
+  assert.ok(Object.hasOwn(workflow.on, 'workflow_dispatch'))
+  assert.equal(workflow.on.pull_request, undefined)
   assert.equal(workflow.on.pull_request_target, undefined)
-  assert.equal(workflow.on.push, undefined)
-  const job = workflow.jobs.sync
-  assert.ok(job.if.includes('github.event.pull_request.head.repo.full_name == github.repository'))
-  assert.ok(
-    job.if.includes('github.event.pull_request.head.ref != github.event.repository.default_branch'),
+  assert.deepEqual(workflow.on.push.paths, [
+    'docs/flow/**',
+    'LICENSES.md',
+    'Notices.md',
+    'LICENSES/**',
+    '.github/workflows/notify-skills.yml',
+  ])
+  assert.deepEqual(workflow.permissions, {})
+  assert.deepEqual(Object.keys(workflow.jobs), ['notify'])
+  const job = workflow.jobs.notify
+  assert.equal(job.if, "github.repository == 'jiggy/flow' && github.ref == 'refs/heads/main'")
+  assert.match(
+    job.uses,
+    /^jiggy\/skills\/\.github\/workflows\/notify\.yml@[a-f0-9]{40}$/,
   )
-  assert.deepEqual(job.permissions, { contents: 'write', actions: 'write' })
-  const checkout = job.steps.find((step) => step.uses?.startsWith('actions/checkout@'))
-  assert.equal(checkout.with.ref, '${{ github.event.pull_request.head.sha }}')
-  assert.equal(checkout.with['persist-credentials'], false)
-  const installIndex = job.steps.findIndex((step) => step.run === 'bun install --ignore-scripts')
-  const syncIndex = job.steps.findIndex((step) => step.run === 'node scripts/sync-skills.mjs')
-  const commitIndex = job.steps.findIndex((step) => step.id === 'commit')
-  assert.ok(installIndex >= 0 && syncIndex > installIndex && commitIndex > syncIndex)
-  assert.equal(job.steps[installIndex].env?.GH_TOKEN, undefined)
-  assert.equal(job.steps[syncIndex].env?.GH_TOKEN, undefined)
-  const commit = job.steps[commitIndex]
-  assert.ok(commit.run.includes("git add -- ':(glob)skills/*/reference/**'"))
-  assert.ok(commit.run.includes('commit --signoff'))
-  assert.ok(commit.run.includes('git push origin "HEAD:refs/heads/$PR_BRANCH"'))
-  assert.ok(!commit.run.includes('--force'))
-  const dispatchIndex = job.steps.findIndex(
-    (step) =>
-      step.run ===
-      'gh workflow run ci.yml --ref "$PR_BRANCH" --field docs_base_revision="$PR_BASE_SHA"',
-  )
-  assert.ok(dispatchIndex > commitIndex)
-  assert.equal(job.steps[dispatchIndex].if, "steps.commit.outputs.pushed == 'true'")
-  assert.equal(
-    job.steps[dispatchIndex].env.PR_BASE_SHA,
-    '${{ github.event.pull_request.base.sha }}',
-  )
+  assert.equal(job.steps, undefined)
+  assert.equal(job.permissions, undefined)
+  assert.deepEqual(job.secrets, { 'dispatch-token': '${{ secrets.SKILLS_DISPATCH_TOKEN }}' })
 })
 
-test('dispatched CI preserves the original pull request documentation baseline', async () => {
+test('documentation checks retain PR and push baselines with a manual-run parent fallback', async () => {
   const workflow = parse(await readFile(new URL('ci.yml', workflows), 'utf8'))
-  const input = workflow.on.workflow_dispatch.inputs.docs_base_revision
-  assert.equal(input.type, 'string')
-  assert.equal(input.required, false)
+  assert.equal(workflow.on.workflow_dispatch, null)
   const baselines = workflow.jobs.sites.steps
     .map((step) => step.env?.DOCS_BASE_REVISION)
     .filter(Boolean)
   assert.ok(baselines.length)
-  for (const baseline of baselines)
-    assert.ok(
-      baseline.includes('github.event.pull_request.base.sha || inputs.docs_base_revision ||'),
-    )
+  for (const baseline of baselines) {
+    assert.ok(baseline.includes('github.event.pull_request.base.sha ||'))
+    assert.ok(baseline.includes('github.event.before'))
+    assert.ok(baseline.includes("format('{0}^', github.sha)"))
+    assert.ok(!baseline.includes('inputs.docs_base_revision'))
+  }
 })
