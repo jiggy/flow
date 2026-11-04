@@ -33,7 +33,6 @@ function DocContext() {
     ['/implement', 'Implementation'],
     ['/reference', 'Reference'],
     ['/spec', 'Specification'],
-    ['/evidence', 'Evidence'],
     ['/for-agents', 'For agents'],
   ]
   const kind = sections.find(([prefix]) => path === prefix || path.startsWith(`${prefix}/`))?.[1] ?? 'Documentation'

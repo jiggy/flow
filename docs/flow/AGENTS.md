@@ -14,7 +14,6 @@ Keep exact portable meaning owned by the specifications.
 - `understand/` explains the shared calling boundary, hosts, runtimes, channels, and optional contracts.
 - `implement/` owns host, SDK, runtime, and ACP integration guides and conformance exercises.
 - `reference/` owns API lookup, recipes, support, compatibility, glossary, and the specification navigator.
-- `evidence/` owns bounded experiment reports and their limits.
 - `spec/` owns normative package, value, protocol, SDK, and interoperability semantics and machine companions.
 - `for-agents.md` owns Markdown entrypoints and FLOW skill installation.
 - Guide diagrams remain beside their owning prose and retain source JSON and exported SVG together.
@@ -60,5 +59,4 @@ Keep exact portable meaning owned by the specifications.
 - [understand/AGENTS.md](understand/AGENTS.md) — Explanations and mental models.
 - [implement/AGENTS.md](implement/AGENTS.md) — Host, SDK, runtime, and agent integration.
 - [reference/AGENTS.md](reference/AGENTS.md) — APIs, recipes, support, and exact-contract navigation.
-- [evidence/AGENTS.md](evidence/AGENTS.md) — Bounded experiments and their limits.
 - [spec/AGENTS.md](spec/AGENTS.md) — Normative specifications and machine companions.

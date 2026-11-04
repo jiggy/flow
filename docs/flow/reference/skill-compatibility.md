@@ -80,8 +80,9 @@ See [Markdown/0 profile bounds](../spec/markdown-runtime.md#lifecycle-profile-an
 
 Check four things separately: package validity, execution qualification, task achievement, and preservation of required constraints.
 A `done` result establishes neither a correct answer nor compliance with every prose instruction.
-Validate the result and evidence that matter to the task.
+A procedural restriction written in prose does not establish its enforcement.
+Result schemas can reject unsuitable shapes, such as null where an artifact is required.
+Validate generated artifacts or execution evidence to establish task completion.
 
 A required effect may be moved into an authorized code specialist and called through a declared dependency.
 That produces an adapted method, whose host must support the selected implementations.
-The [interpreter experiments](../evidence/skills.md) record bounded results and remaining questions.

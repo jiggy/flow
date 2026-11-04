@@ -75,8 +75,8 @@
     {
       "source": "docs/flow/reference/skill-compatibility.md",
       "destination": "reference/skill-compatibility.md",
-      "sourceSha256": "b419583f80cd01a77fc0aa6a3d49072e7403ad1ce92bbaa6e154610495f1cd03",
-      "outputSha256": "c37719c3bb1717da052f05db6ef232f9d5769daee408d63c916d3ce32d03030d"
+      "sourceSha256": "da33627705f3936ac6d1f62d1f5c14f7e882ef16e847e371f0e5f08387100ccb",
+      "outputSha256": "7b37234e93cd410b928c949922833591b7f29ab8208201a85684120111aa41dc"
     },
     {
       "source": "docs/flow/reference/markdown.md",
@@ -189,8 +189,8 @@
     {
       "source": "LICENSES.md",
       "destination": "LICENSES.md",
-      "sourceSha256": "fcfec7864ba1c33e4c7ea534e144e95cfe8d16a7ec1e06f95c75ed4eae7d934c",
-      "outputSha256": "fcfec7864ba1c33e4c7ea534e144e95cfe8d16a7ec1e06f95c75ed4eae7d934c"
+      "sourceSha256": "9bc39a6cfdb37d5ea5d31620b9eacd79375d929cb02ff1a3f2dc2ed3a4275322",
+      "outputSha256": "9bc39a6cfdb37d5ea5d31620b9eacd79375d929cb02ff1a3f2dc2ed3a4275322"
     },
     {
       "source": "Notices.md",

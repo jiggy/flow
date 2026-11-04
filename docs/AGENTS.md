@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Own public normative specifications, current guidance, and bounded evidence reports for FLOW.
+Own public normative specifications and current guidance for FLOW.
 
 ## Ownership
 
