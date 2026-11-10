@@ -100,22 +100,34 @@ if [ "$actual" != "$expected" ]; then
   exit 1
 fi
 
-for route in index.html guide/index.html guide/understand.html; do
+case $site_name in
+  flow)
+    entry_routes='index.html
+start/index.html
+build/index.html
+understand/index.html
+implement/index.html
+reference/index.html'
+    ;;
+  jig) entry_routes='index.html guide/index.html guide/understand.html' ;;
+esac
+for route in $entry_routes; do
   if [ ! -s "$staging/$route" ]; then
     echo "the $site_name public entry route is missing: $route" >&2
     exit 1
   fi
 done
-if [ "$site_name" = flow ] && [ ! -s "$staging/guide/start.html" ]; then
-  echo "the FLOW authoring entrypoint is missing" >&2
-  exit 1
-fi
-
 case $site_name in
   flow)
-    for guide in python typescript markdown skills platforms runtimes; do
-      if [ ! -s "$staging/guide/$guide.html" ]; then
-        echo "the FLOW $guide guide is missing" >&2
+    for route in \
+      start/run.html start/application.html \
+      build/python.html build/typescript.html build/markdown.html build/skills.html \
+      build/compose.html build/outcomes.html build/validation.html build/messages.html build/design.html \
+      implement/host.html implement/sdk.html implement/acp.html implement/verify.html \
+      reference/support.html
+    do
+      if [ ! -s "$staging/$route" ]; then
+        echo "the FLOW guide is missing: $route" >&2
         exit 1
       fi
     done

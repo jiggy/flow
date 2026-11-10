@@ -1,4 +1,12 @@
+---
+title: FLOW Schema/0 files
+description: Schema declarations, validation points, dialect, limits, and errors for portable values.
+---
+
 # FLOW Schema/0 files
+
+> **Reader guide (non-normative).** Read this specification when implementing schema validation or checking a supported keyword or limit.
+> Follow [Validate inputs and results](../build/validation.md) to add validation to a method.
 
 > *Status: prerelease specification candidate. The machine meta-schema is
 > published as [`schema-0.json`](https://flow.jig.md/schemas/schema-0.json).*

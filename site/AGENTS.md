@@ -9,6 +9,7 @@ Own this repository's Rspress configuration, assets, assembly, and direct GitHub
 - `../DESIGN.md` owns website presentation principles and the visual system.
 - `../docs/flow/` owns public prose, specifications, and source diagrams.
 - `flow/` owns product navigation, public roots, origins, and assets.
+  Navigation follows first use, building, understanding, implementation, and reference with an area-specific sidebar.
 - `flow/social.ts` owns default share-image data. `flow/public/social/` holds committed banner sources and PNG exports.
 - `theme/`, `landing.css`, and `home.css` own independently copied presentation.
 - `package.json` and `bun.lock` pin site dependencies.
@@ -19,6 +20,8 @@ Own this repository's Rspress configuration, assets, assembly, and direct GitHub
 Never maintain copied prose or normative machine schemas here.
 Exclude AGENTS.md work contracts from public routes.
 Preserve human pages, exact machine resources, indexed Markdown, font notices, and complete local anchors.
+
+The Markdown index follows all documentation areas, specifications, evidence, and the agent entrypoint.
 Keep shared presentation changes coherent with the sibling product through deliberate review.
 A neighboring checkout is never a build input.
 

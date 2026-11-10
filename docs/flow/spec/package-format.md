@@ -1,4 +1,12 @@
+---
+title: FLOW Package/0
+description: Canonical files, metadata, paths, and identity for a portable Flow package.
+---
+
 # FLOW Package/0
+
+> **Reader guide (non-normative).** Read this specification when implementing package inspection or checking an exact file-layout requirement.
+> For authoring, follow [Write a method](../build/index.md). Use [Reference](../reference/index.md) to find related contracts.
 
 > *Status: prerelease specification candidate.*
 

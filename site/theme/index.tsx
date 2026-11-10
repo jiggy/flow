@@ -26,19 +26,21 @@ export function HomeLayout() {
 function DocContext() {
   const { page } = usePage()
   const path = page.routePath ?? ''
-  const kind = path.startsWith('/spec/')
-    ? 'Specification'
-    : path.startsWith('/contracts/')
-      ? 'Contract guide'
-      : ['/use-cases', '/time-travel-handoff', '/orchestration-patterns'].some((route) =>
-            path.startsWith(route),
-          )
-        ? 'Research'
-        : 'Guide'
+  const sections: [string, string][] = [
+    ['/start', 'Start here'],
+    ['/build', 'Build'],
+    ['/understand', 'Understand'],
+    ['/implement', 'Implementation'],
+    ['/reference', 'Reference'],
+    ['/spec', 'Specification'],
+    ['/evidence', 'Evidence'],
+    ['/for-agents', 'For agents'],
+  ]
+  const kind = sections.find(([prefix]) => path === prefix || path.startsWith(`${prefix}/`))?.[1] ?? 'Documentation'
   if (import.meta.env.SSG_MD) return null
   return (
     <div className="doc-context">
-      <Link href="/guide/overview">Documentation</Link>
+      <Link href="/start/">Documentation</Link>
       <span aria-hidden="true">/</span>
       <span>{kind}</span>
       <span className="doc-stage">Prerelease</span>

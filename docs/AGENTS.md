@@ -2,8 +2,7 @@
 
 ## Purpose
 
-Owns public normative specifications, current product guidance, and research
-catalogues for FLOW and Jig.
+Own public normative specifications, current guidance, and bounded evidence reports for FLOW.
 
 ## Ownership
 
@@ -53,8 +52,11 @@ catalogues for FLOW and Jig.
   Name Skills when using that familiar bridge. Lead with callable composition.
   Keep enterprise operating concerns in relevant guides.
   Explain execution boundaries after explaining their useful role.
-- Organize navigation around starting, building, understanding, and reference.
-  Tutorials should include an expected result and one useful modification.
+- Organize navigation around first use, building, understanding, implementing, and reference.
+  Lead first use from a useful method to application consumption before protocol implementation.
+  Tutorials state prerequisites, expected results, one useful modification, and a failure case.
+- Use active voice, concrete language, and one topic per paragraph.
+  Cut repeated introductions while preserving requirements, conditions, and uncertainty.
 - Write for the reader's decision or task. Introduce unfamiliar concepts in
   plain language before criteria, fields, or implementation detail.
 - Keep human and agent paths equally useful. Every public page must retain

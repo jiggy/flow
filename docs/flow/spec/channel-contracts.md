@@ -1,4 +1,12 @@
+---
+title: FLOW Channel Contract/0
+description: Channel declarations, named message meaning, descriptor identity, and matching.
+---
+
 # FLOW Channel Contract/0
+
+> **Reader guide (non-normative).** Read this specification when defining or matching a channel agreement between independently authored participants.
+> Follow [Exchange messages](../build/messages.md) for practical use. The structural companion is [channel-contract-0.schema.json](https://flow.jig.md/schemas/channel-contract-0.schema.json).
 
 > *Status: prerelease specification candidate for JSON channels.*
 
