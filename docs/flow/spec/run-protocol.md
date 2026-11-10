@@ -1,4 +1,13 @@
+---
+title: FLOW Run/0
+description: Finite process invocation, dependency calls, channels, errors, cancellation, and completion.
+---
+
 # FLOW Run/0
+
+> **Reader guide (non-normative).** Read this specification when implementing a host or component transport.
+> Follow [Implement a host](../implement/host.md) for a walkthrough and [Verify an implementation](../implement/verify.md) for conformance exercises.
+> Machine companions: [message schema](https://flow.jig.md/schemas/run-0.json) and [error registry](https://flow.jig.md/schemas/run-0-errors.json).
 
 > *Status: prerelease specification candidate.*
 

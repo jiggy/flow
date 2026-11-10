@@ -8,8 +8,7 @@ See [PyPI](https://pypi.org/project/jiggy-flow/) for available releases. Prerele
 do not establish a stable compatibility promise. The SDK has no third-party
 runtime dependencies.
 
-The [Python guide](https://flow.jig.md/guide/python) walks through a complete
-method and a local Run/0 exchange. FLOW does not require Jig; execution support
+The [Python guide](https://flow.jig.md/build/python) explains method authoring and links to a complete local SDK exercise. FLOW does not require Jig; execution support
 belongs to the chosen host. Its authoritative documents are [Run SDK/0](https://flow.jig.md/spec/run-sdk) and
 [Run/0](https://flow.jig.md/spec/run-protocol). This installed README contains
 a minimal quickstart.

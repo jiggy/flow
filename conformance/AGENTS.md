@@ -56,9 +56,10 @@ candidates.
   checks and language ergonomics remain distinct from portable wire claims.
 - `MATRIX.md` records executable coverage and limitations. It must not imply a
   general certification programme.
-- `schema.test.ts` checks JSON-RPC examples in the FLOW implementer guides
-  against Run/0 schemas. `python-peer/test_guide_examples.py` runs the platform
-  guide's exact host snippet against controlled process fixtures, checking
+- `schema.test.ts` checks JSON-RPC examples in `docs/flow/implement/host.md`,
+  `sdk.md`, and `acp.md` against Run/0 schemas.
+  `python-peer/test_guide_examples.py` runs `docs/flow/implement/verify.md`'s
+  exact host snippet against controlled process fixtures, checking
   correlation, the granted route, results, timeout, exit and trailing-output
   failures. This is documentation regression evidence, not production host
   containment or independent consumer proof.

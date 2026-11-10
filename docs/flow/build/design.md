@@ -1,5 +1,5 @@
 ---
-title: Design modular Flows
+title: Design reusable Flows
 description: Build small, understandable capabilities that compose, hide complexity, and move between applications.
 ---
 
@@ -42,7 +42,7 @@ This exercise needs no additional manifest or required file.
 For example, `classify-request` suggests a support queue from supplied message content.
 It might return `billing`, `technical`, or `manual`, with the evidence needed to judge that suggestion.
 Its caller should understand this promise without reading prompts, parser helpers, or provider response objects.
-The [FLOW introduction](./understand.md) shows code, Agent, and mixed implementations behind this boundary.
+The [FLOW introduction](../understand/index.md) shows code, Agent, and mixed implementations behind this boundary.
 
 Keep inputs and results specific to the task.
 Pass the needed values explicitly instead of sharing a mutable object containing the whole application.
@@ -226,7 +226,7 @@ Keep provider-specific formats within the integration that owns them.
 Move the complete package and its declared dependency requirements into a separate consumer project.
 Check that it can be configured and invoked without the author's application or checkout.
 Keep runtime and capability requirements explicit.
-Portability depends on [compatible host support](./runtimes.md), not merely on a valid package.
+Portability depends on [compatible host support](../reference/support.md), not merely on a valid package.
 
 Replace a dependency with another suitable implementation when replacement is part of the design.
 Check relevant behavior, outcomes, effects, and required powers as well as the interface shape.
