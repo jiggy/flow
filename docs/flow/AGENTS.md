@@ -8,6 +8,10 @@ Keep exact portable meaning owned by the specifications.
 ## Ownership
 
 - `index.md` owns the website's landing-page narrative and semantic content.
+  Establish cross-application reuse before explaining contracts.
+  Keep the reuse example illustrative and immediately legible, with the same method across apps.
+  Keep supported hosts separate from projects invited to add support.
+  All story tabs remain in generated Markdown.
   Presentation and interactions belong to `site/home.css` and `site/theme/home.tsx`.
 - `start/` owns task discovery, the first supported run, and application consumption.
 - `build/` owns authoring, Skill adaptation, composition, outcomes, validation, channels, and design guidance.
