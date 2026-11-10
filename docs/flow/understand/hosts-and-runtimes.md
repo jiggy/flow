@@ -24,15 +24,14 @@ These are examples of implementation choices, rather than an exhaustive list of 
 | `FLOW.py` | A Python runtime with the package's required dependencies. |
 | `FLOW.<ext>` | Another runtime supported by the receiving host. |
 
-Runtime independence concerns the boundary around the work.
-It leaves a runtime free to advance a plain program, a graph, or another suitable internal model.
+Each runtime can advance a plain program, a graph, or another suitable internal model.
 The receiving host must support that implementation and its required public interfaces.
 
 ## Separate runtime support from SDK availability
 
 An SDK helps an implementation receive invocations, call dependencies, and return results.
 The host still owns launching the runtime and preparing its execution context.
-An available Python SDK therefore requires a Python-capable host to execute a Python package.
+Running a Python package requires a Python-capable host, even when a Python SDK is available.
 
 Check the [support reference](../reference/support.md) before selecting a host or following a language tutorial.
 It separates SDK availability from qualified host support.
@@ -68,6 +67,6 @@ A code classifier might recognize explicit labels, while an Agent classifier int
 A mixed implementation could use both.
 The application still receives the classifier's declared outcome and output.
 
-The shared interface gives callers a consistent way to compose these implementations.
-It leaves their behavior, required powers, and quality open to evaluation.
+The shared interface lets callers compose these implementations consistently.
+Evaluate each implementation's behavior, required powers, and quality.
 See [calls and channels](./calls-and-channels.md) for the relationships between methods.

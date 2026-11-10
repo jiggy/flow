@@ -7,7 +7,6 @@ description: Use calls for finite work and channels for declared live messages w
 
 A call asks a method to perform finite work and return a result.
 A channel carries live messages while work runs.
-These two relationships let a Flow participate in a larger application while keeping its task clear.
 
 ## Call a method for its result
 
@@ -23,7 +22,7 @@ It checks the outcome before using the output in a later policy decision.
 
 A Flow declares dependency roles as `uses` slots.
 The host binds each slot to an authorized implementation.
-The SDK's context `call()` method invokes the selected dependency with supplied input.
+The SDK's context `call()` method invokes the selected dependency with your input.
 Each launched child receives its own execution context.
 
 Code, Agent instructions, and mixed implementations can fill the same dependency role when they satisfy its requirements.
@@ -44,8 +43,7 @@ This is an illustrative observation channel, separate from the method's result.
 
 A method declares each caller-facing channel port and whether it sends or receives messages.
 The host supplies the corresponding rights and enforces the declared message constraints.
-Channel names are local port names.
-They describe neither a global address nor an automatically discovered message bus.
+Channel names identify local ports, rather than global addresses or an automatically discovered message bus.
 
 Some methods need a stream to perform their task.
 Such a required port must be connected before invocation.

@@ -1,5 +1,8 @@
+import { flowLanguage } from './flow-language'
+
 /** One Light / One Dark Pro hues, adjusted for at least 7:1 token contrast. */
 export const codeThemes = {
+  langs: [flowLanguage],
   themes: { light: 'one-light', dark: 'one-dark-pro' },
   colorReplacements: {
     'one-light': {

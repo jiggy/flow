@@ -6,7 +6,7 @@ description: Adapt a Skill, write a method, and combine callable capabilities in
 # Build with Flows
 
 Start with a procedure whose input and useful result you can explain.
-Package it once, then let an application or another method call it.
+Package it so an application or another method can call it.
 Choose the implementation that fits the work and your host.
 
 ## Choose a starting point
@@ -35,4 +35,3 @@ The host supplies the runtime and local powers needed to execute it.
 
 The tutorials use a request classifier as an illustrative example.
 Its queues and review policy belong to that example.
-Apply the same boundary to the task your application needs.
