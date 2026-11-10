@@ -21,7 +21,7 @@ Never maintain copied prose or normative machine schemas here.
 Exclude AGENTS.md work contracts from public routes.
 Preserve human pages, exact machine resources, indexed Markdown, font notices, and complete local anchors.
 
-The Markdown index follows all documentation areas, specifications, evidence, and the agent entrypoint.
+The Markdown index follows all documentation areas, specifications, and the agent entrypoint.
 Keep shared presentation changes coherent with the sibling product through deliberate review.
 A neighboring checkout is never a build input.
 
