@@ -16,7 +16,7 @@ Help readers find current interfaces, support, compatibility, and exact portable
 
 These pages explain current behavior. `../spec/` owns normative requirements.
 Keep language SDK availability separate from a host's supported implementations.
-Keep experiment findings in `../evidence/`, with their scope and uncertainty intact.
+Keep current compatibility guidance separate from experimental findings.
 
 ## Work Guidance
 

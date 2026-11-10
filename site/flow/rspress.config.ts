@@ -181,15 +181,6 @@ const specifications = {
     }
   ]
 }
-const evidence = {
-  "text": "Evidence",
-  "items": [
-    {
-      "text": "Skill interpreter experiment",
-      "link": "/evidence/skills"
-    }
-  ]
-}
 const utilities = {
   "text": "For agents",
   "items": [
@@ -199,7 +190,7 @@ const utilities = {
     }
   ]
 }
-const documentation = [start, build, understand, implement, reference, specifications, evidence, utilities]
+const documentation = [start, build, understand, implement, reference, specifications, utilities]
 const sidebar = {
   '/start/': [start],
   '/build/': [build],
@@ -207,7 +198,6 @@ const sidebar = {
   '/implement/': [implement],
   '/reference/': [reference, specifications],
   '/spec/': [specifications, reference],
-  '/evidence/': [evidence],
   '/for-agents': [utilities],
   '/': [start],
 }
