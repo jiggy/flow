@@ -6,10 +6,9 @@ description: Package a Python procedure with explicit input, an outcome, and a r
 # Write a Flow in Python
 
 Use `jiggy-flow` to receive a host invocation and return a result from Python.
-Its handler boundary matches TypeScript and Markdown, so callers can compose methods without adopting their internal implementation.
+Callers use the same input and result boundary for Python, TypeScript, and Markdown methods.
 
-This guide uses an illustrative request classifier.
-It recognizes a few words and suggests a support queue.
+The illustrative classifier recognizes a few words and suggests a support queue.
 The application owns any routing or assignment that follows.
 
 ## What you need

@@ -21,6 +21,7 @@ The [compatibility reference](../reference/skill-compatibility.md) lists script,
 
 ## Start with the procedure
 
+Choose a directory outside the first tutorial's project.
 Create a project with an Agent configuration:
 
 ```sh
@@ -95,8 +96,10 @@ Test representative requests and the Skill's important constraints before using 
 
 ## Build on the method
 
-[Call the method from an application](../start/application.md) using this package's target.
-The calling boundary stays the same even though an Agent interprets its instructions.
+Follow the [application tutorial](../start/application.md) from the `flow-instructions` project directory.
+Set its target to `flow:flows/classify-request-markdown` and allow time for Agent reasoning, for example `durationMs: 240_000`.
+Keep its execution, cleanup, outcome, and output checks.
+The calling boundary stays the same even though an Agent interprets the instructions.
 [Validate its inputs and results](./validation.md) when callers need a checked data shape.
 
 For work requiring another capability, [declare a dependency and compose methods](./compose.md).

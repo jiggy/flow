@@ -5,7 +5,8 @@ description: Run a Flow, call it from your application, and adapt the method to 
 
 # Choose your next step
 
-A **Flow** packages a method that software can call with input and receive an outcome and result.
+A **Flow** packages a callable method.
+Your software supplies input and receives an outcome with output data.
 The method can use code, Agent instructions, or both.
 Start by running one, then build on it.
 
@@ -35,7 +36,6 @@ Check [hosts, runtimes, and SDKs](../reference/support.md) before choosing anoth
 
 Read [What FLOW adds](../understand/index.md) for the connection from Skills to callable methods.
 Then explore [hosts and runtimes](../understand/hosts-and-runtimes.md), [calls and channels](../understand/calls-and-channels.md), or [optional contracts](../understand/contracts.md).
-Each explanation develops the concepts used by the practical guides.
 
 ## Find a precise answer
 

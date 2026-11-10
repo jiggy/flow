@@ -15,8 +15,8 @@ The experiment used four Apache-2.0 Skills from [Anthropic's pinned repository](
 It renamed each entrypoint to `FLOW.md` and retained the body and resources unchanged.
 It ran the actual Markdown interpreter and HTTP Agent method with live Ministral 8B and Mistral Small responses.
 
-The exercise tested interpretation rather than installed-host containment or independent usability.
-Its tasks were deliberately bounded. They supplied no evidence of general unchanged-Skill compatibility.
+The experiment tested interpretation on bounded tasks.
+It supplied no evidence of installed-host containment, independent usability, or general unchanged-Skill compatibility.
 
 ## Observed results
 
@@ -34,8 +34,8 @@ A `done` outcome alone proved neither task achievement nor compliance with requi
 The browser task showed that the presence of a procedural restriction did not establish its enforcement.
 
 Result schemas can reject unsuitable shapes, such as null where an artifact is required.
-Actual artifact validation or execution evidence is still needed to establish task completion.
-Applications need checks appropriate to their own outcomes and consequences.
+Applications still need artifact validation or execution evidence to establish task completion.
+Choose checks that match the task's outcomes and consequences.
 
 ## Open questions
 

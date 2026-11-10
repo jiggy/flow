@@ -13,7 +13,7 @@ identify the governing terms for their installed package.
 | FLOW normative specifications (`docs/flow/spec/*.md`) and their working-group files (`Governance.md`; `Scope.md`; `Notices.md`) | Community Specification License 1.0 ([text](LICENSES/Community-Spec-1.0.md)) |
 | OpenRunde, Manrope, Quicksand, and JetBrains Mono font files (`site/theme/fonts/**`) | SIL Open Font License 1.1 (individual notices in [site/theme/fonts](https://github.com/jiggy/flow/tree/main/site/theme/fonts)) |
 | Third-party homepage logos (`site/flow/public/home/assets/brands/**`) | Upstream terms and trademarks ([notices](https://github.com/jiggy/flow/blob/main/site/flow/public/home/ASSET-NOTICES.md)) |
-| Explanatory documentation and public sites (`docs/flow/index.md`; `docs/flow/guide/**`; `site/flow/public/**`) | Creative Commons Attribution 4.0 International ([text](LICENSES/CC-BY-4.0.txt)) |
+| Explanatory documentation, evidence reports, and public sites (`docs/flow/index.md`; `docs/flow/for-agents.md`; `docs/flow/start/**`; `docs/flow/build/**`; `docs/flow/understand/**`; `docs/flow/implement/**`; `docs/flow/reference/**`; `docs/flow/evidence/**`; `site/flow/public/**`) | Creative Commons Attribution 4.0 International ([text](LICENSES/CC-BY-4.0.txt)) |
 
 Original repository material not listed above, including repository tooling
 and the Sley integration skill, is available under MPL-2.0

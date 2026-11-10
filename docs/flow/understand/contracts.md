@@ -6,7 +6,7 @@ description: Add validation and exact interface agreements where callers need th
 # When contracts help
 
 Every method needs an understandable promise: what it accepts, what it returns, and what it can change.
-A formal descriptor adds machine-checkable declarations where that promise needs precision.
+A formal descriptor lets software check selected parts of that promise.
 Choose the declarations that serve the method's consumers.
 
 ## Begin with the caller's needs
@@ -32,12 +32,12 @@ The [invocation specification](../spec/invocation-contracts.md) defines those ru
 An input schema checks the actual invocation input.
 A result schema checks the complete `{outcome, output}` value.
 This lets validation express the output shapes permitted for each outcome.
-It also keeps structural checks separate from the application's judgment of the answer.
+The application still judges whether the answer is suitable.
 
 For the classifier example, validation could require a message string and constrain the returned queue to the supported choices.
 That would reject a misspelled queue.
 It would not establish that `billing` is the correct choice for a particular message.
-Behavioral tests and application checks still need to evaluate that decision.
+Behavioral tests and application checks evaluate that decision.
 
 Implementation settings have their own `settings.schema.json`.
 They configure a selected implementation rather than changing the caller's input.
@@ -53,7 +53,6 @@ Exact matching establishes declared compatibility.
 It supplies neither execution authority nor proof that an implementation behaves honestly or produces a correct answer.
 The host still grants powers, and consumers still evaluate relevant behavior.
 
-The same distinction applies to live messages.
 A named channel contract can distinguish append-a-fragment semantics from replace-a-snapshot semantics, even when both messages contain text.
 [Channel Contract/0](../spec/channel-contracts.md) owns that message agreement.
 

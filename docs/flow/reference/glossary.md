@@ -6,13 +6,13 @@ description: Find FLOW's core terms and the specifications or explanations that 
 # Glossary
 
 Use this glossary to resolve a term while reading or building.
-The linked owner supplies its exact requirements or fuller explanation.
+Each link leads to the defining specification or a fuller explanation.
 
 | Term | Meaning | Read more |
 | --- | --- | --- |
 | FLOW | The independent standard for packaging and invoking reusable methods. | [What FLOW adds](/understand/) |
 | Flow | A package containing one reusable method implementation. | [Package/0](../spec/package-format.md) |
-| Method | The bounded procedure a caller invokes with input and consumes through its outcome and result. | [Run/0](../spec/run-protocol.md) |
+| Method | A bounded procedure invoked with input and returning an outcome with output data. | [Run/0](../spec/run-protocol.md) |
 | `FLOW.<ext>` | The package's single implementation entrypoint. | [Package/0](../spec/package-format.md#3-implementation-entrypoint) |
 | Host | The consumer that supplies invocation, supported execution, and local policy. | [Run/0](../spec/run-protocol.md) |
 | Runtime | The program or library that advances a method's internal execution. | [Hosts and runtimes](/understand/) |
@@ -20,7 +20,7 @@ The linked owner supplies its exact requirements or fuller explanation.
 | Outcome | The method-declared meaning returned alongside output data. | [Run/0](../spec/run-protocol.md#2-shared-names-and-values) |
 | Slot | A package-local dependency name whose implementation the host binds. | [Package/0 dependencies](../spec/package-format.md#dependencies) |
 | `FLOW.meta.json` | Optional metadata and dependency declarations for a code implementation. Markdown keeps metadata in its frontmatter. | [Package/0 metadata](../spec/package-format.md#2-metadata0) |
-| Invocation contract | An optional declaration of input, complete results, outcomes, and caller ports, optionally naming an independently agreed interface. | [Invocation Contract/0](../spec/invocation-contracts.md) |
+| Invocation contract | An optional declaration of input, complete results, outcomes, and caller ports. It can identify an independently agreed interface. | [Invocation Contract/0](../spec/invocation-contracts.md) |
 | Schema | A bounded shape used to validate values. | [Schema/0](../spec/schema-files.md) |
 | Channel | An endpoint-based path for live messages alongside a finite invocation. | [Run/0 channels](../spec/run-protocol.md#5-channels) |
 | Channel contract | A declaration of a channel's exact message meaning. | [Channel Contract/0](../spec/channel-contracts.md) |

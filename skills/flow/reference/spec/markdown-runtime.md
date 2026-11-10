@@ -1,4 +1,12 @@
+---
+title: FLOW Markdown/0
+description: Exact recipe syntax, interpretation, resources, bounds, and lifecycle for Markdown implementations.
+---
+
 # FLOW Markdown/0
+
+> **Reader guide (non-normative).** Read this specification when implementing a Markdown interpreter or checking exact recipe behavior.
+> Start with [Write a Markdown method](../build/markdown.md) for authoring, or use [Markdown reference](../reference/markdown.md) for recipe lookup.
 
 > *Status: prerelease specification candidate for sequential Markdown execution.*
 

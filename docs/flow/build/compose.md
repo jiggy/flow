@@ -40,7 +40,7 @@ The host binds that slot to an implementation before invocation.
 Replace `flows/prepare-review/FLOW.ts` with:
 
 ```ts
-import { handle, OperationError } from "@jigging/flow";
+import { handle } from "@jigging/flow";
 
 await handle(async (run) => {
   const classification = await run.call({
@@ -48,14 +48,14 @@ await handle(async (run) => {
     slot: "classifier",
     input: run.input,
   });
-  if (classification.outcome !== "done") {
-    throw new OperationError("INVALID_RESULT", "Expected a completed classification.");
-  }
   return {
     outcome: "done",
     output: {
       request: run.input,
-      classification: classification.output,
+      classification: {
+        outcome: classification.outcome,
+        output: classification.output,
+      },
       reviewRequired: true,
     },
   };
@@ -63,8 +63,9 @@ await handle(async (run) => {
 ```
 
 The SDK returns the complete child result, including `outcome` and `output`.
-This caller accepts the original classifier's `done` outcome and returns a larger review record.
-[Handle additional domain outcomes](./outcomes.md) when the selected classifier declares them.
+This caller retains both values in the review record.
+Its own `done` outcome means that the record is ready for review.
+[Handle the classifier's outcome](./outcomes.md) before acting on its suggestion.
 
 `operationId` identifies this operation within the invocation.
 Await the call before returning so the caller accounts for the work it started.
@@ -100,7 +101,10 @@ The method result is:
   "outcome": "done",
   "output": {
     "request": { "message": "I was charged twice." },
-    "classification": { "queue": "billing" },
+    "classification": {
+      "outcome": "done",
+      "output": { "queue": "billing" }
+    },
     "reviewRequired": true
   }
 }
@@ -111,9 +115,36 @@ The invocation fails instead of preparing a successful review record.
 
 ## Change the implementation
 
-After [adapting a Skill](./skills.md), point the Binding's `classifier` slot to its Markdown package.
-That host must also provide the Markdown interpreter's Agent dependency.
-Keep the calling code unchanged and compare the suggestions against representative messages.
+Use the Agent-enabled `flow-instructions` project from [Bring a Skill](./skills.md) for the Markdown variation.
+Open that project and scaffold a caller:
 
-A common interface permits composition while implementations retain different costs, powers, and judgment.
+```sh
+jig new prepare-review
+```
+
+Replace its `FLOW.ts` and `FLOW.meta.json` with the caller and declaration above.
+Keep the package's generated SDK declaration.
+Create `bindings/prepare-review.ts` with the Markdown target:
+
+```ts
+import { defineBinding } from "@jigging/jig";
+
+export default defineBinding({
+  package: "./flows/prepare-review",
+  slots: { classifier: "flow:flows/classify-request-markdown" },
+});
+```
+
+That project supplies the Markdown interpreter's Agent through its configured default provider.
+Review the source and grants, then run the Binding:
+
+```sh
+jig review --allow-resolution-network
+jig run binding:prepare-review --input '{"message":"I was charged twice."}' --timeout 4m --json
+```
+
+The caller's code stays unchanged while the selected implementation uses instructions.
+Compare its suggestions against representative messages before relying on them.
+
+The common interface lets callers compose implementations whose costs, powers, and judgment can differ.
 Use [design guidance](./design.md) to decide which capabilities deserve their own boundaries.

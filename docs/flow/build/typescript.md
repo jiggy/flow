@@ -8,8 +8,7 @@ description: Write a callable method, run it on a compatible host, and check its
 Put a procedure behind `handle()` so other software can supply input and receive its result.
 The same method can later call code, Agent instructions, or other Flows through declared dependencies.
 
-This guide uses an illustrative request classifier.
-It recognizes a few words and suggests `billing`, `technical`, or `manual`.
+The illustrative classifier recognizes a few words and suggests `billing`, `technical`, or `manual`.
 The application decides what to do with that suggestion.
 
 ## What you need
@@ -51,7 +50,7 @@ await handle(async (run) => {
 ```
 
 `handle()` receives one host invocation and owns its protocol exchange.
-The handler validates the input, performs the method, and returns an outcome with data.
+The handler validates the input, applies the classification rules, and returns an outcome with data.
 Running `node FLOW.ts` alone waits for a host request.
 
 This example also works as JavaScript in `FLOW.mjs` with a supporting host.

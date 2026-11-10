@@ -7,7 +7,7 @@ description: Add FLOW execution to a host, SDK, runtime, or coding agent.
 
 FLOW gives your tool a common way to invoke methods implemented with code, instructions, or both.
 You choose which implementations to support and supply their execution environment.
-The portable boundary lets method authors keep their internal procedure.
+Method authors choose the procedure behind that boundary.
 
 Choose the part you are building:
 
